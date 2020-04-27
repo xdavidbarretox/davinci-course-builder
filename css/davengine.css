@@ -82,6 +82,20 @@ p{
   margin-left: 20px;
 }
 
+.TOCtitle{
+  height: 30px;
+  width: 100%;
+  color: black;
+  font-family: "Roboto";
+  background-color: white;
+}
+
+.TOCtitle p{
+  margin : 0;
+  user-select : none;
+  margin-left: 20px;
+}
+
 #Button_TOC{
   width: 60px;
   height: 60px;
@@ -89,6 +103,15 @@ p{
   top:10px;
   right: 120px;
   background-color: red;
+}
+
+#Button_AspectRatio{
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top:10px;
+  right: 200px;
+  background-color: blue;
 }
 
 #Course_Content{

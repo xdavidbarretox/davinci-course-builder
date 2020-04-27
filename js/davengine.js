@@ -1,12 +1,10 @@
-console.log("DavEngine v0.2");
+console.log("DavEngine v0.3");
 
 /* TODO
   +save leson_location scorm
   +include a js framework: jquery and boostrap
   +example: section | section | section
   +css change class="vertical" class="horizintal" class="coputer"
-  +windoned
-  +Table of content
   +window to avoid portrait
   +HD buttons
   +put is a host
@@ -79,8 +77,8 @@ function courseConfig()
 {
   __totalPages = __course.getElementsByTagName("page").length;
   __courseName = __course.getElementsByTagName("course")[0].getAttribute("name");
-  __isWindowed = (__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
-  windowedCourse(__isWindowed);
+  __isWindowed = !(__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
+  windowedCourse();
   setCourseName(__courseName);
   set_uiElements();
   setCourseContent(0);
@@ -157,10 +155,11 @@ function set_uiElements()
   __nextButton.addEventListener("click", nextPage);
   __prevButton.addEventListener("click", prevPage);
   __tocButton.addEventListener("click", showTOC);
+  document.getElementById("Button_AspectRatio").addEventListener("click", windowedCourse);
 }
 
-function windowedCourse(isWindowed){
-  __isWindowed = isWindowed;
+function windowedCourse(){
+  __isWindowed = !__isWindowed;
   __displayWindow = document.getElementById("Course");
   __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
   if(__isWindowed && !__isMobile)
@@ -191,6 +190,14 @@ function centerCourse()
 function loadTOC(){
   var tocList = __course.getElementsByTagName("course")[0].getElementsByTagName("page");
   __toc = document.getElementById("TOC");
+
+  var entryTitle = document.createElement("div");
+  var entryContent = document.createElement("p");
+  entryTitle.classList.add("TOCtitle");
+  entryContent.innerHTML = __courseName;
+  entryTitle.appendChild(entryContent);
+  __toc.appendChild(entryTitle);
+
   for(i = 0; i < tocList.length; i++){
     var tocValue = tocList[i].getAttribute("name");
     console.log("TOC " + tocValue);
@@ -219,3 +226,8 @@ function showTOC()
   }
   __toogleTOC = !__toogleTOC;
 }
+
+window.addEventListener("orientationchange", function() {
+  // Announce the new orientation number
+  alert(window.orientation);
+}, false);
