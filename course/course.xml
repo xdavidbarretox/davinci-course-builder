@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<course name="SECURITY AWARENESS" css="file.css" windowed="true" width="1280" height="720">
+  <slides>
+    <page name="The Strongest Link">
+      <content><![CDATA[
+        <audio id="audio_01" controls>
+          <source src="course/audios/001_introduction.mp3" type="audio/mpeg">
+        </audio>
+      <img src="course/images/s133_strongest_bg.jpg" class="background_full">
+      <img src="course/images/s133_strongest02.png" style="position:absolute; right: 0; height: 100%; margin: 60px 0 0 0;">
+      <div id="content" style="position: absolute; top: 60px; left: 40px; width:50%;">
+        <h1 id="AnimatedTitle" style="margin-top:0px;">
+      		<span id="T1" class="TitleStartPos color-white MoveTitle">The </span>
+      		<span id="T2" class="TitleStartPos color-greenish MoveTitle DelayAnimation_1">Strongest </span>
+      		<span id="T3" class="TitleStartPos color-blueish MoveTitle DelayAnimation_2">Link</span>
+      	</h1>
+      	<div id="HorizontalRule" class="HR MoveHR"></div>
+          <p id="p1" class="form-font-14 color-white OpacityZero MoveParagraph">Protecting your identity and our organization’s information resources and infrastructure takes more than just installing the correct security software. It takes building and maintaining a security-conscious culture made up of <span class="text_bold-formatDark">individuals who make security-minded decisions every day.</span></p>
+      		<p id="p2" class="form-font-14 color-white OpacityZero MoveParagraph">This course will teach you what you can do to be <span class="text_bold-formatDark">the strongest link</span> in the information security chain.</p>
+        </div>
+    ]]></content>
+    <script><![CDATA[
+      /*
+      var x = document.getElementById("audio_01");
+      function playAudio() {
+        x.play();
+      }
+      playAudio();
+      */
+]]></script>
+  </page>
+  <page name="Consequences">
+    <content><![CDATA[
+      <audio id="audio_01" controls>
+        <source src="course/audios/009_consequences.mp3" type="audio/mpeg">
+      </audio>
+      <img src="course/images/concecuences.jpg" class="background_full">
+      <div id="Content" style="position: absolute; top: 60px; right: 40px; width:50%">
+        <h1 id="AnimatedTitle" style="margin-top:0px;">
+      	   <span id="T1" class="TitleStartPos color-blueish MoveTitle">Consequences</span>
+      	</h1>
+        <div id="HorizontalRule" class="HR MoveHR"></div>
+          <p id="p1" class="form-font-14 color-white OpacityZero MoveParagraph">The consequences of being a weak link are serious for you and our organization. Our organization could suffer significant financial losses due to fraud, network downtime, theft, or even extortion. Our reputation could be damaged and our trade secrets and intellectual property compromised. You could face disciplinary action and put your job at risk. And the organization or even <span class="text_bold-format color-blueish">you</span> could face civil or criminal penalties and fines.</p>
+        </div>
+    ]]></content>
+    <script><![CDATA[
+      var x = document.getElementById("audio_01");
+      function playAudio() {
+        x.play();
+      }
+      playAudio();
+]]></script>
+  </page>
+  <page name="Video">
+    <content><![CDATA[
+    <video id="video_01" height="720" controls autoplay>
+  <source src="course/videos/s133.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</source>
+</video>
+  ]]></content>
+  </page>
+  <page name="3D webGL">
+    <content><![CDATA[
+    <iframe src="course/sites/helvex_web_20181122/index.html" style="height:100%;width:100%;"></iframe>
+  ]]></content>
+  </page>
+  <page name="3D game">
+    <content><![CDATA[
+    <iframe src="course/sites/JohnLemon/index.html" style="height:100%;width:100%;"></iframe>
+  ]]></content>
+  </page>
+  <page name="Canvas animation">
+    <content><![CDATA[
+    <iframe src="course/sites/flash/layerParenting-classicTween-bouncingPig_HTML5 Canvas.html" style="height:100%;width:100%;"></iframe>
+  ]]></content>
+  </page>
+  <page name="Canvas interactive">
+    <content><![CDATA[
+    <iframe src="course/sites/flash/Bilbo_Interactive_START.html" style="height:100%;width:100%;"></iframe>
+  ]]></content>
+  </page>
+  </slides>
+</course>

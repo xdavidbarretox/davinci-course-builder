@@ -1,0 +1,354 @@
+/* Roboto regular */
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+  margin: 0;
+  background-color: #282c34;
+}
+
+p{
+  font-family: "Roboto";
+}
+
+#Course{
+  margin: 0;
+  position: absolute;
+}
+
+#Course_Name{
+  font-family: "Roboto";
+  font-size: 12px;
+  color: white;
+  margin: 20px 10px 10px 40px;
+  position: absolute;
+}
+
+.Course_Title{
+  font-family: "Roboto";
+  font-size: 24px;
+  color: black;
+}
+
+#Course_UI{
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index:100;
+}
+
+#UI_Background{
+  background-color: rgba(0, 0, 0, 0.33);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#TOC{
+  position: absolute;
+  width: 33%;
+  display: none;
+}
+
+.TOCelement{
+  height: 30px;
+  width: 100%;
+  color: white;
+  font-family: "Roboto";
+  background-color: #282c34;
+}
+
+.TOCelement:hover{
+  background-color: white;
+}
+
+.TOCelement:hover p{
+  color: black;
+}
+
+.TOCelement p{
+  margin : 0;
+  user-select : none;
+  margin-left: 20px;
+}
+
+#Button_TOC{
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top:10px;
+  right: 120px;
+  background-color: red;
+}
+
+#Course_Content{
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index:1;
+  overflow: hidden;
+}
+
+.Course_Content_info{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 60px 20px 20px 20px;
+}
+
+.background_full{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+}
+
+audio{
+  position: absolute;
+  bottom: 0px;
+  left: 25%;
+  z-index: 3;
+  width: 50%;
+}
+
+#Button_Next{
+  position: absolute;
+  z-index: 101;
+  right: 0px;
+  top:50%;
+  background-color: rgba(0, 0, 0, 0.33);
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  width: 45px;
+  height: 60px;
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+  background-image: url(../course/images/btn_next.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+}
+
+#Button_Prev{
+  position: absolute;
+  z-index: 101;
+  left: 0px;
+  top:50%;
+  background-color: rgba(0, 0, 0, 0.33);
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  width: 45px;
+  height: 60px;
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+  background-image: url(../course/images/btn_prev.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+}
+
+.TitleStartPos{
+    position: relative;
+    opacity: 0;
+}
+
+.color-white {
+    color:white;
+}
+
+.color-greenish {
+    color: #6ae814;
+}
+
+.color-blueish {
+    color: #00b4dc;
+}
+
+.MoveTitle{
+    animation: AnimateTitle 0.25s forwards;
+    -webkit-animation: AnimateTitle 0.25s forwards;
+    -moz-animation: AnimateTitle 0.25s forwards;
+    -o-animation: AnimateTitle 0.25s forwards;
+}
+
+@keyframes AnimateTitle{
+    from{
+        left: 75px; opacity: 0
+    }
+    to{
+        left: 0px; opacity: 1
+    }
+}
+@-webkit-keyframes AnimateTitle{
+    from{
+        left: 75px; opacity: 0
+    }
+    to{
+        left: 0px; opacity: 1
+    }
+}
+@-moz-keyframes AnimateTitle{
+    from{
+        left: 75px; opacity: 0
+    }
+    to{
+        left: 0px; opacity: 1
+    }
+}
+@-o-keyframes AnimateTitle{
+    from{
+        left: 75px; opacity: 0
+    }
+    to{
+        left: 0px; opacity: 1
+    }
+}
+
+.DelayAnimation_1{
+    animation-delay: 0.25s;
+    -webkit-animation-delay: 0.25s;
+    -moz-animation-delay: 0.25s;
+    -o-animation-delay: 0.25s;
+}
+.DelayAnimation_2{
+    animation-delay: 0.5s;
+    -webkit-animation-delay: 0.5s;
+    -moz-animation-delay: 0.5s;
+    -o-animation-delay: 0.5s;
+}
+.DelayAnimation_3{
+    animation-delay: 0.75s;
+    -webkit-animation-delay: 0.75s;
+    -moz-animation-delay: 0.75s;
+    -o-animation-delay: 0.75s;
+}
+.DelayAnimation_4{
+    animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    -o-animation-delay: 1s;
+}
+
+#AnimatedTitle{
+    font-family: 'Montserrat', Arial, sans-serif !important;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 38px;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.MoveHR{
+    animation: AnimateHR 1s ease-out forwards;
+    -webkit-animation: AnimateHR 1s ease-out forwards;
+    -moz-animation: AnimateHR 1s ease-out forwards;
+    -o-animation: AnimateHR 1s ease-out forwards;
+}
+
+.HR {
+    background-color: #2dc89d;
+    height: 1px;
+    width: 1px;
+}
+
+@keyframes AnimateHR{
+    from{
+        width: 1%
+    }
+    to{
+        width: 100%
+    }
+}
+@-webkit-keyframes AnimateHR{
+    from{
+        width: 1%
+    }
+    to{
+        width: 100%
+    }
+}
+@-moz-keyframes AnimateHR{
+    from{
+        width: 1%
+    }
+    to{
+        width: 100%
+    }
+}
+@-o-keyframes AnimateHR{
+    from{
+        width: 1%
+    }
+    to{
+        width: 100%
+    }
+}
+
+.form-font-14 {
+    -webkit-text-size-adjust: 100%;
+    font-family:  Arial, sans-serif;
+    font-size:14px;
+    line-height:160%;
+}
+
+.OpacityZero {
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.MoveParagraph{
+    animation: AnimateParagraph 0.5s forwards;
+    -webkit-animation: AnimateParagraph 0.5s forwards;
+    -moz-animation: AnimateParagraph 0.5s forwards;
+    -o-animation: AnimateParagraph 0.5s forwards;
+}
+@keyframes AnimateParagraph{
+    from{
+        margin-top: 45px; opacity: 0
+    }
+    to{
+        margin-top: 15px; opacity: 1
+    }
+}
+@-webkit-keyframes AnimateParagraph{
+    from{
+        margin-top: 45px; opacity: 0
+    }
+    to{
+        margin-top: 15px; opacity: 1
+    }
+}
+@-moz-keyframes AnimateParagraph{
+    from{
+        margin-top: 45px; opacity: 0
+    }
+    to{
+        margin-top: 15px; opacity: 1
+    }
+}
+@-o-keyframes AnimateParagraph{
+    from{
+        margin-top: 45px; opacity: 0
+    }
+    to{
+        margin-top: 15px; opacity: 1
+    }
+}
+
+.text_bold-formatDark {
+    color:#a0c1ec;
+    font-weight: bold;
+}

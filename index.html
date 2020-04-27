@@ -1,0 +1,32 @@
+<!<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DavEngine</title>
+    <script type="text/javascript" src="js/SCORM_12_APIWrapper.js"></script>
+    <script>
+    var result = doLMSInitialize();
+    if (result != true)
+    {
+                 // handle error
+    }
+    </script>
+    <script type="text/javascript" src="js/davengine.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/davengine.css">
+  </head>
+  <body>
+    <div id="Course">
+      <div id="Course_UI">
+        <div id="UI_Background"></div>
+        <h1 id="Course_Name">Course Name</h1>
+        <div id="TOC"></div>
+        <button id="Button_TOC"></button>
+      </div>
+      <div id="Course_Content"></div>
+      <button id="Button_Next"></button>
+      <button id="Button_Prev"></button>
+
+      <button id="Button_AspectRatio"></button>
+    </div>
+  </body>
+</html>

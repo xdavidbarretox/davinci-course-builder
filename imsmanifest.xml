@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This is a Reload version 2.5.6 SCORM 1.2 Content Package document-->
+<!--Spawned from the Reload Content Package Generator - http://www.reload.ac.uk-->
+<manifest xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" identifier="MANIFEST-35498C6E9B97BB9EBD926D0A3951E691" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG-41AFF06209B252DF7F9ADEDDD87FADC3">
+    <organization identifier="ORG-41AFF06209B252DF7F9ADEDDD87FADC3" structure="hierarchical">
+      <title>Organization</title>
+      <item identifier="ITEM-4B228EBD99C7296285FA82B73A96A8E8" isvisible="true" identifierref="RES-0D60D38DE8E7941A5D80CACE4F0BCD74">
+        <title>DavEngine</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-0D60D38DE8E7941A5D80CACE4F0BCD74" type="webcontent" href="index.html" adlcp:scormtype="sco">
+      <file href="index.html" />
+      <file href="css/davengine.css" />
+      <file href="js/davengine.js" />
+      <file href="js/SCORM_12_APIWrapper.js" />
+    </resource>
+  </resources>
+</manifest>
+
