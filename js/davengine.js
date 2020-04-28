@@ -4,10 +4,8 @@ console.log("DavEngine v0.3");
   +save leson_location scorm
   +include a js framework: jquery and boostrap
   +example: section | section | section
-  +css change class="vertical" class="horizintal" class="coputer"
-  +window to avoid portrait
+  +css change class="vertical" class="horizintal" class="coputer"  +window to avoid portrait
   +HD buttons
-  +put is a host
 */
 
 var __courseLocation = "course/course.xml";
@@ -34,7 +32,6 @@ function init(){
   console.log("init---");
   checkMobile();
   loadCourse(__courseLocation);
-
 }
 
 function loadCourse(src){
@@ -75,13 +72,14 @@ console.log("----------------------------------- on progress ends");
 
 function courseConfig()
 {
-  __totalPages = __course.getElementsByTagName("page").length;
+  __totalPages = __course.getElementsByTagName("lesson").length;
   __courseName = __course.getElementsByTagName("course")[0].getAttribute("name");
   __isWindowed = !(__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
+  document.getElementById("Welcome_UI").addEventListener("click", function(){setCourseContent(0); this.style.display = "none";});
   windowedCourse();
   setCourseName(__courseName);
   set_uiElements();
-  setCourseContent(0);
+  //setCourseContent(0);
   loadTOC();
 }
 
@@ -90,7 +88,7 @@ function setCourseName(name){
 }
 
 function setCourseContent(index){
-  var page = __course.getElementsByTagName("page")[index];
+  var page = __course.getElementsByTagName("lesson")[index];
   document.getElementById('Course_Content').innerHTML = "";
   document.getElementById("Course_Content").innerHTML = page.getElementsByTagName("content")[0].textContent;
   loadScript(index);
@@ -113,7 +111,7 @@ function setCourseContent(index){
 
 function loadScript(index)
 {
-  var script = __course.getElementsByTagName("page")[index].getElementsByTagName("script")[0];
+  var script = __course.getElementsByTagName("lesson")[index].getElementsByTagName("script")[0];
   if(script != undefined)
   {
     //console.log(script);
@@ -137,6 +135,7 @@ function nextPage(){
   if(__pageCounter < (__totalPages -1)){
     __pageCounter ++;
     setCourseContent(__pageCounter);
+    doLMSSetValue( "cmi.core.lesson_location", __pageCounter );
   }
 }
 
@@ -144,6 +143,7 @@ function prevPage(){
   if(__pageCounter > 0){
     __pageCounter --;
     setCourseContent(__pageCounter);
+    doLMSSetValue( "cmi.core.lesson_location", __pageCounter );
   }
 }
 
@@ -188,7 +188,7 @@ function centerCourse()
 }
 
 function loadTOC(){
-  var tocList = __course.getElementsByTagName("course")[0].getElementsByTagName("page");
+  var tocList = __course.getElementsByTagName("course")[0].getElementsByTagName("lesson");
   __toc = document.getElementById("TOC");
 
   var entryTitle = document.createElement("div");
@@ -230,4 +230,12 @@ function showTOC()
 window.addEventListener("orientationchange", function() {
   // Announce the new orientation number
   alert(window.orientation);
+  var __PortraitAlert = document.getElementById("PortraitAlert");
+  if(window.orientation = 1)
+  {
+    __PortraitAlert.style.display = "block";
+  }
+  else{
+    __PortraitAlert.style.display = "none";
+  }
 }, false);

@@ -125,6 +125,35 @@ p{
   overflow: hidden;
 }
 
+#PortraitAlert{
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 300;
+  display: none;
+}
+
+#PortraitAlert p{
+  color:white;
+  font-size: 32px;
+  font-family: "Roboto";
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 48%;
+}
+
+#Welcome_UI{
+  width: 100%;
+  height: 100%;
+  position: absolute;;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+  z-index: 500;
+}
+
 .Course_Content_info{
   position: absolute;
   top: 0px;
