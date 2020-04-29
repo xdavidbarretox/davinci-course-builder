@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <course name="SECURITY AWARENESS" css="file.css" windowed="true" width="1280" height="720">
-  <module>
+  <module name="HTML">
     <lesson name="The Strongest Link">
       <content><![CDATA[
         <audio id="audio_01" controls autoplay>
@@ -59,7 +59,7 @@
     ]]></content>
     </lesson>
   </module>
-  <module>
+  <module name="3D">
     <lesson name="3D webGL">
       <content><![CDATA[
       <iframe src="course/sites/helvex_web_20181122/index.html" style="height:100%;width:100%;"></iframe>
@@ -70,6 +70,8 @@
       <iframe src="course/sites/JohnLemon/index.html" style="height:100%;width:100%;"></iframe>
     ]]></content>
     </lesson>
+  </module>
+  <module name="Vectorial">
     <lesson name="Canvas animation">
       <content><![CDATA[
       <iframe src="course/sites/flash/layerParenting-classicTween-bouncingPig_HTML5 Canvas.html" style="height:100%;width:100%;"></iframe>

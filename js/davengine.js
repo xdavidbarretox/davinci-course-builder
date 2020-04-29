@@ -6,6 +6,7 @@ console.log("DavEngine v0.3");
   +example: section | section | section
   +css change class="vertical" class="horizintal" class="coputer"  +window to avoid portrait
   +HD buttons
+  +Table of content includes Module and Lessons
 */
 
 var __courseLocation = "course/course.xml";
@@ -188,7 +189,6 @@ function centerCourse()
 }
 
 function loadTOC(){
-  var tocList = __course.getElementsByTagName("course")[0].getElementsByTagName("lesson");
   __toc = document.getElementById("TOC");
 
   var entryTitle = document.createElement("div");
@@ -198,21 +198,41 @@ function loadTOC(){
   entryTitle.appendChild(entryContent);
   __toc.appendChild(entryTitle);
 
-  for(i = 0; i < tocList.length; i++){
-    var tocValue = tocList[i].getAttribute("name");
-    console.log("TOC " + tocValue);
-    var entry = document.createElement("div");
-    var p = document.createElement("p");
-    entry.addEventListener("click", function(){ setCourseContent(this.getAttribute("id")); });
-    entry.classList.add("TOCelement");
-    entry.setAttribute("id", i);
-    p.innerHTML = tocValue;
-    entry.appendChild(p);
-    //var node = document.createTextNode(tocValue);
-    //entry.appendChild(node);
-    __toc.appendChild(entry);
+  var id = 0;
+
+  var moduleList = __course.getElementsByTagName("course")[0].getElementsByTagName("module");
+  for(i = 0; i < moduleList.length; i++)
+  {
+    console.log("Module " + i);
+    var ModuleName = moduleList[i].getAttribute("name");
+    var lessonList = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("lesson");
+    addTOCelement(ModuleName, i, true)
+    for(j = 0; j < lessonList.length; j++){
+      var lessonName = lessonList[j].getAttribute("name");
+      addTOCelement(lessonName, id, false)
+      id++;
+      console.log("Lesson " + id );
+    }
   }
   console.log("loadTOC");
+}
+
+function addTOCelement(name, id, isModule)
+{
+  var entry = document.createElement("div");
+  var p = document.createElement("p");
+  if(!isModule)
+  {
+    entry.addEventListener("click", function(){ setCourseContent(this.getAttribute("id")); });
+    entry.classList.add("TOCListElement");
+  }
+  else {
+    entry.classList.add("TOCModuleElement");
+  }
+  entry.setAttribute("id", id);
+  p.innerHTML = name;
+  entry.appendChild(p);
+  __toc.appendChild(entry);
 }
 
 function showTOC()

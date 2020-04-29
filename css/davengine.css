@@ -60,7 +60,7 @@ p{
   display: none;
 }
 
-.TOCelement{
+.TOCModuleElement{
   height: 30px;
   width: 100%;
   color: white;
@@ -68,18 +68,32 @@ p{
   background-color: #282c34;
 }
 
-.TOCelement:hover{
-  background-color: white;
-}
-
-.TOCelement:hover p{
-  color: black;
-}
-
-.TOCelement p{
+.TOCModuleElement p{
   margin : 0;
   user-select : none;
   margin-left: 20px;
+}
+
+.TOCListElement{
+  height: 30px;
+  width: 100%;
+  color: white;
+  font-family: "Roboto";
+  background-color: #282c34;
+}
+
+.TOCListElement:hover{
+  background-color: white;
+}
+
+.TOCListElement:hover p{
+  color: black;
+}
+
+.TOCListElement p{
+  margin : 0;
+  user-select : none;
+  margin-left: 40px;
 }
 
 .TOCtitle{
