@@ -25,8 +25,10 @@ p{
   font-family: "Roboto";
   font-size: 12px;
   color: white;
-  margin: 20px 10px 10px 40px;
+  margin: 20px 10px 10px 0px;
   position: absolute;
+  left: 60px;
+  top: 0px;
 }
 
 .Course_Title{
@@ -41,7 +43,7 @@ p{
   position: absolute;
   top: 0px;
   left: 0px;
-  z-index:100;
+  z-index:102;
 }
 
 #UI_Background{
@@ -58,6 +60,7 @@ p{
   position: absolute;
   width: 33%;
   display: none;
+  box-shadow: 5px 10px 18px #0006;
 }
 
 .TOCModuleElement{
@@ -110,22 +113,25 @@ p{
   margin-left: 20px;
 }
 
-#Button_TOC{
+#Button_Size{
+  position: absolute;
+  z-index: 3;
+  right: 60px;
+  top:0px;
+  border: none;
   width: 60px;
   height: 60px;
-  position: absolute;
-  top:10px;
-  right: 120px;
-  background-color: red;
+  cursor: pointer;
+  background-image: url(../course/images/btn_size.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  background-color: rgba(0, 0, 0, 0.0);
 }
 
-#Button_AspectRatio{
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  top:10px;
-  right: 200px;
-  background-color: blue;
+#Button_Size:hover{
+  background-color: rgba(0, 0, 0, 0.33);
+  border: none;
 }
 
 #Course_Content{
@@ -168,6 +174,11 @@ p{
   z-index: 500;
 }
 
+#UI_Logo{
+  height: 40px;
+  margin: 10px;
+}
+
 .Course_Content_info{
   position: absolute;
   top: 0px;
@@ -196,12 +207,10 @@ audio{
   right: 0px;
   top:50%;
   background-color: rgba(0, 0, 0, 0.33);
-  border: none; /* Remove borders */
-  color: white; /* White text */
+  border: none;
   width: 45px;
   height: 60px;
-  font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
+  cursor: pointer;
   background-image: url(../course/images/btn_next.png);
   background-repeat: no-repeat;
   background-position-y: center;
@@ -214,16 +223,66 @@ audio{
   left: 0px;
   top:50%;
   background-color: rgba(0, 0, 0, 0.33);
-  border: none; /* Remove borders */
-  color: white; /* White text */
+  border: none;
   width: 45px;
   height: 60px;
-  font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
+  cursor: pointer;
   background-image: url(../course/images/btn_prev.png);
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
+}
+
+#Button_TOC{
+  position: absolute;
+  z-index: 3;
+  right: 120px;
+  top:0px;
+  border: none;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  background-image: url(../course/images/btn_toc.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  background-color: rgba(0, 0, 0, 0.0);
+}
+
+#Button_TOC:hover{
+  background-color: rgba(0, 0, 0, 0.33);
+  border: none;
+}
+
+#Button_Close{
+  position: absolute;
+  z-index: 3;
+  right: 0px;
+  top:0px;
+  border: none;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  background-image: url(../course/images/btn_close.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  background-color: rgba(0, 0, 0, 0.0);
+}
+
+#Button_Close:hover{
+  background-color: rgba(0, 0, 0, 0.33);
+  border: none;
+}
+
+#Counter{
+  color:white;
+  font-size: 12px;
+  font-family: "Roboto";
+  bottom: 0px;
+  right: 20px;
+  position: absolute;
+  z-index: 101;
 }
 
 .TitleStartPos{
@@ -417,4 +476,13 @@ audio{
 .text_bold-formatDark {
     color:#a0c1ec;
     font-weight: bold;
+}
+
+video {
+   /*border: 1px solid #aaa;
+   object-fit: initial;*/
+}
+::cue {
+   font-size: 24px;
+   font-family: "Roboto";
 }

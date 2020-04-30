@@ -1,4 +1,4 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <link rel="shortcut icon" type="image/png" href="course/images/favicon.ico"/>
@@ -6,8 +6,9 @@
     <title>DavEngine</title>
     <script type="text/javascript" src="js/SCORM_12_APIWrapper.js"></script>
     <script>
-    var result = doLMSInitialize();
-    if (result != true)
+    var __LMSInitialized = false;
+    __LMSInitialized = doLMSInitialize();
+    if (__LMSInitialized != true)
     {
                  // handle error
     }
@@ -19,14 +20,17 @@
     <div id="Course">
       <div id="Course_UI">
         <div id="UI_Background"></div>
+        <img id="UI_Logo" src="course/images/ico_MDC_128.png"/>
         <h1 id="Course_Name">Course Name</h1>
         <div id="TOC"></div>
-        <button id="Button_TOC">TOC</button>
-        <button id="Button_AspectRatio">16:9</button>
+        <button id="Button_TOC"></button>
+        <button id="Button_Size"></button>
+        <button id="Button_Close"></button>
       </div>
       <div id="Course_Content"></div>
       <button id="Button_Next"></button>
       <button id="Button_Prev"></button>
+      <p id="Counter"></p>
       <div id="PortraitAlert">
         <p>Please use horizontal</p>
       </div>

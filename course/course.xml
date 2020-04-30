@@ -29,9 +29,15 @@
     </lesson>
     <lesson name="Consequences">
       <content><![CDATA[
-        <audio id="audio_01" controls>
-          <source src="course/audios/009_consequences.mp3" type="audio/mpeg">
-        </audio>
+        <!--
+        <video  id="audio_01" controls width="500" height="100">
+          <source src="course/audios/009_consequences.mp3" type="audio/mp3">
+            <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default>
+        </video>
+      -->
+      <audio id="audio_01" controls autoplay>
+        <source src="course/audios/009_consequences.mp3" type="audio/mp3">
+      </audio>
         <img src="course/images/concecuences.jpg" class="background_full">
         <div id="Content" style="position: absolute; top: 60px; right: 40px; width:50%">
           <h1 id="AnimatedTitle" style="margin-top:0px;">
@@ -43,16 +49,29 @@
       ]]></content>
       <script><![CDATA[
         var x = document.getElementById("audio_01");
+        var myTextTrack = x.addTextTrack( 'subtitles','myLabel','en' );
+
+        //var cue0 = new TextTrackCue(516.517,531.532, 'it had become much easier after the so called united resistance movement');
+        /*
+cue0.id = 'cue0';
+cue0.pauseOnExit = false;
+myTextTrack.addCue(cue0);
+
+myTextTrack.mode = "showing";
+*/
         function playAudio() {
+
           x.play();
         }
         playAudio();
+
   ]]></script>
     </lesson>
     <lesson name="Video">
       <content><![CDATA[
       <video id="video_01" height="720" controls autoplay>
     <source src="course/videos/s133.mp4" type="video/mp4">
+      <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default>
     Your browser does not support the video tag.
   </source>
   </video>

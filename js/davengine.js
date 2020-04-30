@@ -2,11 +2,10 @@ console.log("DavEngine v0.3");
 
 /* TODO
   +save leson_location scorm
-  +include a js framework: jquery and boostrap
-  +example: section | section | section
-  +css change class="vertical" class="horizintal" class="coputer"  +window to avoid portrait
-  +HD buttons
-  +Table of content includes Module and Lessons
+  +save data
+  +reload button
+  +copyright info loaded by date.year
+  + is needed glossary or help?
 */
 
 var __courseLocation = "course/course.xml";
@@ -22,12 +21,16 @@ var __tocButton;
 var __isWindowed;
 var __courseWindow;
 var __courseWidth;
+var __courseHeight;
 var __displayWindow;
 var __toc;
 var __toogleTOC = false;
 
+var __visited = [];
+var __counter;
+
 document.addEventListener('DOMContentLoaded', init, false);
-window.addEventListener('resize', centerCourse);
+window.addEventListener('resize', windowedCourse);
 
 function init(){
   console.log("init---");
@@ -75,13 +78,17 @@ function courseConfig()
 {
   __totalPages = __course.getElementsByTagName("lesson").length;
   __courseName = __course.getElementsByTagName("course")[0].getAttribute("name");
-  __isWindowed = !(__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
+  __isWindowed = (__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
+  __displayWindow = document.getElementById("Course");
+  __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
+  __courseHeight = parseInt(__course.getElementsByTagName("course")[0].getAttribute("height"));
   document.getElementById("Welcome_UI").addEventListener("click", function(){setCourseContent(0); this.style.display = "none";});
   windowedCourse();
   setCourseName(__courseName);
   set_uiElements();
   //setCourseContent(0);
   loadTOC();
+  setLessonCounter();
 }
 
 function setCourseName(name){
@@ -108,6 +115,7 @@ function setCourseContent(index){
   else{
     __nextButton.style.display = "block";
   }
+  setLessonCounter();
 }
 
 function loadScript(index)
@@ -119,6 +127,10 @@ function loadScript(index)
     eval(script.textContent);
     //alert(script.textContent);
   }
+}
+
+function setLessonCounter(){
+  __counter.innerHTML = (__pageCounter + 1) + " / " + __totalPages;
 }
 
 function checkMobile(){
@@ -136,15 +148,41 @@ function nextPage(){
   if(__pageCounter < (__totalPages -1)){
     __pageCounter ++;
     setCourseContent(__pageCounter);
-    doLMSSetValue( "cmi.core.lesson_location", __pageCounter );
+    setVisited(__pageCounter);
+    setLessonLocation(__pageCounter);
   }
 }
 
 function prevPage(){
-  if(__pageCounter > 0){
+  if(__pageCounter > 1){
     __pageCounter --;
     setCourseContent(__pageCounter);
-    doLMSSetValue( "cmi.core.lesson_location", __pageCounter );
+    setLessonLocation(__pageCounter);
+  }
+}
+
+function setLessonLocation(location)
+{
+  if(__LMSInitialized != "false")
+  {
+    doLMSSetValue( "cmi.core.lesson_location", location );
+  }
+}
+
+function setVisited(id)
+{
+  console.log("setVisited " + id);
+  for(i = 0; i <= __visited.length; i++)
+  {
+    if(__visited[i] == id)
+    {
+      console.log("find " + id);
+      break;
+    }else {
+      console.log("added " + id);
+      __visited.push(id);
+      break;
+    }
   }
 }
 
@@ -153,38 +191,47 @@ function set_uiElements()
   __nextButton = document.getElementById("Button_Next");
   __prevButton = document.getElementById("Button_Prev");
   __tocButton = document.getElementById("Button_TOC");
+  __counter = document.getElementById("Counter");
   __nextButton.addEventListener("click", nextPage);
   __prevButton.addEventListener("click", prevPage);
   __tocButton.addEventListener("click", showTOC);
-  document.getElementById("Button_AspectRatio").addEventListener("click", windowedCourse);
+  document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; windowedCourse();});
+  document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
 }
 
 function windowedCourse(){
-  __isWindowed = !__isWindowed;
-  __displayWindow = document.getElementById("Course");
-  __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
-  if(__isWindowed && !__isMobile)
-  {
-    var height = __course.getElementsByTagName("course")[0].getAttribute("height");
-    __displayWindow.style.width = __courseWidth + "px";
-    __displayWindow.style.height = height + "px";
-    centerCourse();
-  }
-  else {
-    __displayWindow.style.width = 100 + "%";
-    __displayWindow.style.height = 100 + "%";
-    __displayWindow.style.left = 0 + "px";
-    }
-}
 
-function centerCourse()
-{
-  if(__isWindowed)
+  if(__isMobile)
   {
-    __displayWindow.style.left = (window.innerWidth / 2) - (__courseWidth / 2) + "px";
+    var w = (window.innerHeight / 9) * 16;
+    __displayWindow.style.width = w + "px";
+    __displayWindow.style.height = window.innerHeight + "px";
+    __displayWindow.style.left = (window.innerWidth / 2) - (w / 2) + "px";
+    __displayWindow.style.top = 0 + "px";
   }
   else {
-    __displayWindow.style.left = 0 + "px";
+    if(__isWindowed)
+    {
+      __displayWindow.style.width = __courseWidth + "px";
+      __displayWindow.style.height = __courseHeight + "px";
+      __displayWindow.style.left = (window.innerWidth / 2) - (__courseWidth / 2) + "px";
+      __displayWindow.style.top = (window.innerHeight / 2) - (__courseHeight / 2) + "px";
+    }
+    else {
+      if(window.innerHeight > __courseHeight){
+        var w = Math.round((window.innerHeight / 9) * 16);
+        __displayWindow.style.width = w + "px";
+        __displayWindow.style.height = window.innerHeight + "px";
+        __displayWindow.style.left = (window.innerWidth / 2) - (w / 2) + "px";
+        __displayWindow.style.top = 0 + "px";
+      }
+      else {
+        __displayWindow.style.width = __courseWidth + "px";
+        __displayWindow.style.height = __courseHeight + "px";
+        __displayWindow.style.left = (window.innerWidth / 2) - (__courseWidth / 2) + "px";
+        __displayWindow.style.top = 0 + "px";
+      }
+    }
   }
 }
 
@@ -223,7 +270,7 @@ function addTOCelement(name, id, isModule)
   var p = document.createElement("p");
   if(!isModule)
   {
-    entry.addEventListener("click", function(){ setCourseContent(this.getAttribute("id")); });
+    entry.addEventListener("click", function(){var i = parseInt(this.getAttribute("id"),10); __pageCounter = i; setCourseContent( i ); });
     entry.classList.add("TOCListElement");
   }
   else {
