@@ -69,13 +69,26 @@ myTextTrack.mode = "showing";
     </lesson>
     <lesson name="Video">
       <content><![CDATA[
-      <video id="video_01" height="720" controls autoplay>
+      <video id="video_01" controls autoplay>
     <source src="course/videos/s133.mp4" type="video/mp4">
-      <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default>
+      <!-- <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default> -->
     Your browser does not support the video tag.
   </source>
   </video>
     ]]></content>
+    <script><![CDATA[
+      var video = document.querySelector('video');
+      video.addEventListener('loadedmetadata', () => {
+      const track = video.addTextTrack("captions", "Subtitles", "en_EN");
+      track.mode = "showing";
+
+      const cueCn = new VTTCue(0, 2.500, '字幕会在0至2.5秒间显示');
+      track.addCue(cueCn);
+
+      var cueEn = new VTTCue(2.6, 4, 'Subtitles will display between 2.6 and 4 seconds');
+      track.addCue(cueEn);
+});
+    ]]></script>
     </lesson>
   </module>
   <module name="3D">

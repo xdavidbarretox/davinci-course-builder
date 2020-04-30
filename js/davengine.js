@@ -200,14 +200,31 @@ function set_uiElements()
 }
 
 function windowedCourse(){
-
   if(__isMobile)
   {
-    var w = (window.innerHeight / 9) * 16;
-    __displayWindow.style.width = w + "px";
-    __displayWindow.style.height = window.innerHeight + "px";
-    __displayWindow.style.left = (window.innerWidth / 2) - (w / 2) + "px";
-    __displayWindow.style.top = 0 + "px";
+    //1.333333333333333‬ ipad
+    //2.165333333333333 iphonex
+    //1.77777777777778 1280 * 720 HD
+
+    var aspecRatio = window.innerWidth / window.innerHeight;
+    var x;
+
+    if(aspecRatio < 1.7){
+      x = window.innerWidth * .5625;
+      __displayWindow.style.width = "100%";
+      __displayWindow.style.height = x + "px";
+      __displayWindow.style.left = 0 + "px";
+      __displayWindow.style.top = (window.innerHeight / 2) - (x / 2) + "px" ;
+      console.log(" is less than 1.7 ---- " + x);
+
+    }else{
+      x = window.innerHeight * 1.77777777777778;
+      __displayWindow.style.width = x + "px";
+      __displayWindow.style.height = "100%";
+      __displayWindow.style.left = (window.innerWidth / 2) - (x / 2) + "px";
+      __displayWindow.style.top = 0 + "px";
+      console.log("is more than 1.7 --- " + x);
+    }
   }
   else {
     if(__isWindowed)
@@ -296,9 +313,9 @@ function showTOC()
 
 window.addEventListener("orientationchange", function() {
   // Announce the new orientation number
-  alert(window.orientation);
+  console.log("orientation = " + window.orientation);
   var __PortraitAlert = document.getElementById("PortraitAlert");
-  if(window.orientation = 1)
+  if(window.orientation <= 1)
   {
     __PortraitAlert.style.display = "block";
   }

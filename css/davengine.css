@@ -127,11 +127,13 @@ p{
   background-position-y: center;
   background-position-x: center;
   background-color: rgba(0, 0, 0, 0.0);
+  opacity: 0.5;
 }
 
 #Button_Size:hover{
   background-color: rgba(0, 0, 0, 0.33);
   border: none;
+  opacity: 1;
 }
 
 #Course_Content{
@@ -215,6 +217,11 @@ audio{
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
+  opacity: 0.5;
+}
+
+#Button_Next:hover{
+  opacity: 1;
 }
 
 #Button_Prev{
@@ -231,6 +238,11 @@ audio{
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
+  opacity: 0.5;
+}
+
+#Button_Prev:hover{
+  opacity: 1;
 }
 
 #Button_TOC{
@@ -247,11 +259,13 @@ audio{
   background-position-y: center;
   background-position-x: center;
   background-color: rgba(0, 0, 0, 0.0);
+  opacity: 0.5;
 }
 
 #Button_TOC:hover{
   background-color: rgba(0, 0, 0, 0.33);
   border: none;
+  opacity: 1;
 }
 
 #Button_Close{
@@ -268,11 +282,13 @@ audio{
   background-position-y: center;
   background-position-x: center;
   background-color: rgba(0, 0, 0, 0.0);
+  opacity: 0.5;
 }
 
 #Button_Close:hover{
   background-color: rgba(0, 0, 0, 0.33);
   border: none;
+  opacity: 1;
 }
 
 #Counter{
@@ -481,6 +497,9 @@ audio{
 video {
    /*border: 1px solid #aaa;
    object-fit: initial;*/
+   position: relative;
+   height: 100%;
+   width: auto;
 }
 ::cue {
    font-size: 24px;
