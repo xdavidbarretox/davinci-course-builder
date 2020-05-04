@@ -6,6 +6,7 @@ console.log("DavEngine v0.3");
   +reload button
   +copyright info loaded by date.year
   + is needed glossary or help?
+  +exit fullscreen
 */
 
 var __courseLocation = "course/course.xml";
@@ -28,6 +29,7 @@ var __toogleTOC = false;
 
 var __visited = [];
 var __counter;
+var __PortraitAlertCenter;
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -35,6 +37,7 @@ window.addEventListener('resize', windowedCourse);
 function init(){
   console.log("init---");
   checkMobile();
+  checkHorizontal();
   loadCourse(__courseLocation);
 }
 
@@ -154,7 +157,7 @@ function nextPage(){
 }
 
 function prevPage(){
-  if(__pageCounter > 1){
+  if(__pageCounter > 0){
     __pageCounter --;
     setCourseContent(__pageCounter);
     setLessonLocation(__pageCounter);
@@ -195,7 +198,7 @@ function set_uiElements()
   __nextButton.addEventListener("click", nextPage);
   __prevButton.addEventListener("click", prevPage);
   __tocButton.addEventListener("click", showTOC);
-  document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; windowedCourse();});
+  document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; if(__isMobile){ if(!__isWindowed){document.body.requestFullscreen();}else{document.exitFullscreen();}}else{ windowedCourse(); }});
   document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
 }
 
@@ -311,15 +314,27 @@ function showTOC()
   __toogleTOC = !__toogleTOC;
 }
 
-window.addEventListener("orientationchange", function() {
-  // Announce the new orientation number
-  console.log("orientation = " + window.orientation);
+window.addEventListener("orientationchange", function() { checkHorizontal(); }, false);
+
+function checkHorizontal()
+{
   var __PortraitAlert = document.getElementById("PortraitAlert");
-  if(window.orientation <= 1)
+  if(window.orientation == 0 || window.orientation == 1)
   {
     __PortraitAlert.style.display = "block";
+    __PortraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
+    if(window.innerHeight < window.innerWidth)
+    {
+      var timmerDelay = setTimeout(function(){
+        __PortraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
+        document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __PortraitAlertCenter + "px";
+      }, 250);
+    }
+    else{
+      document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __PortraitAlertCenter + "px";
+    }
   }
   else{
     __PortraitAlert.style.display = "none";
   }
-}, false);
+}
