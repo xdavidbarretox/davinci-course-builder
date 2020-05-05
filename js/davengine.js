@@ -7,6 +7,9 @@ console.log("DavEngine v0.3");
   +copyright info loaded by date.year
   + is needed glossary or help?
   +exit fullscreen
+  +lisent keys <-- --> to advance
+  + set events
+  +removes full screen om mobile
 */
 
 var __courseLocation = "course/course.xml";
@@ -29,7 +32,12 @@ var __toogleTOC = false;
 
 var __visited = [];
 var __counter;
-var __PortraitAlertCenter;
+var __portraitAlertCenter;
+var __page;
+var __frame;
+var __events;
+var __frameInterval;
+var __frameRate = 100;
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -89,7 +97,6 @@ function courseConfig()
   windowedCourse();
   setCourseName(__courseName);
   set_uiElements();
-  //setCourseContent(0);
   loadTOC();
   setLessonCounter();
 }
@@ -99,10 +106,13 @@ function setCourseName(name){
 }
 
 function setCourseContent(index){
-  var page = __course.getElementsByTagName("lesson")[index];
+  __page = __course.getElementsByTagName("lesson")[index];
+  console.log("setCourseContent = " + index + " | " + __page.getElementsByTagName("content").length );
+
   document.getElementById('Course_Content').innerHTML = "";
-  document.getElementById("Course_Content").innerHTML = page.getElementsByTagName("content")[0].textContent;
-  loadScript(index);
+  document.getElementById("Course_Content").innerHTML = __page.getElementsByTagName("content")[0].textContent;
+  setEvents();
+  loadScript();
 
   if(index == 0)
   {
@@ -121,14 +131,36 @@ function setCourseContent(index){
   setLessonCounter();
 }
 
-function loadScript(index)
+function loadScript()
 {
-  var script = __course.getElementsByTagName("lesson")[index].getElementsByTagName("script")[0];
+  var script = __page.getElementsByTagName("script")[0];
   if(script != undefined)
   {
-    //console.log(script);
     eval(script.textContent);
-    //alert(script.textContent);
+  }
+}
+
+function setEvents(){
+  __frame = 0;
+  __events = null;
+  clearInterval(__frameInterval);
+  if(__page.getElementsByTagName("events")[0] != undefined)
+  {
+    __events = __page.getElementsByTagName("events")[0].getElementsByTagName("event");
+    __frameInterval = setInterval(playFrame, __frameRate);
+  }
+}
+
+function playFrame(){
+  __frame++;
+  console.log("playEvent = " + __frame);
+  for (i = 0; i < __events.length; i++){
+    var timing = parseInt(__events[i].getAttribute("time"), 10);
+    if(timing == __frame)
+    {
+      console.log("frame---------------------------");
+      eval(__events[i].textContent);
+    }
   }
 }
 
@@ -322,16 +354,16 @@ function checkHorizontal()
   if(window.orientation == 0 || window.orientation == 1)
   {
     __PortraitAlert.style.display = "block";
-    __PortraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
+    __portraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
     if(window.innerHeight < window.innerWidth)
     {
       var timmerDelay = setTimeout(function(){
-        __PortraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
-        document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __PortraitAlertCenter + "px";
+        __portraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
+        document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __portraitAlertCenter + "px";
       }, 250);
     }
     else{
-      document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __PortraitAlertCenter + "px";
+      document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __portraitAlertCenter + "px";
     }
   }
   else{

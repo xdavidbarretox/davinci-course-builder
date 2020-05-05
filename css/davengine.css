@@ -185,6 +185,13 @@ p{
   animation-delay: 0.5s; */
 }
 
+.fadein_05{
+  animation: fadein 0.5s forwards;
+  -webkit-animation: fadein 0.5s forwards;
+  -moz-animation: fadein 0.5s forwards;
+  -o-animation: fadein 0.5s forwards;
+}
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }

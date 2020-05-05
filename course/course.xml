@@ -3,11 +3,11 @@
   <module name="HTML">
     <lesson name="The Strongest Link">
       <content><![CDATA[
-        <audio id="audio_01" controls autoplay>
+        <audio id="audio_01" controls>
           <source src="course/audios/001_introduction.mp3" type="audio/mpeg">
         </audio>
       <img src="course/images/s133_strongest_bg.jpg" class="background_full">
-      <img src="course/images/s133_strongest02.png" style="position:absolute; right: 0; height: 100%; margin: 60px 0 0 0;">
+      <img id="image_2" class="OpacityZero" src="course/images/s133_strongest02.png" style="position:absolute; right: 0; height: 100%; margin: 60px 0 0 0;">
       <div id="content" style="position: absolute; top: 60px; left: 40px; width:50%;">
         <h1 id="AnimatedTitle" style="margin-top:0px;">
       		<span id="T1" class="TitleStartPos color-white MoveTitle">The </span>
@@ -15,16 +15,23 @@
       		<span id="T3" class="TitleStartPos color-blueish MoveTitle DelayAnimation_2">Link</span>
       	</h1>
       	<div id="HorizontalRule" class="HR MoveHR"></div>
-          <p id="p1" class="form-font-14 color-white OpacityZero MoveParagraph">Protecting your identity and our organization’s information resources and infrastructure takes more than just installing the correct security software. It takes building and maintaining a security-conscious culture made up of <span class="text_bold-formatDark">individuals who make security-minded decisions every day.</span></p>
-      		<p id="p2" class="form-font-14 color-white OpacityZero MoveParagraph">This course will teach you what you can do to be <span class="text_bold-formatDark">the strongest link</span> in the information security chain.</p>
+          <p id="p1" class="form-font-14 color-white OpacityZero">Protecting your identity and our organization’s information resources and infrastructure takes more than just installing the correct security software. It takes building and maintaining a security-conscious culture made up of <span class="text_bold-formatDark">individuals who make security-minded decisions every day.</span></p>
+      		<p id="p2" class="form-font-14 color-white OpacityZero">This course will teach you what you can do to be <span class="text_bold-formatDark">the strongest link</span> in the information security chain.</p>
         </div>
       ]]></content>
+      <events>
+        <event time="6"><![CDATA[
+          document.getElementById("audio_01").play();
+          document.getElementById("p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="30"><![CDATA[
+          document.getElementById("image_2").classList.add("fadein_05");
+        ]]></event>
+        <event time="145"><![CDATA[
+          document.getElementById("p2").classList.add("MoveParagraph");
+        ]]></event>
+      </events>
       <script><![CDATA[
-        var x = document.getElementById("audio_01");
-        function playAudio() {
-          x.play();
-        }
-        //playAudio();
       ]]></script>
     </lesson>
     <lesson name="Consequences">
