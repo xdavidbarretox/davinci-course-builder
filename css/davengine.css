@@ -231,6 +231,31 @@ p{
   z-index: 500;
 }
 
+#Welcome_UI img{
+  width: 33.3%;
+  margin-left: 33.3%;
+  margin-top: 10%;
+  position: absolute;
+}
+
+#Welcome_UI p{
+  width: 100%;
+  color: white;
+  font-size: 32px;
+  bottom: 10%;
+  position: absolute;
+  left: 0%;
+  text-align: center;
+  margin: 0;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
 #UI_Logo{
   height: 40px;
   margin: 10px;

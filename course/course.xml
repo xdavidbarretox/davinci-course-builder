@@ -20,28 +20,23 @@
         </div>
       ]]></content>
       <events>
-        <event time="6"><![CDATA[
+        <event time="0.6"><![CDATA[
           document.getElementById("audio_01").play();
           document.getElementById("p1").classList.add("MoveParagraph");
         ]]></event>
-        <event time="30"><![CDATA[
+        <event time="3"><![CDATA[
           document.getElementById("image_2").classList.add("fadein_05");
         ]]></event>
-        <event time="145"><![CDATA[
+        <event time="14.5"><![CDATA[
           document.getElementById("p2").classList.add("MoveParagraph");
         ]]></event>
+        <event time="20.6"><![CDATA[
+          nextPage();
+          ]]></event>
       </events>
-      <script><![CDATA[
-      ]]></script>
     </lesson>
     <lesson name="Consequences">
       <content><![CDATA[
-        <!--
-        <video  id="audio_01" controls width="500" height="100">
-          <source src="course/audios/009_consequences.mp3" type="audio/mp3">
-            <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default>
-        </video>
-      -->
       <audio id="audio_01" controls autoplay>
         <source src="course/audios/009_consequences.mp3" type="audio/mp3">
       </audio>

@@ -1,4 +1,4 @@
-console.log("DavEngine v0.3");
+console.log("DavEngine v0.4");
 
 /* TODO
   +save leson_location scorm
@@ -8,8 +8,10 @@ console.log("DavEngine v0.3");
   + is needed glossary or help?
   +exit fullscreen
   +lisent keys <-- --> to advance
-  + set events
   +removes full screen om mobile
+  +developer mode? reload xml and page
+  +review script to identify types of slides
+  +investigate mp3 players
 */
 
 var __courseLocation = "course/course.xml";
@@ -35,9 +37,10 @@ var __counter;
 var __portraitAlertCenter;
 var __page;
 var __frame;
-var __events;
+var __events = null;
 var __frameInterval;
 var __frameRate = 100;
+var __BlockEvent = false;
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -141,25 +144,39 @@ function loadScript()
 }
 
 function setEvents(){
-  __frame = 0;
-  __events = null;
-  clearInterval(__frameInterval);
+  resetPlayer();
   if(__page.getElementsByTagName("events")[0] != undefined)
   {
     __events = __page.getElementsByTagName("events")[0].getElementsByTagName("event");
+    __BlockEvent = false;
     __frameInterval = setInterval(playFrame, __frameRate);
   }
 }
 
+function resetPlayer()
+{
+  __BlockEvent = true;
+  __frame = 0;
+  __events = null;
+  clearInterval(__frameInterval);
+  console.log("---------------------------------------------------------reset events");
+}
+
 function playFrame(){
   __frame++;
+  var milisecondTime = (__frame * 100);
+  var _totalEvents = __events.length;
   console.log("playEvent = " + __frame);
-  for (i = 0; i < __events.length; i++){
-    var timing = parseInt(__events[i].getAttribute("time"), 10);
-    if(timing == __frame)
-    {
-      console.log("frame---------------------------");
-      eval(__events[i].textContent);
+
+  for (i = 0; i < _totalEvents; i++){
+    if(!__BlockEvent){
+      var sTime = __events[i].getAttribute("time");
+      var timing = parseInt(sTime * 1000, 10);
+      if(timing == milisecondTime)
+      {
+        console.log("--- Play frame : " + __frame + " second: " + sTime);
+        eval(__events[i].textContent);
+      }
     }
   }
 }
