@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="shortcut icon" type="image/png" href="course/images/favicon.ico"/>
+    <link rel="shortcut icon" type="image/png" href="bin/images/favicon.ico"/>
     <meta charset="utf-8">
     <title>DavEngine</title>
-    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="js/SCORM_12_APIWrapper.js"></script>
+    <script type="text/javascript" src="bin/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="bin/js/SCORM_12_APIWrapper.js"></script>
     <script>
     var __LMSInitialized = false;
     __LMSInitialized = doLMSInitialize();
@@ -14,14 +14,16 @@
                  // handle error
     }
     </script>
-    <script type="text/javascript" src="js/davengine.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/davengine.css">
+    <script type="text/javascript" src="bin/js/davengine.js"></script>
+    <script type="text/javascript" src="bin/js/finalExam.js"></script>
+    <link rel="stylesheet" type="text/css" href="bin/css/davengine.css">
+    <link rel="stylesheet" type="text/css" href="course/css/course.css">
   </head>
   <body>
     <div id="Course">
       <div id="Course_UI">
         <div id="UI_Background"></div>
-        <img id="UI_Logo" src="course/images/ico_MDC_128.png"/>
+        <img id="UI_Logo" src="bin/images/ico_MDC_128.png"/>
         <h1 id="Course_Name">Course Name</h1>
         <div id="TOC"></div>
         <button id="Button_TOC"></button>
@@ -31,14 +33,17 @@
       <div id="Course_Content"></div>
       <button id="Button_Next"></button>
       <button id="Button_Prev"></button>
+      <button id="Button_Play"></button>
+      <div id="Next_Page_Tooltip"></div>
+      <div id="Prev_Page_Tooltip"></div>
       <p id="Counter"></p>
       <div id="Welcome_UI">
-        <img src="course/images/ico_MDC_128.png"/>
+        <img src="bin/images/ico_MDC_128.png"/>
         <p>PLEASE CLICK TO START</p>
       </div>
     </div>
     <div id="PortraitAlert">
-      <img src="course/images/portrait_alert.png"/>
+      <img src="bin/images/portrait_alert.png"/>
       <p>Please use horizontal</p>
     </div>
   </body>

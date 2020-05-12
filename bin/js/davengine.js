@@ -1,17 +1,20 @@
 console.log("DavEngine v0.4");
 
 /* TODO
+use ECMA script 5
   +save leson_location scorm
   +save data
   +reload button
   +copyright info loaded by date.year
   + is needed glossary or help?
   +exit fullscreen
-  +lisent keys <-- --> to advance
   +removes full screen om mobile
   +developer mode? reload xml and page
-  +review script to identify types of slides
-  +investigate mp3 players
+  *developer mode to reload xml
+  *question final exam mode
+  --- load_question(question_number, question, isTrue)
+  +hideUI?
+  + should next and prev button show the comming title
 */
 
 var __courseLocation = "course/course.xml";
@@ -23,6 +26,7 @@ var __courseName;
 
 var __nextButton;
 var __prevButton;
+var __playButton;
 var __tocButton;
 var __isWindowed;
 var __courseWindow;
@@ -40,7 +44,10 @@ var __frame;
 var __events = null;
 var __frameInterval;
 var __frameRate = 100;
-var __BlockEvent = false;
+var __blockEvent = false;
+var __isPaused = false;
+var __tooltipNext;
+var __tooltipPrev;
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -109,6 +116,7 @@ function setCourseName(name){
 }
 
 function setCourseContent(index){
+  __isPaused = false;
   __page = __course.getElementsByTagName("lesson")[index];
   console.log("setCourseContent = " + index + " | " + __page.getElementsByTagName("content").length );
 
@@ -132,6 +140,21 @@ function setCourseContent(index){
     __nextButton.style.display = "block";
   }
   setLessonCounter();
+
+  if(index < (__totalPages -1)){
+    __tooltipNext.innerHTML = __course.getElementsByTagName("lesson")[index + 1].getAttribute("name");
+  }
+  else{
+    __tooltipNext.innerHTML = "";
+  }
+
+  if(index > 0){
+  __tooltipPrev.innerHTML = __course.getElementsByTagName("lesson")[index - 1].getAttribute("name");
+  }
+  else {
+    __tooltipPrev.innerHTML = "";
+  }
+  //TODO set prev tooltip button
 }
 
 function loadScript()
@@ -144,22 +167,30 @@ function loadScript()
 }
 
 function setEvents(){
-  resetPlayer();
+  __blockEvent = true;
+  __frame = 0;
+  __events = null;
+  clearInterval(__frameInterval);
+
+  playCourse();
+}
+
+function playCourse()
+{
   if(__page.getElementsByTagName("events")[0] != undefined)
   {
+    __playButton.classList.remove("pause");
     __events = __page.getElementsByTagName("events")[0].getElementsByTagName("event");
-    __BlockEvent = false;
+    __blockEvent = false;
     __frameInterval = setInterval(playFrame, __frameRate);
   }
 }
 
-function resetPlayer()
+function pauseCourse()
 {
-  __BlockEvent = true;
-  __frame = 0;
-  __events = null;
+  __blockEvent = true;
   clearInterval(__frameInterval);
-  console.log("---------------------------------------------------------reset events");
+  __playButton.classList.add("pause");
 }
 
 function playFrame(){
@@ -169,7 +200,7 @@ function playFrame(){
   console.log("playEvent = " + __frame);
 
   for (i = 0; i < _totalEvents; i++){
-    if(!__BlockEvent){
+    if(!__blockEvent){
       var sTime = __events[i].getAttribute("time");
       var timing = parseInt(sTime * 1000, 10);
       if(timing == milisecondTime)
@@ -244,9 +275,17 @@ function set_uiElements()
   __prevButton = document.getElementById("Button_Prev");
   __tocButton = document.getElementById("Button_TOC");
   __counter = document.getElementById("Counter");
+  __playButton = document.getElementById("Button_Play");
+  __tooltipNext = document.getElementById("Next_Page_Tooltip");
+  __tooltipPrev = document.getElementById("Prev_Page_Tooltip");
   __nextButton.addEventListener("click", nextPage);
+  __nextButton.addEventListener("mouseover", function(){__tooltipNext.style.display = "block";});
+  __nextButton.addEventListener("mouseout", function(){__tooltipNext.style.display = "none";});
   __prevButton.addEventListener("click", prevPage);
+  __prevButton.addEventListener("mouseover", function(){__tooltipPrev.style.display = "block";});
+  __prevButton.addEventListener("mouseout", function(){__tooltipPrev.style.display = "none";});
   __tocButton.addEventListener("click", showTOC);
+  __playButton.addEventListener("click", tooglePlayPause);
   document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; if(__isMobile){ if(!__isWindowed){document.body.requestFullscreen();}else{document.exitFullscreen();}}else{ windowedCourse(); }});
   document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
 }
@@ -306,14 +345,14 @@ function windowedCourse(){
 
 function loadTOC(){
   __toc = document.getElementById("TOC");
-
+/*
   var entryTitle = document.createElement("div");
   var entryContent = document.createElement("p");
   entryTitle.classList.add("TOCtitle");
   entryContent.innerHTML = __courseName;
   entryTitle.appendChild(entryContent);
   __toc.appendChild(entryTitle);
-
+*/
   var id = 0;
 
   var moduleList = __course.getElementsByTagName("course")[0].getElementsByTagName("module");
@@ -346,6 +385,8 @@ function addTOCelement(name, id, isModule)
     entry.classList.add("TOCModuleElement");
   }
   entry.setAttribute("id", id);
+  //entry.classList.add("TOCListElementDisable");
+  //TODO read from supend data
   p.innerHTML = name;
   entry.appendChild(p);
   __toc.appendChild(entry);
@@ -387,3 +428,61 @@ function checkHorizontal()
     __PortraitAlert.style.display = "none";
   }
 }
+
+function tooglePlayPause()
+{
+  __isPaused = !__isPaused;
+  var audios = document.getElementsByTagName("audio");
+  var videos = document.getElementsByTagName("video");
+  console.log(audios.length + "|" + videos.length);
+  if(audios.length > 0)
+  {
+    console.log("playing audios ");
+    for(i=0;i<audios.length;i++)
+    {
+      console.log("pausing " + i);
+      if(__isPaused)
+      {
+        audios[i].pause();
+      }
+      else {
+        audios[0].play();
+      }
+    }
+  }
+  if(videos.length > 0)
+  {
+    console.log("playing audios ");
+    for(i=0;i<videos.length;i++)
+    {
+      console.log("pausing " + i);
+      if(__isPaused)
+      {
+        videos[i].pause();
+      }
+      else {
+        videos[0].play();
+      }
+    }
+  }
+  if(__isPaused)
+  {
+    pauseCourse();
+  }
+  else {
+    playCourse();
+  }
+}
+
+document.addEventListener('keydown', function(event) {
+  console.log(event.code);
+  if (event.code == "ArrowRight") {
+    nextPage();
+  }
+  if (event.code == "ArrowLeft") {
+    prevPage();
+  }
+  if (event.code == "Space") {
+    tooglePlayPause();
+  }
+});

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<course name="SECURITY AWARENESS" css="file.css" windowed="true" width="1280" height="720">
+<course name="SECURITY AWARENESS" windowed="true" width="1280" height="720" finalExam="course/finalExam.xml">
   <module name="HTML">
     <lesson name="The Strongest Link">
       <content><![CDATA[
-        <audio id="audio_01" controls>
+        <audio id="audio_01">
           <source src="course/audios/001_introduction.mp3" type="audio/mpeg">
         </audio>
       <img src="course/images/s133_strongest_bg.jpg" class="background_full">
@@ -37,7 +37,7 @@
     </lesson>
     <lesson name="Consequences">
       <content><![CDATA[
-      <audio id="audio_01" controls autoplay>
+      <audio id="audio_01" autoplay>
         <source src="course/audios/009_consequences.mp3" type="audio/mp3">
       </audio>
         <img src="course/images/concecuences.jpg" class="background_full">
@@ -50,35 +50,32 @@
           </div>
       ]]></content>
       <script><![CDATA[
-        var x = document.getElementById("audio_01");
-        var myTextTrack = x.addTextTrack( 'subtitles','myLabel','en' );
-
-        //var cue0 = new TextTrackCue(516.517,531.532, 'it had become much easier after the so called united resistance movement');
-        /*
-cue0.id = 'cue0';
-cue0.pauseOnExit = false;
-myTextTrack.addCue(cue0);
-
-myTextTrack.mode = "showing";
-*/
-        function playAudio() {
-
-          x.play();
-        }
-        playAudio();
-
+        // document.getElementById("audio_01").play();
   ]]></script>
     </lesson>
     <lesson name="Video">
       <content><![CDATA[
       <video id="video_01" controls autoplay>
-    <source src="course/videos/s133.mp4" type="video/mp4">
-      <!-- <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default> -->
-    Your browser does not support the video tag.
-  </source>
-  </video>
+        <source src="course/videos/s133.mp4" type="video/mp4">
+          <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default type="text/vtt">
+          Your browser does not support the video tag.
+        </source>
+      </video>
+      <p id="subtitles" class="subtitle">This is a subtitle area</p>
     ]]></content>
+    <events>
+      <event time="2"><![CDATA[
+        document.getElementById("subtitles").innerHTML = "Change of text ;)";
+      ]]></event>
+      <event time="5"><![CDATA[
+        document.getElementById("subtitles").innerHTML = "happy";
+      ]]></event>
+      <event time="8"><![CDATA[
+        document.getElementById("subtitles").innerHTML = "";
+      ]]></event>
+    </events>
     <script><![CDATA[
+      /*
       var video = document.querySelector('video');
       video.addEventListener('loadedmetadata', () => {
       const track = video.addTextTrack("captions", "Subtitles", "en_EN");
@@ -89,7 +86,7 @@ myTextTrack.mode = "showing";
 
       var cueEn = new VTTCue(2.6, 4, 'Subtitles will display between 2.6 and 4 seconds');
       track.addCue(cueEn);
-});
+}); */
     ]]></script>
     </lesson>
   </module>

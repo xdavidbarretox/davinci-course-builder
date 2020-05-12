@@ -113,16 +113,24 @@ p{
   margin-left: 20px;
 }
 
+.TOCListElementDisable{
+
+}
+
+.TOCListElementDisable p{
+  color: gray !important;
+}
+
 #Button_Size{
   position: absolute;
   z-index: 3;
   right: 60px;
   top:0px;
   border: none;
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
-  background-image: url(../course/images/btn_size.png);
+  background-image: url(../images/btn_size.png);
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
@@ -183,13 +191,6 @@ p{
   -ms-animation-delay: 0.5s;
   -o-animation-delay: 0.5s;
   animation-delay: 0.5s; */
-}
-
-.fadein_05{
-  animation: fadein 0.5s forwards;
-  -webkit-animation: fadein 0.5s forwards;
-  -moz-animation: fadein 0.5s forwards;
-  -o-animation: fadein 0.5s forwards;
 }
 
 @keyframes fadein {
@@ -288,12 +289,12 @@ audio{
   z-index: 101;
   right: 0px;
   top:50%;
-  background-color: rgba(0, 0, 0, 0.33);
+  background-color: rgba(0, 0, 0, 0.0);
   border: none;
   width: 45px;
   height: 60px;
   cursor: pointer;
-  background-image: url(../course/images/btn_next.png);
+  background-image: url(../images/btn_next.png);
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
@@ -302,6 +303,7 @@ audio{
 
 #Button_Next:hover{
   opacity: 1;
+  background-color: rgba(0, 0, 0, 0.33);
 }
 
 #Button_Prev{
@@ -309,12 +311,12 @@ audio{
   z-index: 101;
   left: 0px;
   top:50%;
-  background-color: rgba(0, 0, 0, 0.33);
+  background-color: rgba(0, 0, 0, 0.0);
   border: none;
   width: 45px;
   height: 60px;
   cursor: pointer;
-  background-image: url(../course/images/btn_prev.png);
+  background-image: url(../images/btn_prev.png);
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
@@ -323,6 +325,7 @@ audio{
 
 #Button_Prev:hover{
   opacity: 1;
+  background-color: rgba(0, 0, 0, 0.33);
 }
 
 #Button_TOC{
@@ -331,10 +334,10 @@ audio{
   right: 120px;
   top:0px;
   border: none;
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
-  background-image: url(../course/images/btn_toc.png);
+  background-image: url(../images/btn_toc.png);
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
@@ -354,10 +357,10 @@ audio{
   right: 0px;
   top:0px;
   border: none;
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
-  background-image: url(../course/images/btn_close.png);
+  background-image: url(../images/btn_close.png);
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
@@ -381,199 +384,6 @@ audio{
   z-index: 101;
 }
 
-.TitleStartPos{
-    position: relative;
-    opacity: 0;
-}
-
-.color-white {
-    color:white;
-}
-
-.color-greenish {
-    color: #6ae814;
-}
-
-.color-blueish {
-    color: #00b4dc;
-}
-
-.MoveTitle{
-    animation: AnimateTitle 0.25s forwards;
-    -webkit-animation: AnimateTitle 0.25s forwards;
-    -moz-animation: AnimateTitle 0.25s forwards;
-    -o-animation: AnimateTitle 0.25s forwards;
-}
-
-@keyframes AnimateTitle{
-    from{
-        left: 75px; opacity: 0
-    }
-    to{
-        left: 0px; opacity: 1
-    }
-}
-@-webkit-keyframes AnimateTitle{
-    from{
-        left: 75px; opacity: 0
-    }
-    to{
-        left: 0px; opacity: 1
-    }
-}
-@-moz-keyframes AnimateTitle{
-    from{
-        left: 75px; opacity: 0
-    }
-    to{
-        left: 0px; opacity: 1
-    }
-}
-@-o-keyframes AnimateTitle{
-    from{
-        left: 75px; opacity: 0
-    }
-    to{
-        left: 0px; opacity: 1
-    }
-}
-
-.DelayAnimation_1{
-    animation-delay: 0.25s;
-    -webkit-animation-delay: 0.25s;
-    -moz-animation-delay: 0.25s;
-    -o-animation-delay: 0.25s;
-}
-.DelayAnimation_2{
-    animation-delay: 0.5s;
-    -webkit-animation-delay: 0.5s;
-    -moz-animation-delay: 0.5s;
-    -o-animation-delay: 0.5s;
-}
-.DelayAnimation_3{
-    animation-delay: 0.75s;
-    -webkit-animation-delay: 0.75s;
-    -moz-animation-delay: 0.75s;
-    -o-animation-delay: 0.75s;
-}
-.DelayAnimation_4{
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    -o-animation-delay: 1s;
-}
-
-#AnimatedTitle{
-    font-family: 'Montserrat', Arial, sans-serif !important;
-    font-weight: 500;
-    font-size: 40px;
-    line-height: 38px;
-    font-style: normal;
-    text-transform: uppercase;
-}
-
-.MoveHR{
-    animation: AnimateHR 1s ease-out forwards;
-    -webkit-animation: AnimateHR 1s ease-out forwards;
-    -moz-animation: AnimateHR 1s ease-out forwards;
-    -o-animation: AnimateHR 1s ease-out forwards;
-}
-
-.HR {
-    background-color: #2dc89d;
-    height: 1px;
-    width: 1px;
-}
-
-@keyframes AnimateHR{
-    from{
-        width: 1%
-    }
-    to{
-        width: 100%
-    }
-}
-@-webkit-keyframes AnimateHR{
-    from{
-        width: 1%
-    }
-    to{
-        width: 100%
-    }
-}
-@-moz-keyframes AnimateHR{
-    from{
-        width: 1%
-    }
-    to{
-        width: 100%
-    }
-}
-@-o-keyframes AnimateHR{
-    from{
-        width: 1%
-    }
-    to{
-        width: 100%
-    }
-}
-
-.form-font-14 {
-    -webkit-text-size-adjust: 100%;
-    font-family:  Arial, sans-serif;
-    font-size:14px;
-    line-height:160%;
-}
-
-.OpacityZero {
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-
-.MoveParagraph{
-    animation: AnimateParagraph 0.5s forwards;
-    -webkit-animation: AnimateParagraph 0.5s forwards;
-    -moz-animation: AnimateParagraph 0.5s forwards;
-    -o-animation: AnimateParagraph 0.5s forwards;
-}
-@keyframes AnimateParagraph{
-    from{
-        margin-top: 45px; opacity: 0
-    }
-    to{
-        margin-top: 15px; opacity: 1
-    }
-}
-@-webkit-keyframes AnimateParagraph{
-    from{
-        margin-top: 45px; opacity: 0
-    }
-    to{
-        margin-top: 15px; opacity: 1
-    }
-}
-@-moz-keyframes AnimateParagraph{
-    from{
-        margin-top: 45px; opacity: 0
-    }
-    to{
-        margin-top: 15px; opacity: 1
-    }
-}
-@-o-keyframes AnimateParagraph{
-    from{
-        margin-top: 45px; opacity: 0
-    }
-    to{
-        margin-top: 15px; opacity: 1
-    }
-}
-
-.text_bold-formatDark {
-    color:#a0c1ec;
-    font-weight: bold;
-}
-
 video {
    /*border: 1px solid #aaa;
    object-fit: initial;*/
@@ -584,4 +394,63 @@ video {
 ::cue {
    font-size: 24px;
    font-family: "Roboto";
+}
+
+#Button_Play{
+  position: absolute;
+  z-index: 101;
+  left: 0px;
+  bottom:0px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.0);
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background-image: url(../images/btn_pause.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  opacity: 0.5;
+  border-radius: 23px;
+}
+
+#Button_Play:hover{
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.33);
+}
+
+.pause{
+  background-image: url(../images/btn_play.png) !important;
+}
+
+button{
+  outline:none;
+  margin:0;
+  padding: 0;
+}
+
+#Next_Page_Tooltip{
+  background-color: rgb(0, 0, 0, 0.33);
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  z-index: 101;
+  color: white;
+  font-family: Roboto;
+  padding: 10px;
+  font-weight: normal;
+  display:none;
+}
+
+#Prev_Page_Tooltip{
+  background-color: rgb(0, 0, 0, 0.33);
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  z-index: 101;
+  color: white;
+  font-family: Roboto;
+  padding: 10px;
+  font-weight: normal;
+  display:none;
 }
