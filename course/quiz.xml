@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<quiz minToPass="70" retakes="0">
+  <intro>
+    <content><![CDATA[
+    <div id="background" style="position:absolute; background-color:lightsteelblue; width:100%; height:100%;"></div>
+    <div id="textbox" style="position:absolute; width:50%; Height:50%; left:25%; top:25%; background-color:red; border-radius: 20px;">
+      <div id="startCourseButton" style="height:60px; width:120px; background-color:blue; position:absolute; right:60px; bottom:60px;"></div>
+    </div>
+  ]]></content>
+  <script><![CDATA[
+    document.getElementById("startCourseButton").addEventListener("click", function(){alert("YES");});
+  ]]></script>
+</intro>
+
+  <question>
+    <text><![CDATA[
+
+    ]]></text>
+    <answere showFeedback="correct">answere</answere>
+    <answere showFeedback="wrong">answere</answere>
+    <answere showFeedback="wrong">answere</answere>
+    <feedback id="correct"></feedback>
+    <feedback id="wrong"></feedback>
+  </question>
+
+  <result><![CDATA[
+  ]]></result>
+</quiz>

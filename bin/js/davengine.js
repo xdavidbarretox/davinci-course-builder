@@ -3,7 +3,6 @@ console.log("DavEngine v0.4");
 /* TODO
 use ECMA script 5
   +save leson_location scorm
-  +save data
   +reload button
   +copyright info loaded by date.year
   + is needed glossary or help?
@@ -14,11 +13,11 @@ use ECMA script 5
   *question final exam mode
   --- load_question(question_number, question, isTrue)
   +hideUI?
-  + should next and prev button show the comming title
 */
 
 var __courseLocation = "course/course.xml";
 var __course;
+var __courseContainer;
 var __isMobile = false;
 var __pageCounter = 0;
 var __totalPages;
@@ -48,6 +47,7 @@ var __blockEvent = false;
 var __isPaused = false;
 var __tooltipNext;
 var __tooltipPrev;
+var __lessons = [];
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -74,6 +74,7 @@ function loadCourse(src){
   requestCourse.onload = function() {
     console.log("on load start ------------------------");
     __course = requestCourse.responseXML;
+    console.dir(__course);
     courseConfig();
 };
 
@@ -97,12 +98,13 @@ console.log("----------------------------------- on progress ends");
 
 function courseConfig()
 {
-  __totalPages = __course.getElementsByTagName("lesson").length;
+  __totalPages = __course.getElementsByTagName("lesson").length + __course.getElementsByTagName("quiz").length;
   __courseName = __course.getElementsByTagName("course")[0].getAttribute("name");
   __isWindowed = (__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
   __displayWindow = document.getElementById("Course");
   __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
   __courseHeight = parseInt(__course.getElementsByTagName("course")[0].getAttribute("height"));
+  __courseContainer = document.getElementById("Course_Content");
   document.getElementById("Welcome_UI").addEventListener("click", function(){setCourseContent(0); this.style.display = "none";});
   windowedCourse();
   setCourseName(__courseName);
@@ -117,13 +119,21 @@ function setCourseName(name){
 
 function setCourseContent(index){
   __isPaused = false;
-  __page = __course.getElementsByTagName("lesson")[index];
-  console.log("setCourseContent = " + index + " | " + __page.getElementsByTagName("content").length );
+  __page = __lessons[index];
+  type = __page.tagName;
+  //console.log("setCourseContent = " + index + " | " + __page.getElementsByTagName("content").length );
 
-  document.getElementById('Course_Content').innerHTML = "";
-  document.getElementById("Course_Content").innerHTML = __page.getElementsByTagName("content")[0].textContent;
+  __courseContainer.innerHTML = "";
+
+if(type == "lesson"){
+  __courseContainer.innerHTML = __page.getElementsByTagName("content")[0].textContent;
   setEvents();
   loadScript();
+}
+if(type == "quiz"){
+  clearInterval(__frameInterval);
+  loadQuiz(__lessons[index].getAttribute("file"));
+}
 
   if(index == 0)
   {
@@ -142,19 +152,18 @@ function setCourseContent(index){
   setLessonCounter();
 
   if(index < (__totalPages -1)){
-    __tooltipNext.innerHTML = __course.getElementsByTagName("lesson")[index + 1].getAttribute("name");
+    __tooltipNext.innerHTML = __lessons[index + 1].getAttribute("name");
   }
   else{
     __tooltipNext.innerHTML = "";
   }
 
   if(index > 0){
-  __tooltipPrev.innerHTML = __course.getElementsByTagName("lesson")[index - 1].getAttribute("name");
+  __tooltipPrev.innerHTML = __lessons[index - 1].getAttribute("name");
   }
   else {
     __tooltipPrev.innerHTML = "";
   }
-  //TODO set prev tooltip button
 }
 
 function loadScript()
@@ -361,12 +370,22 @@ function loadTOC(){
     console.log("Module " + i);
     var ModuleName = moduleList[i].getAttribute("name");
     var lessonList = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("lesson");
+    var quiz = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("quiz");
+
     addTOCelement(ModuleName, i, true)
     for(j = 0; j < lessonList.length; j++){
       var lessonName = lessonList[j].getAttribute("name");
-      addTOCelement(lessonName, id, false)
+      __lessons.push(lessonList[j]);
+      addTOCelement(lessonName, id, false);
       id++;
       console.log("Lesson " + id );
+    }
+    for(k=0;k < quiz.length;k++){
+      console.log("Quiz ---" + k);
+      var quizName = quiz[k].getAttribute("name");
+      __lessons.push(quiz[k]);
+      addTOCelement(quizName, id, false);
+      id++;
     }
   }
   console.log("loadTOC");
@@ -378,7 +397,7 @@ function addTOCelement(name, id, isModule)
   var p = document.createElement("p");
   if(!isModule)
   {
-    entry.addEventListener("click", function(){var i = parseInt(this.getAttribute("id"),10); __pageCounter = i; setCourseContent( i ); });
+    entry.addEventListener("click", function(){var i = parseInt(this.getAttribute("id"),10); __pageCounter = i; setCourseContent( i ); hideTOC();});
     entry.classList.add("TOCListElement");
   }
   else {
@@ -402,6 +421,12 @@ function showTOC()
     __toc.style.display = "block";
   }
   __toogleTOC = !__toogleTOC;
+}
+
+function hideTOC(){
+  __toogleTOC = false;
+  __toc.style.display = "none";
+
 }
 
 window.addEventListener("orientationchange", function() { checkHorizontal(); }, false);
