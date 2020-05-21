@@ -313,19 +313,71 @@ function windowedCourse(){
 
     if(aspecRatio < 1.7){
       x = window.innerWidth * .5625;
+      /*
       __displayWindow.style.width = "100%";
       __displayWindow.style.height = x + "px";
       __displayWindow.style.left = 0 + "px";
       __displayWindow.style.top = (window.innerHeight / 2) - (x / 2) + "px" ;
       console.log(" is less than 1.7 ---- " + x);
+      //iPad when fit with width.
+*/
+//------------------------------
+
+
+      var scale = ((window.innerWidth * 100) / __courseWidth) / 100;
+    //  var translateX = (__courseWidth - window.innerWidth) * scale;
+    var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
+      var translateY = ((__courseHeight - window.innerHeight)  / scale) / 2;
+
+      //alert("(window.innerHeight = " + window.innerHeight + " | window.outerHeight = " + window.outerHeight + " | scale = " + scale + " | translateX = " + translateY  + " | translateY = " + translateY);
+
+      __displayWindow.style.width = __courseWidth + "px";
+      __displayWindow.style.height =  __courseHeight + "px";
+      //__displayWindow.style.left = (window.innerWidth / 2) - ((x * scale) / 2) + "px";
+      __displayWindow.style.left = 0 + "px";
+
+      __displayWindow.style.top = 0 + "px";
+
+      __displayWindow.style.transform = ("scale(" + scale + ") translate(" + (translateX * -1) + "px, " + ( translateY * -1 )+"px)");
+
+
+
+
 
     }else{
       x = window.innerHeight * 1.77777777777778;
+      /*
       __displayWindow.style.width = x + "px";
       __displayWindow.style.height = "100%";
       __displayWindow.style.left = (window.innerWidth / 2) - (x / 2) + "px";
       __displayWindow.style.top = 0 + "px";
+      */
       console.log("is more than 1.7 --- " + x);
+      //when fit to height.
+
+
+      //------------------------------------------------
+      var scale = ((window.innerHeight * 100) / __courseHeight) / 100;
+    //  var translateX = (__courseWidth - window.innerWidth) * scale;
+    var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
+      var translateY = ((__courseHeight - window.innerHeight)  / scale) / 2;
+
+      //alert("(window.innerHeight = " + window.innerHeight + " | window.outerHeight = " + window.outerHeight + " | scale = " + scale + " | translateX = " + translateY  + " | translateY = " + translateY);
+
+      __displayWindow.style.width = __courseWidth + "px";
+      __displayWindow.style.height =  __courseHeight + "px";
+      //__displayWindow.style.left = (window.innerWidth / 2) - ((x * scale) / 2) + "px";
+      __displayWindow.style.left = 0 +"px";
+
+      __displayWindow.style.top = 0 + "px";
+
+      __displayWindow.style.transform = ("scale(" + scale + ") translate(" + (translateX * -1) + "px, " + ( translateY * -1 )+"px)");
+      /*
+      __displayWindow.style.webkitTransform = ("scale(" + scale + ")");
+    __displayWindow.style.MozTransform = ("scale(" + scale + ")");
+    __displayWindow.style.msTransform = ("scale(" + scale + ")");
+    __displayWindow.style.OTransform = ("scale(" + scale + ")"); */
+
     }
   }
   else {

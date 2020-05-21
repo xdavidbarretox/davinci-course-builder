@@ -12,7 +12,7 @@
         <h1 id="AnimatedTitle" style="margin-top:0px;">
       		<span id="T1" class="TitleStartPos color-white MoveTitle">The </span>
       		<span id="T2" class="TitleStartPos color-greenish MoveTitle DelayAnimation_1">Strongest </span>
-      		<span id="T3" class="TitleStartPos color-blueish MoveTitle DelayAnimation_2">Link</span>
+      		<span id="T3" class="TitleStartPos color-blueish MoveTitle DelayAnimation_2">Link2</span>
       	</h1>
       	<div id="HorizontalRule" class="HR MoveHR"></div>
           <p id="p1" class="form-font-14 color-white OpacityZero">Protecting your identity and our organization’s information resources and infrastructure takes more than just installing the correct security software. It takes building and maintaining a security-conscious culture made up of <span class="text_bold-formatDark">individuals who make security-minded decisions every day.</span></p>
