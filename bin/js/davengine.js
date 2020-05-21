@@ -10,9 +10,6 @@ use ECMA script 5
   +removes full screen om mobile
   +developer mode? reload xml and page
   *developer mode to reload xml
-  *question final exam mode
-  --- load_question(question_number, question, isTrue)
-  +hideUI?
 */
 
 var __courseLocation = "course/course.xml";
@@ -117,23 +114,28 @@ function setCourseName(name){
   document.getElementById("Course_Name").innerHTML = name;
 }
 
+function clearCourseContainer()
+{
+  clearInterval(__frameInterval);
+  __courseContainer.innerHTML = "";
+}
+
 function setCourseContent(index){
   __isPaused = false;
   __page = __lessons[index];
   type = __page.tagName;
-  //console.log("setCourseContent = " + index + " | " + __page.getElementsByTagName("content").length );
 
-  __courseContainer.innerHTML = "";
+  clearCourseContainer();
 
-if(type == "lesson"){
-  __courseContainer.innerHTML = __page.getElementsByTagName("content")[0].textContent;
-  setEvents();
-  loadScript();
-}
-if(type == "quiz"){
-  clearInterval(__frameInterval);
-  loadQuiz(__lessons[index].getAttribute("file"));
-}
+  if(type == "lesson"){
+    __courseContainer.innerHTML = __page.getElementsByTagName("content")[0].textContent;
+    setEvents();
+    loadScript();
+  }
+  if(type == "quiz"){
+
+    loadQuiz(__lessons[index].getAttribute("file"));
+  }
 
   if(index == 0)
   {
@@ -511,3 +513,16 @@ document.addEventListener('keydown', function(event) {
     tooglePlayPause();
   }
 });
+
+function showUI(isVisible){
+  if(isVisible){
+    __nextButton.style.display = "block";
+    __prevButton.style.display = "block";
+    __playButton.style.display = "block";
+  }
+  else{
+    __nextButton.style.display = "none";
+    __prevButton.style.display = "none";
+    __playButton.style.display = "node";
+  }
+}
