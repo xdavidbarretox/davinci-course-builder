@@ -1,4 +1,4 @@
-console.log("DavEngine v0.4");
+console.log("DavEngine v0.5");
 
 /* TODO
 use ECMA script 5
