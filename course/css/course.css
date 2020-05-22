@@ -1,3 +1,120 @@
+@font-face {
+    font-family: "LibreFranklin-Regular";
+    src: url("../fonts/LibreFranklin-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "LibreFranklin-Black";
+    src: url("../fonts/LibreFranklin-Black.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+p{
+  font-family: "LibreFranklin-Regular";
+  font-size: 18px;
+}
+
+h1{
+  font-family: "LibreFranklin-Regular";
+  font-size: 28px;
+  color: #7461a3;
+  margin: 10px auto auto auto;
+}
+
+h2{
+  font-family: "LibreFranklin-Black";
+  font-size: 53px;
+  color: #009ea3;
+  margin: auto;
+}
+
+.hr2{
+  width: 40px;
+  height: 6px;
+  background-color: #add072;
+}
+
+.content_rigth{
+  position: absolute;
+  right: 45px;
+  top: 60px;
+  width: 49%;
+  height: auto;
+}
+
+.content_rigth .hr2{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.content_rigth h1{
+  text-align: right;
+}
+
+.content_rigth h2{
+  text-align: right;
+}
+
+.content_rigth p{
+  text-align: left;
+}
+
+/*Content left*/
+.content_left{
+  position: absolute;
+  left: 45px;
+  top: 60px;
+  width: 49%;
+  height: auto;
+}
+
+.content_left .hr2{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.content_left h1{
+  text-align: left;
+}
+
+.content_left h2{
+  text-align: left;
+}
+
+.content_left p{
+  text-align: left;
+}
+
+ul {
+    list-style: square inside url(../images/bullet.png);
+}
+
+li{
+  font-family: "LibreFranklin-Regular";
+  font-size: 18px;
+}
+
+td{
+  font-family: "LibreFranklin-Regular";
+  font-size: 18px;
+}
+
+td img{
+  margin: 0 20px 0 20px;
+}
+
+.avance{
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .fadein_05{
   animation: fadein 0.5s forwards;
   -webkit-animation: fadein 0.5s forwards;

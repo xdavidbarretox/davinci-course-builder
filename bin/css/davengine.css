@@ -12,10 +12,6 @@ body{
   background-color: #282c34;
 }
 
-p{
-  font-family: "Roboto";
-}
-
 #Course{
   margin: 0;
   position: absolute;
@@ -23,7 +19,7 @@ p{
 
 #Course_Name{
   font-family: "Roboto";
-  font-size: 12px;
+  font-size: 14px;
   color: white;
   margin: 20px 10px 10px 0px;
   position: absolute;
@@ -75,6 +71,7 @@ p{
   margin : 0;
   user-select : none;
   margin-left: 20px;
+  font-family: "Roboto";
 }
 
 .TOCListElement{
@@ -97,6 +94,7 @@ p{
   margin : 0;
   user-select : none;
   margin-left: 40px;
+  font-family: "Roboto";
 }
 
 .TOCtitle{
@@ -111,10 +109,7 @@ p{
   margin : 0;
   user-select : none;
   margin-left: 20px;
-}
-
-.TOCListElementDisable{
-
+  font-family: "Roboto";
 }
 
 .TOCListElementDisable p{
@@ -240,6 +235,7 @@ p{
 }
 
 #Welcome_UI p{
+  font-family: "Roboto";
   width: 100%;
   color: white;
   font-size: 32px;

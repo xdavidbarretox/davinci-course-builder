@@ -10,6 +10,7 @@ use ECMA script 5
   +removes full screen om mobile
   +developer mode? reload xml and page
   *developer mode to reload xml
+  external xml and assets
 */
 
 var __courseLocation = "course/course.xml";
@@ -205,10 +206,9 @@ function pauseCourse()
 }
 
 function playFrame(){
-  __frame++;
   var milisecondTime = (__frame * 100);
   var _totalEvents = __events.length;
-  console.log("playEvent = " + __frame);
+  //console.log("playEvent = " + __frame);
 
   for (i = 0; i < _totalEvents; i++){
     if(!__blockEvent){
@@ -221,6 +221,7 @@ function playFrame(){
       }
     }
   }
+    __frame++;
 }
 
 function setLessonCounter(){
@@ -325,19 +326,12 @@ function windowedCourse(){
 
 
       var scale = ((window.innerWidth * 100) / __courseWidth) / 100;
-    //  var translateX = (__courseWidth - window.innerWidth) * scale;
-    var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
+      var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
       var translateY = ((__courseHeight - window.innerHeight)  / scale) / 2;
-
-      //alert("(window.innerHeight = " + window.innerHeight + " | window.outerHeight = " + window.outerHeight + " | scale = " + scale + " | translateX = " + translateY  + " | translateY = " + translateY);
-
       __displayWindow.style.width = __courseWidth + "px";
       __displayWindow.style.height =  __courseHeight + "px";
-      //__displayWindow.style.left = (window.innerWidth / 2) - ((x * scale) / 2) + "px";
       __displayWindow.style.left = 0 + "px";
-
       __displayWindow.style.top = 0 + "px";
-
       __displayWindow.style.transform = ("scale(" + scale + ") translate(" + (translateX * -1) + "px, " + ( translateY * -1 )+"px)");
 
 

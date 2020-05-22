@@ -1,5 +1,112 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<course name="SECURITY AWARENESS" windowed="true" width="1280" height="720" finalExam="course/finalExam.xml">
+<course name="Fundamentos del teletrabajo para supervisores" windowed="true" width="1280" height="720" finalExam="course/finalExam.xml">
+
+  <module name="Fundamentos del teletrabajo para supervisores">
+    <lesson name="Reconocimiento del desempeño">
+      <content><![CDATA[
+        <!--
+        <audio id="audio">
+          <source src="course/audios/reconocimiento_del_desempeño.mp3" type="audio/mpeg">
+        </audio>
+      -->
+      <img src="course/images/reconocimiento_del_desempeno.jpg" class="background_full">
+      <div id="content" class="content_rigth">
+        <div class="hr2"></div>
+        <h1>Reconocimiento</h1>
+      	<h2>del Desempeño</h2>
+          <p id="p1" class="OpacityZero">La motivación es parte fundamental del liderazgo. Considera que el dinero importa, pero no debe ser la única recompensa, también puedes integrar experiencias como forma de reconocimiento (experiencias gastronómicas, tarjetas de regalo, reuniones extracurriculares).</p>
+      		<p id="p2" class="OpacityZero">Reconoce sus logros y desempeño en público. Si detectas algún área de oportunidad, brinda una retroalimentación crítica en privado, abordando puntos específicos lo antes posible. Nunca evidencies errores delante del resto del equipo.</p>
+          <p id="p3" class="OpacityZero">Compartan sus logros o proyectos completados y celébrenlos en equipo.</p>
+          <p id="p4" class="OpacityZero">La falta de reconocimiento es una de la principales razones por las que un colaborador reduce su desempeño o renuncia. Nunca descuides esta área.</p>
+        </div>
+      ]]></content>
+      <events>
+        <event time="0"><![CDATA[
+          //document.getElementById("audio").play();
+          document.getElementById("p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="1"><![CDATA[
+          document.getElementById("p2").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="3"><![CDATA[
+          document.getElementById("p3").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="4"><![CDATA[
+          document.getElementById("p4").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="20.6"><![CDATA[
+          //nextPage();
+          ]]></event>
+      </events>
+    </lesson>
+
+    <lesson name="Seguridad de la información">
+      <content><![CDATA[
+        <!--
+        <audio id="audio">
+          <source src="course/audios/seguridad_de_la_informacion.jpg.mp3" type="audio/mpeg">
+        </audio>
+      -->
+      <img src="course/images/seguridad_de_la_informacion.jpg" class="background_full">
+      <div id="content" class="content_left">
+        <div class="hr2"></div>
+        <h1>Seguridad de la</h1>
+      	<h2>Información</h2>
+          <p id="p1" class="OpacityZero">También tienes que considerar que, dependiendo del nivel de privacidad o confidencialidad de la información que se maneje, se deberán implementar las medidas adecuadas. Realiza un análisis para identificar qué nivel de seguridad es el más apropiado para tu organización. Siempre que tengas dudas, consúltalo con el departamento de Tecnología Informática (TI) o Recursos Humanos (RH). Las siguientes recomendaciones generales pueden ayudarte a garantizar la seguridad de la información de tu organización:</p>
+
+          <table>
+            <tr id="b1" class="OpacityZero">
+              <td><img src="course/images/bullet.png"></td>
+              <td>Utilizar un protector de pantalla con una contraseña de alta complejidad o que incluya múltiples factores de autenticación.</td>
+            </tr>
+            <tr id="b2" class="OpacityZero">
+              <td><img src="course/images/bullet.png"></td>
+              <td>Nunca compartir ni dejar a la vista contraseñas.</td>
+            </tr>
+            <tr id="b3" class="OpacityZero">
+              <td><img src="course/images/bullet.png"></td>
+              <td>Cambiar con regularidad las claves de acceso a programas y aplicaciones instalados en el equipo.</td>
+            </tr>
+            <tr id="b4" class="OpacityZero">
+              <td><img src="course/images/bullet.png"></td>
+              <td>Encriptar toda la información sensible.</td>
+            </tr>
+            <tr id="b5" class="OpacityZero">
+              <td><img src="course/images/bullet.png"></td>
+              <td>En caso de acceder a información sensible en un lugar público, comprobar que nadie pueda ver la contraseña o la información que se muestra en pantalla.</td>
+            </tr>
+          </table>
+        </div>
+        <img class="avance" src="course/images/avance_1.png">
+      ]]></content>
+      <events>
+        <event time="0"><![CDATA[
+          //document.getElementById("audio").play();
+          document.getElementById("p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="0.5"><![CDATA[
+          document.getElementById("b1").classList.add("fadein_05");
+        ]]></event>
+        <event time="1.0"><![CDATA[
+          document.getElementById("b2").classList.add("fadein_05");
+        ]]></event>
+        <event time="1.5"><![CDATA[
+          document.getElementById("b3").classList.add("fadein_05");
+        ]]></event>
+        <event time="2.0"><![CDATA[
+          document.getElementById("b4").classList.add("fadein_05");
+        ]]></event>
+        <event time="2.5"><![CDATA[
+          document.getElementById("b5").classList.add("fadein_05");
+        ]]></event>
+
+        <event time="10"><![CDATA[
+          //nextPage();
+          ]]></event>
+      </events>
+    </lesson>
+  </module>
+
   <module name="HTML">
     <lesson name="The Strongest Link">
       <content><![CDATA[

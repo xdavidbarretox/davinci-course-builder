@@ -18,7 +18,7 @@
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">¿Cuales son los <b>retos</b> que enfrentas al dirigir a un colaborador remoto?</p>
+      <p class="questionText">1 ¿Cuales son los <b>retos</b> que enfrentas al dirigir a un colaborador remoto?</p>
     ]]></text>
     <answer showFeedback="wrong">Falta de comunicación efectiva, desmotivación, desorganización al no tener horarios definidos para trabajo y tiempo libre.</answer>
     <answer showFeedback="wrong">Reducción de gastos generales, mayor productividad, disminución en el impacto ambiental.</answer>
@@ -52,7 +52,7 @@
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">¿Qué modalidad de teletrabajo consiste en que el colaborador realiza sus tareas alternando algunos días dentro de la empresa y mínimo 2 días fuera de ella?</p>
+      <p class="questionText">2 ¿Qué modalidad de teletrabajo consiste en que el colaborador realiza sus tareas alternando algunos días dentro de la empresa y mínimo 2 días fuera de ella?</p>
     ]]></text>
     <answer showFeedback="wrong">Autónomo</answer>
     <answer showFeedback="wrong">Centro de teletrabajo</answer>
@@ -85,7 +85,7 @@
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">Antes de realizar una prueba piloto para aplicar el teletrabajo en tu organización es necesario haber estructurado el proyecto y comprobar que la organización ya cumple con todos los requisitos legales e infraestructura tecnológica necesaria:</p>
+      <p class="questionText">3 Antes de realizar una prueba piloto para aplicar el teletrabajo en tu organización es necesario haber estructurado el proyecto y comprobar que la organización ya cumple con todos los requisitos legales e infraestructura tecnológica necesaria:</p>
     ]]></text>
     <answer showFeedback="correct">Verdadero</answer>
     <answer showFeedback="wrong">Falso</answer>
@@ -116,7 +116,7 @@
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">¿Cuál de las siguientes opciones es una mejor práctica del teletrabajo para la seguridad física de los dispositivos? </p>
+      <p class="questionText">4 ¿Cuál de las siguientes opciones es una mejor práctica del teletrabajo para la seguridad física de los dispositivos? </p>
     ]]></text>
     <answer showFeedback="wrong">Utilizar únicamente dispositivos personales que cuenten con actualización automática.</answer>
     <answer showFeedback="wrong">Utilizar una contraseña fácil de recordar.</answer>
