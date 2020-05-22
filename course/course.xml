@@ -21,20 +21,20 @@
         </div>
       ]]></content>
       <events>
-        <event time="0"><![CDATA[
+        <event time="1"><![CDATA[
           //document.getElementById("audio").play();
           document.getElementById("p1").classList.add("MoveParagraph");
         ]]></event>
-        <event time="1"><![CDATA[
+        <event time="1.5"><![CDATA[
           document.getElementById("p2").classList.add("MoveParagraph");
         ]]></event>
-        <event time="3"><![CDATA[
+        <event time="2"><![CDATA[
           document.getElementById("p3").classList.add("MoveParagraph");
         ]]></event>
-        <event time="4"><![CDATA[
+        <event time="2.5"><![CDATA[
           document.getElementById("p4").classList.add("MoveParagraph");
         ]]></event>
-        <event time="20.6"><![CDATA[
+        <event time="10"><![CDATA[
           //nextPage();
           ]]></event>
       </events>
@@ -80,23 +80,23 @@
         <img class="avance" src="course/images/avance_1.png">
       ]]></content>
       <events>
-        <event time="0"><![CDATA[
+        <event time="1"><![CDATA[
           //document.getElementById("audio").play();
           document.getElementById("p1").classList.add("MoveParagraph");
         ]]></event>
-        <event time="0.5"><![CDATA[
+        <event time="1.5"><![CDATA[
           document.getElementById("b1").classList.add("fadein_05");
         ]]></event>
-        <event time="1.0"><![CDATA[
+        <event time="2.0"><![CDATA[
           document.getElementById("b2").classList.add("fadein_05");
         ]]></event>
-        <event time="1.5"><![CDATA[
+        <event time="2.5"><![CDATA[
           document.getElementById("b3").classList.add("fadein_05");
         ]]></event>
-        <event time="2.0"><![CDATA[
+        <event time="3.0"><![CDATA[
           document.getElementById("b4").classList.add("fadein_05");
         ]]></event>
-        <event time="2.5"><![CDATA[
+        <event time="3.5"><![CDATA[
           document.getElementById("b5").classList.add("fadein_05");
         ]]></event>
 

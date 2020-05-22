@@ -22,6 +22,19 @@ h1{
   font-size: 28px;
   color: #7461a3;
   margin: 10px auto auto auto;
+  opacity: 0;
+  animation: AnimateH1 0.5s forwards;
+}
+
+@keyframes AnimateH1{
+    from{
+        margin-top: 40px;
+        opacity: 0
+    }
+    to{
+        margin-top: 10px;
+        opacity: 1
+    }
 }
 
 h2{
@@ -29,10 +42,23 @@ h2{
   font-size: 53px;
   color: #009ea3;
   margin: auto;
+  opacity: 0;
+  animation: AnimateH1 0.5s 0.5s forwards;
+}
+
+@keyframes AnimateH2{
+    from{
+        margin-top: 30px;
+        opacity: 0
+    }
+    to{
+        margin-top: 0px;
+        opacity: 1
+    }
 }
 
 .hr2{
-  width: 40px;
+  width: 1px;
   height: 6px;
   background-color: #add072;
 }
@@ -49,6 +75,17 @@ h2{
   position: absolute;
   top: 0px;
   right: 0px;
+  animation: hr2Right 1.5s forwards;
+}
+
+@keyframes hr2Right {
+  0%   {width: : 1px;}
+  50%  {width: 45px;}
+  75%  {opacity: 1;}
+  76%  {opacity: 0;}
+  84%  {opacity: 1;}
+  92%  {opacity: 0;}
+  100% {opacity: 1; width: 45px;}
 }
 
 .content_rigth h1{
@@ -76,6 +113,7 @@ h2{
   position: absolute;
   top: 0px;
   left: 0px;
+  animation: hr2Right 1.5s forwards;
 }
 
 .content_left h1{
