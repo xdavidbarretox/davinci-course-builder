@@ -46,6 +46,11 @@ var __isPaused = false;
 var __tooltipNext;
 var __tooltipPrev;
 var __lessons = [];
+var __eventPlayed;
+var __videoTimeInternal;
+var __video;
+var __subtitles;
+var __currentSubtitle;
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -167,6 +172,54 @@ function setCourseContent(index){
   else {
     __tooltipPrev.innerHTML = "";
   }
+  cathMedia();
+}
+
+function cathMedia()
+{
+  __currentSubtitle = 0;
+  __video = __courseContainer.getElementsByTagName("video");
+  if(__video.length > 0){
+    __subtitles = __page.getElementsByTagName("subtitles")[0].getElementsByTagName("subtitle");
+    console.log("has video | subtitles " + __subtitles.length);
+    __videoTimeInternal = setInterval(checkVideoTime, 100);
+  }
+}
+
+function checkVideoTime()
+{
+/*
+  for(var i = 0; i < __subtitles.length; i++)
+  {
+    var start = parseInt(__subtitles[i].getAttribute("start"));
+    var end = parseInt(__subtitles[i].getAttribute("end"));
+    console.log(__video[0].currentTime + " | start " + start + " | end " + end);
+    var time = __video[0].currentTime;
+    if(time >= start && time <= end)
+    {
+      console.log("awiwi");
+      eval(__subtitles[i].textContent);
+    }
+  } */
+  console.log(__currentSubtitle + " vs " + __subtitles.length);
+  if(__currentSubtitle == __subtitles.length)
+  {
+    clearInterval(__videoTimeInternal);
+    console.log("---subtitles ends");
+    return;
+  }
+  var start = parseInt(__subtitles[__currentSubtitle].getAttribute("start"));
+  var end = parseInt(__subtitles[__currentSubtitle].getAttribute("end"));
+  console.log(__video[0].currentTime + " | start " + start + " | end " + end);
+  var time = __video[0].currentTime;
+  if(time >= start && time <= end)
+  {
+    console.log("awiwi");
+    eval(__subtitles[__currentSubtitle].textContent);
+    __currentSubtitle ++;
+  }
+
+
 }
 
 function loadScript()
@@ -183,6 +236,7 @@ function setEvents(){
   __frame = 0;
   __events = null;
   clearInterval(__frameInterval);
+  __eventPlayed = 0;
 
   playCourse();
 }
@@ -216,7 +270,13 @@ function playFrame(){
       var timing = parseInt(sTime * 1000, 10);
       if(timing == milisecondTime)
       {
-        console.log("--- Play frame : " + __frame + " second: " + sTime);
+        console.log("--- Play frame : " + __frame + " second: " + sTime + " ... comes from event " + i);
+        __eventPlayed ++;
+        if(__eventPlayed == _totalEvents)
+        {
+          clearInterval(__frameInterval);
+          console.log("events end");
+        }
         eval(__events[i].textContent);
       }
     }

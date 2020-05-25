@@ -205,12 +205,24 @@
       <content><![CDATA[
       <video id="video_01" controls autoplay>
         <source src="course/videos/s133.mp4" type="video/mp4">
-          <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default type="text/vtt">
-          Your browser does not support the video tag.
+        <!--  <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default type="text/vtt">
+          Your browser does not support the video tag. -->
         </source>
       </video>
-      <p id="subtitles" class="subtitle">This is a subtitle area</p>
+      <p id="subtitles" class="subtitle"></p>
     ]]></content>
+    <subtitles>
+      <subtitle start="2" end="4"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "Change of text ;)";
+        ]]></subtitle>
+        <subtitle start="5" end="8"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "happy";
+        ]]></subtitle>
+        <subtitle start="8" end="12"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "";
+        ]]></subtitle>
+    </subtitles>
+      <!--
     <events>
       <event time="2"><![CDATA[
         document.getElementById("subtitles").innerHTML = "Change of text ;)";
@@ -222,6 +234,7 @@
         document.getElementById("subtitles").innerHTML = "";
       ]]></event>
     </events>
+
     <script><![CDATA[
       /*
       var video = document.querySelector('video');
@@ -236,6 +249,7 @@
       track.addCue(cueEn);
 }); */
     ]]></script>
+    -->
     </lesson>
     <lesson name="scorm 1.2 Test">
       <content><![CDATA[
