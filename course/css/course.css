@@ -411,3 +411,52 @@ td img{
     z-index: 100;
     text-shadow: 2px 2px #000000;
 }
+
+.interactivityTable{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 60px;
+  }
+
+
+
+.interactivityTable tbody tr td{
+  width: 50px;
+  padding: 5px;
+}
+
+  .interactivityTable tbody tr td div{
+    background-color: rgba(68,57,123,0.7);
+    width: 100%;
+    height: 75px;
+    border-radius: 10px;
+  }
+
+  .interactivityTable tbody tr td div:hover{
+    background-color: rgba(255,255,255,0.7);
+  }
+
+  .interactivityTable tbody tr td div:hover p{
+    color:black;
+  }
+
+
+  .interactivityTable tbody tr td div p{
+    color:white;
+    transform: translate(-0%, -50%);
+    position: relative;
+    top: 50%;
+    margin: 0 10px 0 60px;
+    font-size: 16px;
+  }
+
+  .interactivityTable tbody tr td div span{
+    color:#7461a3;
+    font-size: 45px;
+    font-weight: bold;
+    font-family: "LibreFranklin-Black";
+    position: absolute;
+    margin: 10px 0 0 10px;
+  }

@@ -105,6 +105,47 @@
           ]]></event>
       </events>
     </lesson>
+
+    <lesson name="Interactividad 1">
+      <content><![CDATA[
+        <!--
+        <audio id="audio">
+          <source src="course/audios/reconocimiento_del_desempeño.mp3" type="audio/mpeg">
+        </audio>
+      -->
+      <img src="course/images/quiz.jpg" class="background_full">
+      <div id="content" class="content_left">
+        <div class="hr2"></div>
+        <h1>Interactividad</h1>
+      	<h2>Pregunta 1</h2>
+        <p id="p1" class="color-white OpacityZero">¿Recuerdas el modelo para la implementación del teletrabajo? Organiza los pasos  en el orden correcto.</p>
+      </div>
+      <table class="interactivityTable">
+        <tr>
+          <td><div><span>A</span><p>Analizar las ventajas y los propósitos de implementar el teletrabajo.</p></div></td>
+          <td><div><span>B</span><p>Identificar las herramientas de uso diario del colaborador. Establecer lineamientos generales, habilidades y cambios culturales necesarios.</p></div></td>
+        </tr>
+        <tr>
+          <td><div><span>C</span><p>Hacer preguntas clave para asegurarse de que la compañía ya tiene contemplados todos los recursos jurídicos y tecnológicos necesarios para la implementación.</p></div></td>
+          <td><div><span>D</span><p>Realizar pequeñas pruebas para observar la adaptación de los colaboradores, medir resultados y hacer reajustes.</p></div></td>
+        </tr>
+        <tr>
+          <td><div><span>E</span><p>Tu organización cuenta con los lineamientos necesarios y puede integrar a nuevos colaboradores a esta modalidad de trabajo.</p></div></td>
+        </tr>
+      </table>
+    ]]></content>
+      <events>
+        <event time="1"><![CDATA[
+          //document.getElementById("audio").play();
+          document.getElementById("p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="10"><![CDATA[
+          //nextPage();
+          ]]></event>
+      </events>
+    </lesson>
+
+
   </module>
 
   <module name="HTML">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<quiz minToPass="70" retakes="0" maxQuestions="3">
+<quiz minToPass="70" retakes="0" maxQuestions="10">
   <intro>
     <content><![CDATA[
     <div class="introQuiz"></div>
