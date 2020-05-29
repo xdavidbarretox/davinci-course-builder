@@ -21,10 +21,13 @@ body{
   font-family: "Roboto";
   font-size: 14px;
   color: white;
-  margin: 20px 10px 10px 0px;
+  margin: 0;
   position: absolute;
   left: 60px;
-  top: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: none;
+  opacity: 1;
 }
 
 .Course_Title{

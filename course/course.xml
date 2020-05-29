@@ -10,7 +10,7 @@
         </audio>
       -->
       <img src="course/images/reconocimiento_del_desempeno.jpg" class="background_full">
-      <div id="content" class="content_rigth">
+      <div id="content" class="content_right">
         <div class="hr2"></div>
         <h1>Reconocimiento</h1>
       	<h2>del Desempeño</h2>
@@ -41,7 +41,7 @@
     </lesson>
 
     <lesson name="Seguridad de la información">
-      <content><![CDATA[
+      <content><![CDATA[content_right
         <!--
         <audio id="audio">
           <source src="course/audios/seguridad_de_la_informacion.jpg.mp3" type="audio/mpeg">
@@ -106,6 +106,303 @@
       </events>
     </lesson>
 
+    <lesson name="¿Cómo implementar el teletrabajo?"><!-- TODO Pop up-->
+      <content><![CDATA[
+        <!--
+        <audio id="audio">
+          <source src="course/audios/seguridad_de_la_informacion.jpg.mp3" type="audio/mpeg">
+        </audio>
+      -->
+        <div id="content" class="popupBackground BackgroundPurple"></div>
+      <div class="content_left">
+        <div class="hr2"></div>
+        <h1 class="color-white">¿Cómo implementar</h1>
+      	<h2>El teletrabajo?</h2>
+          <p id="p1" class="OpacityZero color-white">Si has decidido implementar el teletrabajo en tu organización, tendrás que desarrollar un plan de acción.</p>
+          <p id="p2" class="OpacityZero color-white">Te proponemos el siguiente modelo que ha ayudado a las mejores empresas de todo el mundo a alcanzar el éxito. Es fundamental completar cada etapa del proceso antes de avanzar a la siguiente.</p>
+        </div>
+        <table class="popupTable">
+          <tr>
+            <td>
+              <div id="Button_1" class="popupButtonOpen">
+              <img src="course/images/1A.png">
+              <p style="color: white; text-align: center">Plantea los beneficios y objetivos</p>
+              </div>
+            </td>
+            <td>
+              <div id="Button_2" class="popupButtonOpen">
+              <img src="course/images/2A.png">
+              <p style="color: white; text-align: center">Estructura el proyecto</p>
+              </div>
+            </td>
+            <td>
+              <div id="Button_3" class="popupButtonOpen">
+              <img src="course/images/3A.png">
+              <p style="color: white; text-align: center">Autoevaluación</p>
+              </div>
+            </td>
+            <td>
+              <div id="Button_4" class="popupButtonOpen">
+              <img src="course/images/4A.png">
+              <p style="color: white; text-align: center">Prueba pilot</p>
+              </div>
+            </td>
+            <td>
+              <div id="Button_5" class="popupButtonOpen">
+              <img src="course/images/5A.png">
+              <p style="color: white; text-align: center">Aprópiate del modelo</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <div id="popup_1" class="popup">
+          <div id="background" class="popupBackground BackgroundDarkBlue"><img src="course/images/interactivity_1_popup_1.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+          <button class="popupButtonClose">CERRAR</button>
+          <div class="content_left">
+            <div class="hr2"></div>
+            <h1 class="color-white">Plantea los beneficios</h1>
+          	<h2>y Objetivos</h2>
+              <p id="p1p1" class="OpacityZero color-white">Analiza las ventajas de implementar el modelo en tu organización y decide cuál es la modalidad más conveniente para cada colaborador dependiendo de su puesto:</p>
+              <table>
+                <tr id="p1b1" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">Autónomo (Home office): los trabajadores, ya sean independientes o empleados, trabajan desde un lugar fijo de su preferencia.</td>
+                </tr>
+                <tr id="p1b2" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">Centro de teletrabajo (Coworking): El trabajador asiste a un centro adaptado con infraestructura y tecnología que le permite realizar sus actividades laborales.</td>
+                </tr>
+                <tr id="p1b3" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">Suplementario: los trabajadores alternan sus tareas acudiendo a la empresa algunos días y trabajando fuera de ella otros (mínimo 2 días).</td>
+                </tr>
+                <tr id="p1b4" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">Móvil: el trabajador no requiere un lugar fijo para realizar sus tareas, puede llevarlas a cabo en espacios públicos con conectividad a internet como cafés, bibliotecas u otros.</td>
+                </tr>
+              </table>
+              <p id="p1p2" class="OpacityZero color-white">Es importante que definas los motivos de elegir cualquiera de estas modalidades.</p>
+          </div>
+        </div>
+
+        <div id="popup_2" class="popup">
+          <div id="background" class="popupBackground BackgroundDarkBlue"><img src="course/images/interactivity_1_popup_1.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+          <button class="popupButtonClose">CERRAR</button>
+          <div class="content_left">
+            <div class="hr2"></div>
+            <h1 class="color-white">Estructura</h1>
+          	<h2>el Proyecto</h2>
+              <table>
+                <tr id="p2b1" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">Identifica las herramientas que tus colaboradores usan en su día a día y garantiza el acceso a esos recursos.</td>
+                </tr>
+                <tr id="p2b2" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">Reconoce las habilidades y cambios culturales que necesitas adoptar y fomentar en la organización.</td>
+                </tr>
+                <tr id="p2b3" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">Establece los lineamientos, mecanismos y medidas de seguridad para generar un entorno propicio para el teletrabajador y para proteger la información a la que accede, procesa o almacena.</td>
+                </tr>
+              </table>
+          </div>
+        </div>
+
+        <div id="popup_3" class="popup">
+          <div id="background" class="popupBackground BackgroundDarkBlue"><img src="course/images/interactivity_1_popup_1.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+          <button class="popupButtonClose">CERRAR</button>
+          <div class="content_left">
+            <div class="hr2"></div>
+          	<h2>Autoevaluación</h2>
+              <p id="p3p1" class="OpacityZero color-white">Una vez estructurado el proyecto, pregúntate si tu organización:</p>
+              <table>
+                <tr id="p3b1" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">¿Cumple con los requisitos legales y regulatorios para brindar certidumbre jurídica al trabajador y a la empresa?</td>
+                </tr>
+                <tr id="p3b2" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">¿Puede enfrentar los retos en materia de comunicación y seguridad informática con la infraestructura tecnológica y organizacional adecuada?</td>
+                </tr>
+                <tr id="p3b3" class="OpacityZero">
+                  <td><img src="course/images/bullet.png"></td>
+                  <td class="color-white">¿Dispone de canales seguros para el manejo y transferencia de la información?</td>
+                </tr>
+              </table>
+              <p id="p3p2" class="OpacityZero color-white">En caso de encontrar impedimentos, busca alternativas y soluciones antes de iniciar cualquier prueba piloto. Si de momento no encuentras una solución, reconsidera si tu organización está preparada para el teletrabajo.</p>
+          </div>
+        </div>
+
+        <div id="popup_4" class="popup">
+          <div id="background" class="popupBackground BackgroundDarkBlue"><img src="course/images/interactivity_1_popup_1.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+          <button class="popupButtonClose">CERRAR</button>
+          <div class="content_left">
+            <div class="hr2"></div>
+            <h1>Prueba</h1>
+          	<h2>Piloto</h2>
+              <p id="p4p1" class="OpacityZero color-white">Realiza pequeñas pruebas para observar la adaptación de tus colaboradores y mide los resultados. Si se presenta algún reto inesperado el impacto será menor, conocerás tus áreas de oportunidad y podrás realizar los ajustes necesarios.</p>
+          </div>
+        </div>
+
+        <div id="popup_5" class="popup">
+          <div id="background" class="popupBackground BackgroundDarkBlue"><img src="course/images/interactivity_1_popup_1.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+          <button class="popupButtonClose">CERRAR</button>
+          <div class="content_left">
+            <div class="hr2"></div>
+            <h1>Aprópiate</h1>
+          	<h2>del Modelo</h2>
+              <p id="p5p1" class="OpacityZero color-white">En esta etapa, tu organización está lista para cumplir con sus <b>objetivos</b>, aplicar las <b>mejores prácticas</b> y cumplir con los <b>lineamientos</b> y <b>políticas de seguridad</b>. Ahora puedes implementar el teletrabajo de forma continua e integrar a más colaboradores a esta modalidad.</p>
+          </div>
+        </div>
+
+      ]]></content>
+
+      <events>
+        <event time="1"><![CDATA[
+          //document.getElementById("audio").play();
+          document.getElementById("p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="1.5"><![CDATA[
+          document.getElementById("p2").classList.add("MoveParagraph");
+          pause();
+        ]]></event>
+
+        <event time="99"><![CDATA[
+          checkReviewItems(600);
+
+          document.getElementById("p1p1").classList.remove("MoveParagraph");
+          document.getElementById("p1b1").classList.remove("fadein_05");
+          document.getElementById("p1b2").classList.remove("fadein_05");
+          document.getElementById("p1b3").classList.remove("fadein_05");
+          document.getElementById("p1b4").classList.remove("fadein_05");
+          document.getElementById("p1p2").classList.remove("MoveParagraph");
+
+          document.getElementById("p2b1").classList.remove("fadein_05");
+          document.getElementById("p2b2").classList.remove("fadein_05");
+          document.getElementById("p2b3").classList.remove("fadein_05");
+
+
+          document.getElementById("p3p1").classList.remove("MoveParagraph");
+          document.getElementById("p3b1").classList.remove("fadein_05");
+          document.getElementById("p3b2").classList.remove("fadein_05");
+          document.getElementById("p3b3").classList.remove("fadein_05");
+          document.getElementById("p3p2").classList.remove("MoveParagraph");
+
+          document.getElementById("p4p1").classList.remove("MoveParagraph");
+
+          document.getElementById("p5p1").classList.remove("MoveParagraph");
+        ]]></event>
+
+        <event time="100"><![CDATA[
+            $("#popup_1").show();
+        ]]></event>
+        <event time="101"><![CDATA[
+            document.getElementById("p1p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="101.5"><![CDATA[
+            document.getElementById("p1b1").classList.add("fadein_05");
+        ]]></event>
+        <event time="102"><![CDATA[
+            document.getElementById("p1b2").classList.add("fadein_05");
+        ]]></event>
+        <event time="102.5"><![CDATA[
+            document.getElementById("p1b3").classList.add("fadein_05");
+        ]]></event>
+        <event time="103"><![CDATA[
+            document.getElementById("p1b4").classList.add("fadein_05");
+        ]]></event>
+        <event time="103.5"><![CDATA[
+            document.getElementById("p1p2").classList.add("MoveParagraph");
+            pause();
+        ]]></event>
+
+        <event time="200"><![CDATA[
+            $("#popup_2").show();
+        ]]></event>
+        <event time="201"><![CDATA[
+            document.getElementById("p2b1").classList.add("fadein_05");
+        ]]></event>
+        <event time="201.2"><![CDATA[
+            document.getElementById("p2b2").classList.add("fadein_05");
+        ]]></event>
+        <event time="202"><![CDATA[
+            document.getElementById("p2b3").classList.add("fadein_05");
+            pause();
+        ]]></event>
+
+        <event time="300"><![CDATA[
+            $("#popup_3").show();
+        ]]></event>
+        <event time="301"><![CDATA[
+            document.getElementById("p3p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="301.5"><![CDATA[
+            document.getElementById("p3b1").classList.add("fadein_05");
+        ]]></event>
+        <event time="302"><![CDATA[
+            document.getElementById("p3b2").classList.add("fadein_05");
+        ]]></event>
+        <event time="302.5"><![CDATA[
+            document.getElementById("p3b3").classList.add("fadein_05");
+        ]]></event>
+        <event time="303.5"><![CDATA[
+            document.getElementById("p3p2").classList.add("MoveParagraph");
+            pause();
+        ]]></event>
+
+        <event time="400"><![CDATA[
+            $("#popup_4").show();
+        ]]></event>
+        <event time="401"><![CDATA[
+            document.getElementById("p4p1").classList.add("MoveParagraph");
+            pause();
+        ]]></event>
+
+        <event time="500"><![CDATA[
+            $("#popup_5").show();
+        ]]></event>
+        <event time="501"><![CDATA[
+            document.getElementById("p5p1").classList.add("MoveParagraph");
+            pause();
+        ]]></event>
+
+        <event time="600"><![CDATA[
+            nextPage();
+        ]]></event>
+
+      </events>
+
+      <script><![CDATA[
+        $( document ).ready(function() {
+          configReviewItems(5);
+          $("#Button_1").click(function(){ goToAndPlay(100); setReviewItem(1); $(this).find("img").attr("src", "course/images/1B.png"); });
+          $("#Button_2").click(function(){ goToAndPlay(200); setReviewItem(2); $(this).find("img").attr("src", "course/images/2B.png"); });
+          $("#Button_3").click(function(){ goToAndPlay(300); setReviewItem(3); $(this).find("img").attr("src", "course/images/3B.png"); });
+          $("#Button_4").click(function(){ goToAndPlay(400); setReviewItem(4); $(this).find("img").attr("src", "course/images/4B.png"); });
+          $("#Button_5").click(function(){ goToAndPlay(500); setReviewItem(5); $(this).find("img").attr("src", "course/images/5B.png"); });
+
+          $(".popupButtonClose").click(function(){ $( this ).parent().hide(); goToAndStop(99); });
+        });
+      ]]></script>
+    </lesson>
+
+    <lesson name="Desafio de preguntas">
+      <content><![CDATA[
+        <div class="interactiveIntroContainer">
+          <img src="course/images/quiz_feedback.jpg" class="background_full">
+          <div class="interactiveIntro">
+            <div id="hr" class="background-pink"></div>
+            <h1>Desafio de Preguntas</h1>
+            <h2 class="color-pink">Interactividad</h2>
+            <p>Seleccione la respuesta correcta para las siguientes preguntas</p>
+            <button class="interactiveFeedbackButton" onclick="(function(){ nextPage(); })();">COMENZAR</button>
+          </div>
+        </div>
+      ]]></content>
+    </lesson>
+
     <lesson name="Interactividad 1">
       <content><![CDATA[
         <!--
@@ -118,21 +415,41 @@
         <div class="hr2"></div>
         <h1>Interactividad</h1>
       	<h2>Pregunta 1</h2>
-        <p id="p1" class="color-white OpacityZero">¿Recuerdas el modelo para la implementación del teletrabajo? Organiza los pasos  en el orden correcto.</p>
+        <p id="p1" class="color-white OpacityZero">Sofía está de viaje por Europa. El día de hoy, se encuentra trabajando en un café de una cadena reconocida internacionalmente y se sintió con la confianza de conectarse a la red. En unos momentos tiene que enviar su proyecto final. ¿Cómo puede asegurarse su supervisor que la transferencia de la información será segura?</p>
       </div>
       <table class="interactivityTable">
         <tr>
-          <td><div><span>A</span><p>Analizar las ventajas y los propósitos de implementar el teletrabajo.</p></div></td>
-          <td><div><span>B</span><p>Identificar las herramientas de uso diario del colaborador. Establecer lineamientos generales, habilidades y cambios culturales necesarios.</p></div></td>
+          <td><div id="Button_A"><span>A</span><p>Pedir que la información sea encriptada.</p></div></td>
+          <td><div id="Button_B"><span>B</span><p>Solicitar a Sofía que se conecte a través de una VPN.</p></div></td>
         </tr>
         <tr>
-          <td><div><span>C</span><p>Hacer preguntas clave para asegurarse de que la compañía ya tiene contemplados todos los recursos jurídicos y tecnológicos necesarios para la implementación.</p></div></td>
-          <td><div><span>D</span><p>Realizar pequeñas pruebas para observar la adaptación de los colaboradores, medir resultados y hacer reajustes.</p></div></td>
+          <td><div id="Button_C"><span>C</span><p>Pedirle a Sofía su usuario y contraseña para acceder directamente a la información.</p></div></td>
+          <td><div id="Button_D"><span>D</span><p>Todas las anteriores.</p></div></td>
         </tr>
         <tr>
-          <td><div><span>E</span><p>Tu organización cuenta con los lineamientos necesarios y puede integrar a nuevos colaboradores a esta modalidad de trabajo.</p></div></td>
+          <td><div id="Button_E"><span>E</span><p>A y B son correctas.</p></div></td>
         </tr>
       </table>
+      <div id="Correct" class="interactiveFeedbackContainer">
+        <img src="course/images/quiz_feedback.jpg" class="background_full">
+        <div class="interactiveFeedback">
+          <div id="hr" class="background-green"></div>
+          <h1>Respuesta</h1>
+          <h2 class="color-green">Correcta</h2>
+          <p>Cuando se trabaja con información sensible, lo mejor es encriptarla. Al estar conectado a una red pública,<br> el uso de una VPN garantizará una transferencia segura.</p>
+          <button class="interactiveFeedbackButton" onclick="nextPage();">CONTINUAR</button>
+        </div>
+      </div>
+      <div id="Wrong" class="interactiveFeedbackContainer">
+        <img src="course/images/quiz_feedback.jpg" class="background_full">
+        <div class="interactiveFeedback">
+          <div id="hr" class="background-red"></div>
+          <h1>Respuesta</h1>
+          <h2 class="color-red">incorrecta</h2>
+          <p>Intenta de nuevo</p>
+          <button class="interactiveFeedbackButton" onclick="(function(){ $('#Wrong').hide(); })();">CONTINUAR</button>
+        </div>
+      </div>
     ]]></content>
       <events>
         <event time="1"><![CDATA[
@@ -143,8 +460,16 @@
           //nextPage();
           ]]></event>
       </events>
+      <script><![CDATA[
+        $( document ).ready(function() {
+          $("#Button_A").click(function(){ $("#Wrong").show(); });
+          $("#Button_B").click(function(){ $("#Wrong").show(); });
+          $("#Button_C").click(function(){ $("#Wrong").show(); });
+          $("#Button_D").click(function(){ $("#Wrong").show(); });
+          $("#Button_E").click(function(){ $("#Correct").show(); });
+        });
+      ]]></script>
     </lesson>
-
 
   </module>
 

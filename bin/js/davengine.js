@@ -11,6 +11,7 @@ use ECMA script 5
   +developer mode? reload xml and page
   *developer mode to reload xml
   external xml and assets
+  +review pool
 */
 
 var __courseLocation = "course/course.xml";
@@ -46,11 +47,12 @@ var __isPaused = false;
 var __tooltipNext;
 var __tooltipPrev;
 var __lessons = [];
-var __eventPlayed;
+//var __eventPlayed;
 var __videoTimeInternal;
 var __video;
 var __subtitles;
 var __currentSubtitle;
+var __reviewPool = new Array();
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -123,6 +125,7 @@ function setCourseName(name){
 function clearCourseContainer()
 {
   clearInterval(__frameInterval);
+  clearInterval(__videoTimeInternal);
   __courseContainer.innerHTML = "";
 }
 
@@ -218,15 +221,15 @@ function checkVideoTime()
     eval(__subtitles[__currentSubtitle].textContent);
     __currentSubtitle ++;
   }
-
-
 }
 
 function loadScript()
 {
   var script = __page.getElementsByTagName("script")[0];
+  console.log("is has a script: " + script);
   if(script != undefined)
   {
+    console.log(script.textContent);
     eval(script.textContent);
   }
 }
@@ -236,7 +239,7 @@ function setEvents(){
   __frame = 0;
   __events = null;
   clearInterval(__frameInterval);
-  __eventPlayed = 0;
+  //__eventPlayed = 0;
 
   playCourse();
 }
@@ -261,25 +264,29 @@ function pauseCourse()
 
 function playFrame(){
   var milisecondTime = (__frame * 100);
-  var _totalEvents = __events.length;
-  //console.log("playEvent = " + __frame);
-
-  for (i = 0; i < _totalEvents; i++){
-    if(!__blockEvent){
-      var sTime = __events[i].getAttribute("time");
-      var timing = parseInt(sTime * 1000, 10);
-      if(timing == milisecondTime)
-      {
-        console.log("--- Play frame : " + __frame + " second: " + sTime + " ... comes from event " + i);
-        __eventPlayed ++;
-        if(__eventPlayed == _totalEvents)
+  var totalEvents = __events.length;
+  console.log("playEvent = " + __frame + " | __blockEvent : " + __blockEvent + " | __isPaused : " + __isPaused);
+  if(!__blockEvent){
+    for (i = 0; i < totalEvents; i++){
+        var sTime = __events[i].getAttribute("time");
+        var timing = parseInt(sTime * 1000, 10);
+        console.log(i + " of " + totalEvents + " totalEvents");
+        if(timing == milisecondTime)
         {
-          clearInterval(__frameInterval);
-          console.log("events end");
+          /*
+          console.log("--- Play frame : " + __frame + " second: " + sTime + " ... comes from event " + i);
+          __eventPlayed ++;
+          if(__eventPlayed == totalEvents)
+          {
+            clearInterval(__frameInterval);
+            console.log("events end");
+          }
+          */
+          eval(__events[i].textContent);
+          console.log("---Event found");
+          break;
         }
-        eval(__events[i].textContent);
       }
-    }
   }
     __frame++;
 }
@@ -565,6 +572,12 @@ function checkHorizontal()
 function tooglePlayPause()
 {
   __isPaused = !__isPaused;
+  play_pause(__isPaused);
+}
+
+function play_pause(isPaused)
+{
+  __isPaused = isPaused;
   var audios = document.getElementsByTagName("audio");
   var videos = document.getElementsByTagName("video");
   console.log(audios.length + "|" + videos.length);
@@ -607,6 +620,16 @@ function tooglePlayPause()
   }
 }
 
+function pause(){
+    __isPaused = true;
+    play_pause(__isPaused);
+}
+
+function play(){
+    __isPaused = false;
+    play_pause(__isPaused);
+}
+
 document.addEventListener('keydown', function(event) {
   console.log(event.code);
   if (event.code == "ArrowRight") {
@@ -631,4 +654,59 @@ function showUI(isVisible){
     __prevButton.style.display = "none";
     __playButton.style.display = "node";
   }
+}
+
+function goTo(goFrame){
+  __frame = goFrame * 10;
+  playCourse();
+}
+
+function goToAndStop(goFrame){
+  __frame = goFrame * 10;
+  var milisecondTime = (__frame * 100);
+  __blockEvent = true;
+  clearInterval(__frameInterval);
+  var totalEvents = __events.length;
+  console.log("---------------------goToAndStop = " + __frame + " | __blockEvent = " + __blockEvent);
+
+  for (i = 0; i < totalEvents; i++){
+      var sTime = __events[i].getAttribute("time");
+      var timing = parseInt(sTime * 1000, 10);
+      if(timing == milisecondTime)
+      {
+        eval(__events[i].textContent);
+        return;
+      }
+  }
+}
+
+function goToAndPlay(goFrame){
+  clearInterval(__frameInterval);
+  __blockEvent = false;
+  __frame = (goFrame * 10);
+  __frameInterval = setInterval(playFrame, __frameRate);
+}
+
+function configReviewItems(nItems){
+  __reviewPool = [];
+
+  for(var i = 0; i < nItems; i++){
+    __reviewPool[i] = false;
+  }
+}
+
+function setReviewItem(nItem){
+    __reviewPool[nItem - 1] = true;
+}
+
+function checkReviewItems(frameToGo){
+  console.log("checkReviewItems");
+  for(var i = 0; i < __reviewPool.length; i++){
+    if(__reviewPool[i] == false){
+      console.log("return.......");
+      return;
+    }
+  }
+  console.log("action..................................... frame = " + frameToGo);
+  goToAndPlay(frameToGo);
 }
