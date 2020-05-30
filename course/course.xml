@@ -471,6 +471,225 @@
       ]]></script>
     </lesson>
 
+
+    <lesson name="Drag and drop">
+
+      <content><![CDATA[
+        <p>Drag the p element back and forth between the two rectangles:</p>
+
+<div class="droptarget">
+  <p draggable="true" id="dragtarget">Drag me!</p>
+</div>
+
+<div class="droptarget"></div>
+
+<p style="clear:both;"><strong>Note:</strong> drag events are not supported in Internet Explorer 8 and earlier versions or Safari 5.1 and earlier versions.</p>
+
+<p id="demo"></p>
+
+<div style="position:absolute; background-color: #2c2e46; width: 100%; height:100%; top: 0px; left: 0px,"></div>
+
+  <table class="DDTable">
+    <tr>
+      <td>
+      </td>
+      <td>
+          <div class="DDtableLeftSideTop"></div>
+      </td>
+      <td>
+        <div class="DDtextTop"></div>
+      </td>
+    <tr>
+
+    <tr>
+      <td>
+        <div class="DDcontainer">
+          <div id="DD1" draggable="true" class="DDcircle" style="background-color:#a2c173;"><p>1</p></div>
+        </div>
+      </td>
+      <td>
+        <div class="DDcontainer">
+          <div class="DDtableLeftSide"></div>
+          <div id="target_1" class="DDcircle DDtarget"></div>
+        </div>
+      </td>
+      <td>
+        <div class="DDtext">
+          <p>3.	Hacer preguntas clave para asegurarse de que la compañía ya tiene contemplados todos los recursos jurídicos y tecnológicos necesarios para la implementación.</p>
+        </div>
+      </td>
+    <tr>
+    <tr>
+      <td>
+        <div class="DDcontainer">
+          <div id="DD2" draggable="true" class="DDcircle" style="background-color:#36a99f;"><p>2</p></div>
+        </div>
+      </td>
+      <td>
+        <div class="DDcontainer">
+          <div class="DDtableLeftSide"></div>
+          <div id="target_2" class="DDcircle DDtarget"></div>
+        </div>
+      </td>
+      <td>
+        <div class="DDtext">
+          <p>5.	Tu organización cuenta con los lineamientos necesarios y puede integrar a nuevos colaboradores a esta modalidad de trabajo.</p>
+        </div>
+      </td>
+    <tr>
+      <tr>
+        <td>
+          <div class="DDcontainer">
+            <div id="DD3" draggable="true" class="DDcircle" style="background-color:#7c94a0;"><p>3</p></div>
+          </div>
+        </td>
+        <td>
+          <div class="DDcontainer">
+            <div class="DDtableLeftSide"></div>
+            <div id="target_3" class="DDcircle DDtarget" ></div>
+          </div>
+        </td>
+        <td>
+          <div class="DDtext">
+            <p>4.	Realizar pequeñas pruebas para observar la adaptación de los colaboradores, medir resultados y hacer reajustes.</p>
+          </div>
+        </td>
+      <tr>
+        <tr>
+          <td>
+            <div class="DDcontainer">
+              <div id="DD4" draggable="true" class="DDcircle" style="background-color:#a2628d;"><p>4</p></div>
+            </div>
+          </td>
+          <td>
+            <div class="DDcontainer">
+              <div class="DDtableLeftSide"></div>
+              <div id="target_4" class="DDcircle DDtarget"></div>
+            </div>
+          </td>
+          <td>
+            <div class="DDtext">
+              <p>1.	Analizar las ventajas y los propósitos de implementar el teletrabajo.</p>
+            </div>
+          </td>
+        <tr>
+          <tr>
+            <td>
+              <div class="DDcontainer">
+                <div id="DD5" draggable="true" class="DDcircle" style="background-color:#e7ae49;"><p>5</p></div>
+              </div>
+            </td>
+            <td>
+              <div class="DDcontainer">
+                <div class="DDtableLeftSide"></div>
+                <div id="target_5" class="DDcircle DDtarget"></div>
+              </div>
+            </td>
+            <td>
+              <div class="DDtext">
+                <p>2.	Identificar las herramientas de uso diario del colaborador. Establecer lineamientos generales, habilidades y cambios culturales necesarios.</p>
+              </div>
+            </td>
+          <tr>
+
+            <tr>
+              <td>
+              </td>
+              <td>
+                  <div class="DDtableLeftSideBottom"></div>
+              </td>
+              <td>
+                <div class="DDtextBottom"></div>
+              </td>
+            <tr>
+  </table>
+      ]]></content>
+      <script><![CDATA[
+        /* Events fired on the drag target */
+
+        document.addEventListener("dragstart", function(event) {
+          // The dataTransfer.setData() method sets the data type and the value of the dragged data
+          event.dataTransfer.setData("Text", event.target.id);
+
+          console.log("event.target.id = " + event.target.id);
+
+          // Output some text when starting to drag the p element
+          document.getElementById("demo").innerHTML = "Started to drag the p element.";
+
+          // Change the opacity of the draggable element
+          event.target.style.opacity = "0.5";
+        });
+
+        // While dragging the p element, change the color of the output text
+        document.addEventListener("drag", function(event) {
+          document.getElementById("demo").style.color = "red";
+        });
+
+        // Output some text when finished dragging the p element and reset the opacity
+        document.addEventListener("dragend", function(event) {
+          document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+          event.target.style.opacity = "1";
+        });
+
+        /* Events fired on the drop target */
+
+        // When the draggable p element enters the droptarget, change the DIVS's border style
+        document.addEventListener("dragenter", function(event) {
+          if ( event.target.className == "droptarget" ) {
+            event.target.style.border = "3px dotted red";
+          }
+
+          if(event.target.classList.contains("DDtarget")){
+            event.target.classList.add("DDtarget_hover");
+          }
+        });
+
+        // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+        document.addEventListener("dragover", function(event) {
+          event.preventDefault();
+        });
+
+        // When the draggable p element leaves the droptarget, reset the DIVS's border style
+        document.addEventListener("dragleave", function(event) {
+          if ( event.target.className == "droptarget" ) {
+            event.target.style.border = "";
+          }
+
+          if(event.target.classList.contains("DDtarget_hover")){
+            event.target.classList.remove("DDtarget_hover");
+          }
+        });
+
+        /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+           Reset the color of the output text and DIV's border color
+           Get the dragged data with the dataTransfer.getData() method
+           The dragged data is the id of the dragged element ("drag1")
+           Append the dragged element into the drop element
+        */
+        document.addEventListener("drop", function(event) {
+          event.preventDefault();
+
+          if ( event.target.className == "droptarget" ) {
+            document.getElementById("demo").style.color = "";
+            event.target.style.border = "";
+            var data = event.dataTransfer.getData("Text");
+            event.target.appendChild(document.getElementById(data));
+          }
+          console.log("event.target = " + event.target.getAttribute("id"));
+          if(event.target.classList.contains("DDtarget")){
+            var data = event.dataTransfer.getData("Text");
+            event.target.appendChild(document.getElementById(data));
+          }
+
+          if(event.target.classList.contains("DDtarget_hover")){
+            event.target.classList.remove("DDtarget_hover");
+          }
+        });
+      ]]></script>
+
+
+    </lesson>
+
   </module>
 
   <module name="HTML">
