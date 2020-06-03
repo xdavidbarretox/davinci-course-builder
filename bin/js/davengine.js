@@ -229,7 +229,6 @@ function loadScript()
   console.log("is has a script: " + script);
   if(script != undefined)
   {
-    console.log(script.textContent);
     eval(script.textContent);
   }
 }
@@ -709,4 +708,11 @@ function checkReviewItems(frameToGo){
   }
   console.log("action..................................... frame = " + frameToGo);
   goToAndPlay(frameToGo);
+}
+
+function stop()
+{
+  __blockEvent = true;
+  clearInterval(__frameInterval);
+  console.log("----------------------------------------------------------------stop");
 }

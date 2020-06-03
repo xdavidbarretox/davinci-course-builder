@@ -136,7 +136,7 @@ h2{
 }
 
 ul {
-    list-style: square inside url(../images/bullet.png);
+  list-style: square inside url(../images/bullet.png);
 }
 
 li{
@@ -365,6 +365,7 @@ td img{
     -moz-animation: AnimateParagraph 0.5s forwards;
     -o-animation: AnimateParagraph 0.5s forwards;
 }
+
 @keyframes AnimateParagraph{
     from{
         margin-top: 45px; opacity: 0
@@ -538,6 +539,7 @@ td img{
   font-size: 18px;
   text-align: center;
   letter-spacing: 4px;
+  margin-top:20px;
 }
 
 .interactiveFeedbackButton:hover{
@@ -828,12 +830,12 @@ transform: translateX(-50%);
 
 .DDtableLeftSideTop{
   position: relative;
-    width: 50%;
-    height: 20px;
-    right: -50px;
-    top: 0px;
-    background-color: #22243b;
-    border-radius: 10px 0px 0px 0px;
+  width: 50%;
+  height: 20px;
+  right: -50px;
+  top: 0px;
+  background-color: #22243b;
+  border-radius: 10px 0px 0px 0px;
 }
 
 .DDtextTop{
@@ -858,4 +860,30 @@ transform: translateX(-50%);
   margin: 0;
   height: 20px;
   border-radius: 0px 0px 10px 0px;
+}
+
+.custom_bullet{
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 0% 50%;
+  background-color: #7461a3;
+  margin:5px;
+}
+
+.custom_bullet p{
+  font-family: "LibreFranklin-Black";
+    color: white;
+    font-size: 24px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    height: auto;
+    transform: translateY(-50%);
+    margin: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
 }

@@ -106,13 +106,11 @@
       </events>
     </lesson>
 
-    <lesson name="¿Cómo implementar el teletrabajo?"><!-- TODO Pop up-->
+    <lesson name="¿Cómo implementar el teletrabajo?"><!-- TODO Pop up audios-->
       <content><![CDATA[
-        <!--
-        <audio id="audio">
-          <source src="course/audios/seguridad_de_la_informacion.jpg.mp3" type="audio/mpeg">
+        <audio id="audio_01">
+          <source src="course/audios/tt_01.mp3" type="audio/mpeg">
         </audio>
-      -->
         <div id="content" class="popupBackground BackgroundPurple"></div>
       <div class="content_left">
         <div class="hr2"></div>
@@ -261,12 +259,12 @@
 
       <events>
         <event time="1"><![CDATA[
-          //document.getElementById("audio").play();
+          document.getElementById("audio_01").play();
           document.getElementById("p1").classList.add("MoveParagraph");
         ]]></event>
-        <event time="1.5"><![CDATA[
+        <event time="8"><![CDATA[
           document.getElementById("p2").classList.add("MoveParagraph");
-          pause();
+          stop();
         ]]></event>
 
         <event time="99"><![CDATA[
@@ -297,6 +295,8 @@
 
         <event time="100"><![CDATA[
             $("#popup_1").show();
+            document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup1-.mp3");
+            document.getElementById("audio_01").play();
         ]]></event>
         <event time="101"><![CDATA[
             document.getElementById("p1p1").classList.add("MoveParagraph");
@@ -315,11 +315,13 @@
         ]]></event>
         <event time="103.5"><![CDATA[
             document.getElementById("p1p2").classList.add("MoveParagraph");
-            pause();
+            stop();
         ]]></event>
 
         <event time="200"><![CDATA[
             $("#popup_2").show();
+            document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup2.mp3");
+            document.getElementById("audio_01").play();
         ]]></event>
         <event time="201"><![CDATA[
             document.getElementById("p2b1").classList.add("fadein_05");
@@ -329,11 +331,13 @@
         ]]></event>
         <event time="202"><![CDATA[
             document.getElementById("p2b3").classList.add("fadein_05");
-            pause();
+            stop();
         ]]></event>
 
         <event time="300"><![CDATA[
             $("#popup_3").show();
+            document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup3.mp3");
+            document.getElementById("audio_01").play();
         ]]></event>
         <event time="301"><![CDATA[
             document.getElementById("p3p1").classList.add("MoveParagraph");
@@ -349,23 +353,27 @@
         ]]></event>
         <event time="303.5"><![CDATA[
             document.getElementById("p3p2").classList.add("MoveParagraph");
-            pause();
+            stop();
         ]]></event>
 
         <event time="400"><![CDATA[
             $("#popup_4").show();
+            document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup4.mp3");
+            document.getElementById("audio_01").play();
         ]]></event>
         <event time="401"><![CDATA[
             document.getElementById("p4p1").classList.add("MoveParagraph");
-            pause();
+            stop();
         ]]></event>
 
         <event time="500"><![CDATA[
             $("#popup_5").show();
+            document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup5.mp3");
+            document.getElementById("audio_01").play();
         ]]></event>
         <event time="501"><![CDATA[
             document.getElementById("p5p1").classList.add("MoveParagraph");
-            pause();
+            stop();
         ]]></event>
 
         <event time="600"><![CDATA[
@@ -377,13 +385,13 @@
       <script><![CDATA[
         $( document ).ready(function() {
           configReviewItems(5);
-          $("#Button_1").click(function(){ goToAndPlay(100); setReviewItem(1); $(this).find("img").attr("src", "course/images/1B.png"); });
-          $("#Button_2").click(function(){ goToAndPlay(200); setReviewItem(2); $(this).find("img").attr("src", "course/images/2B.png"); });
-          $("#Button_3").click(function(){ goToAndPlay(300); setReviewItem(3); $(this).find("img").attr("src", "course/images/3B.png"); });
-          $("#Button_4").click(function(){ goToAndPlay(400); setReviewItem(4); $(this).find("img").attr("src", "course/images/4B.png"); });
-          $("#Button_5").click(function(){ goToAndPlay(500); setReviewItem(5); $(this).find("img").attr("src", "course/images/5B.png"); });
+          $("#Button_1").click(function(){ goToAndPlay(100); setReviewItem(1); $(this).find("img").attr("src", "course/images/1B.png"); document.getElementById("audio_01").pause();});
+          $("#Button_2").click(function(){ goToAndPlay(200); setReviewItem(2); $(this).find("img").attr("src", "course/images/2B.png"); document.getElementById("audio_01").pause();});
+          $("#Button_3").click(function(){ goToAndPlay(300); setReviewItem(3); $(this).find("img").attr("src", "course/images/3B.png"); document.getElementById("audio_01").pause();});
+          $("#Button_4").click(function(){ goToAndPlay(400); setReviewItem(4); $(this).find("img").attr("src", "course/images/4B.png"); document.getElementById("audio_01").pause();});
+          $("#Button_5").click(function(){ goToAndPlay(500); setReviewItem(5); $(this).find("img").attr("src", "course/images/5B.png"); document.getElementById("audio_01").pause();});
 
-          $(".popupButtonClose").click(function(){ $( this ).parent().hide(); goToAndStop(99); });
+          $(".popupButtonClose").click(function(){ $( this ).parent().hide(); goToAndStop(99); document.getElementById("audio_01").pause();});
         });
       ]]></script>
     </lesson>
@@ -471,22 +479,25 @@
       ]]></script>
     </lesson>
 
-
-    <lesson name="Drag and drop">
-
+    <lesson name="Drag and Drop">
       <content><![CDATA[
-        <p>Drag the p element back and forth between the two rectangles:</p>
+        <div class="interactiveIntroContainer">
+          <img src="course/images/quiz_feedback.jpg" class="background_full">
+          <div class="interactiveIntro">
+            <div id="hr" class="background-pink"></div>
+            <h1>Drag and Drop</h1>
+            <h2 class="color-pink">Interactividad</h2>
+            <p>¿Recuerdas el modelo para la implementación del teletrabajo? Organiza los pasos  en el orden correcto.</p>
+            <button class="interactiveFeedbackButton" onclick="(function(){ nextPage(); })();">COMENZAR</button>
+          </div>
+        </div>
+      ]]></content>
+    </lesson>
 
-<div class="droptarget">
-  <p draggable="true" id="dragtarget">Drag me!</p>
-</div>
 
-<div class="droptarget"></div>
+    <lesson name="Drag and drop"><!-- TODO only drop if match -->
 
-<p style="clear:both;"><strong>Note:</strong> drag events are not supported in Internet Explorer 8 and earlier versions or Safari 5.1 and earlier versions.</p>
-
-<p id="demo"></p>
-
+    <content><![CDATA[
 <div style="position:absolute; background-color: #2c2e46; width: 100%; height:100%; top: 0px; left: 0px,"></div>
 
   <table class="DDTable">
@@ -500,7 +511,6 @@
         <div class="DDtextTop"></div>
       </td>
     <tr>
-
     <tr>
       <td>
         <div class="DDcontainer">
@@ -591,54 +601,69 @@
               </div>
             </td>
           <tr>
-
-            <tr>
-              <td>
-              </td>
-              <td>
-                  <div class="DDtableLeftSideBottom"></div>
-              </td>
-              <td>
-                <div class="DDtextBottom"></div>
-              </td>
-            <tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+                <div class="DDtableLeftSideBottom"></div>
+            </td>
+            <td>
+              <div class="DDtextBottom"></div>
+            </td>
+          <tr>
   </table>
+
+  <div id="Correct" class="interactiveFeedbackContainer">
+    <img src="course/images/quiz_feedback.jpg" class="background_full">
+    <div class="interactiveFeedback">
+      <div id="hr" class="background-green"></div>
+      <h1>Respuesta</h1>
+      <h2 class="color-green">Correcta</h2>
+      <p>¡Excelente! Recuerda que los 5 pasos para la implementación exitosa son: </p>
+      <table style="margin: auto;">
+        <tr id="b1" class="color-white">
+          <td><div class="custom_bullet"><p>1</p></div></td>
+          <td>plantear beneficios y objetivos</td>
+        </tr>
+        <tr id="b2" class="color-white">
+          <td><div class="custom_bullet"><p>2</p></div></td>
+          <td>estructurar el proyecto</td>
+        </tr>
+        <tr id="b3" class="color-white">
+          <td><div class="custom_bullet"><p>3</p></div></td>
+          <td>autoevaluación</td>
+        </tr>
+        <tr id="b4" class="color-white">
+          <td><div class="custom_bullet"><p>4</p></div></td>
+          <td>prueba piloto</td>
+        </tr>
+        <tr id="b5" class="color-white">
+          <td><div class="custom_bullet"><p>5</p></div></td>
+          <td>apropiación del modelo</td>
+        </tr>
+      </table>
+      <button class="interactiveFeedbackButton" onclick="nextPage();">CONTINUAR</button>
+    </div>
+  </div>
       ]]></content>
       <script><![CDATA[
-        /* Events fired on the drag target */
+        var DDCounter = 0;
+        var DDTotalTargets = 5;
 
         document.addEventListener("dragstart", function(event) {
-          // The dataTransfer.setData() method sets the data type and the value of the dragged data
           event.dataTransfer.setData("Text", event.target.id);
-
-          console.log("event.target.id = " + event.target.id);
-
-          // Output some text when starting to drag the p element
-          document.getElementById("demo").innerHTML = "Started to drag the p element.";
-
-          // Change the opacity of the draggable element
           event.target.style.opacity = "0.5";
         });
 
-        // While dragging the p element, change the color of the output text
         document.addEventListener("drag", function(event) {
-          document.getElementById("demo").style.color = "red";
         });
 
-        // Output some text when finished dragging the p element and reset the opacity
         document.addEventListener("dragend", function(event) {
-          document.getElementById("demo").innerHTML = "Finished dragging the p element.";
           event.target.style.opacity = "1";
         });
 
-        /* Events fired on the drop target */
-
-        // When the draggable p element enters the droptarget, change the DIVS's border style
         document.addEventListener("dragenter", function(event) {
-          if ( event.target.className == "droptarget" ) {
-            event.target.style.border = "3px dotted red";
-          }
-
+        event.preventDefault();
           if(event.target.classList.contains("DDtarget")){
             event.target.classList.add("DDtarget_hover");
           }
@@ -649,47 +674,59 @@
           event.preventDefault();
         });
 
-        // When the draggable p element leaves the droptarget, reset the DIVS's border style
         document.addEventListener("dragleave", function(event) {
-          if ( event.target.className == "droptarget" ) {
-            event.target.style.border = "";
-          }
-
           if(event.target.classList.contains("DDtarget_hover")){
             event.target.classList.remove("DDtarget_hover");
           }
         });
 
-        /* On drop - Prevent the browser default handling of the data (default is open as link on drop)
-           Reset the color of the output text and DIV's border color
-           Get the dragged data with the dataTransfer.getData() method
-           The dragged data is the id of the dragged element ("drag1")
-           Append the dragged element into the drop element
-        */
-        document.addEventListener("drop", function(event) {
+        document.addEventListener("drop", function(event){
           event.preventDefault();
+          var SourdeID = event.dataTransfer.getData("Text");
+          var TargetID = event.target.getAttribute("id");
 
-          if ( event.target.className == "droptarget" ) {
-            document.getElementById("demo").style.color = "";
-            event.target.style.border = "";
-            var data = event.dataTransfer.getData("Text");
-            event.target.appendChild(document.getElementById(data));
+          if((SourdeID == "DD1") && (TargetID == "target_4"))
+          {
+            match(SourdeID, TargetID);
           }
-          console.log("event.target = " + event.target.getAttribute("id"));
-          if(event.target.classList.contains("DDtarget")){
-            var data = event.dataTransfer.getData("Text");
-            event.target.appendChild(document.getElementById(data));
+          if((SourdeID == "DD2") && (TargetID == "target_5"))
+          {
+            match(SourdeID, TargetID);
+          }
+          if((SourdeID == "DD3") && (TargetID == "target_1"))
+          {
+            match(SourdeID, TargetID);
+          }
+          if((SourdeID == "DD4") && (TargetID == "target_3"))
+          {
+            match(SourdeID, TargetID);
+          }
+          if((SourdeID == "DD5") && (TargetID == "target_2"))
+          {
+            match(SourdeID, TargetID);
           }
 
           if(event.target.classList.contains("DDtarget_hover")){
             event.target.classList.remove("DDtarget_hover");
           }
         });
+
+        function match(source, target)
+        {
+          var s = document.getElementById(source);
+          var t = document.getElementById(target)
+          t.appendChild(s);
+          if(t.classList.contains("DDtarget_hover")){
+            t.classList.remove("DDtarget_hover");
+          }
+          DDCounter ++;
+          if(DDCounter == DDTotalTargets)
+          {
+            $("#Correct").show();
+          }
+        }
       ]]></script>
-
-
     </lesson>
-
   </module>
 
   <module name="HTML">
