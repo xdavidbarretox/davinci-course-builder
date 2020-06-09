@@ -106,7 +106,7 @@
       </events>
     </lesson>
 
-    <lesson name="¿Cómo implementar el teletrabajo?"><!-- TODO Pop up audios-->
+    <lesson name="¿Cómo implementar el teletrabajo?">
       <content><![CDATA[
         <audio id="audio_01">
           <source src="course/audios/tt_01.mp3" type="audio/mpeg">
@@ -254,7 +254,6 @@
               <p id="p5p1" class="OpacityZero color-white">En esta etapa, tu organización está lista para cumplir con sus <b>objetivos</b>, aplicar las <b>mejores prácticas</b> y cumplir con los <b>lineamientos</b> y <b>políticas de seguridad</b>. Ahora puedes implementar el teletrabajo de forma continua e integrar a más colaboradores a esta modalidad.</p>
           </div>
         </div>
-
       ]]></content>
 
       <events>
@@ -280,7 +279,6 @@
           document.getElementById("p2b1").classList.remove("fadein_05");
           document.getElementById("p2b2").classList.remove("fadein_05");
           document.getElementById("p2b3").classList.remove("fadein_05");
-
 
           document.getElementById("p3p1").classList.remove("MoveParagraph");
           document.getElementById("p3b1").classList.remove("fadein_05");
@@ -379,7 +377,6 @@
         <event time="600"><![CDATA[
             nextPage();
         ]]></event>
-
       </events>
 
       <script><![CDATA[
@@ -494,157 +491,152 @@
       ]]></content>
     </lesson>
 
-
-    <lesson name="Drag and drop"><!-- TODO only drop if match -->
-
+  <lesson name="Drag and drop">
     <content><![CDATA[
-<div style="position:absolute; background-color: #2c2e46; width: 100%; height:100%; top: 0px; left: 0px,"></div>
-
-  <table class="DDTable">
-    <tr>
-      <td>
-      </td>
-      <td>
-          <div class="DDtableLeftSideTop"></div>
-      </td>
-      <td>
-        <div class="DDtextTop"></div>
-      </td>
-    <tr>
-    <tr>
-      <td>
-        <div class="DDcontainer">
-          <div id="DD1" draggable="true" class="DDcircle" style="background-color:#a2c173;"><p>1</p></div>
-        </div>
-      </td>
-      <td>
-        <div class="DDcontainer">
-          <div class="DDtableLeftSide"></div>
-          <div id="target_1" class="DDcircle DDtarget"></div>
-        </div>
-      </td>
-      <td>
-        <div class="DDtext">
-          <p>3.	Hacer preguntas clave para asegurarse de que la compañía ya tiene contemplados todos los recursos jurídicos y tecnológicos necesarios para la implementación.</p>
-        </div>
-      </td>
-    <tr>
-    <tr>
-      <td>
-        <div class="DDcontainer">
-          <div id="DD2" draggable="true" class="DDcircle" style="background-color:#36a99f;"><p>2</p></div>
-        </div>
-      </td>
-      <td>
-        <div class="DDcontainer">
-          <div class="DDtableLeftSide"></div>
-          <div id="target_2" class="DDcircle DDtarget"></div>
-        </div>
-      </td>
-      <td>
-        <div class="DDtext">
-          <p>5.	Tu organización cuenta con los lineamientos necesarios y puede integrar a nuevos colaboradores a esta modalidad de trabajo.</p>
-        </div>
-      </td>
-    <tr>
-      <tr>
-        <td>
-          <div class="DDcontainer">
-            <div id="DD3" draggable="true" class="DDcircle" style="background-color:#7c94a0;"><p>3</p></div>
-          </div>
-        </td>
-        <td>
-          <div class="DDcontainer">
-            <div class="DDtableLeftSide"></div>
-            <div id="target_3" class="DDcircle DDtarget" ></div>
-          </div>
-        </td>
-        <td>
-          <div class="DDtext">
-            <p>4.	Realizar pequeñas pruebas para observar la adaptación de los colaboradores, medir resultados y hacer reajustes.</p>
-          </div>
-        </td>
-      <tr>
+      <div style="position:absolute; background-color: #2c2e46; width: 100%; height:100%; top: 0px; left: 0px,"></div>
+      <table class="DDTable">
+        <tr>
+          <td></td>
+          <td>
+              <div class="DDtableLeftSideTop"></div>
+          </td>
+          <td>
+            <div class="DDtextTop"></div>
+          </td>
+        </tr>
         <tr>
           <td>
             <div class="DDcontainer">
-              <div id="DD4" draggable="true" class="DDcircle" style="background-color:#a2628d;"><p>4</p></div>
+              <div id="DD1" draggable="true" class="DDcircle" style="background-color:#a2c173;"><p>1</p></div>
             </div>
           </td>
           <td>
             <div class="DDcontainer">
               <div class="DDtableLeftSide"></div>
-              <div id="target_4" class="DDcircle DDtarget"></div>
+              <div id="target_1" class="DDcircle DDtarget"></div>
             </div>
           </td>
           <td>
             <div class="DDtext">
-              <p>1.	Analizar las ventajas y los propósitos de implementar el teletrabajo.</p>
+              <p>3.	Hacer preguntas clave para asegurarse de que la compañía ya tiene contemplados todos los recursos jurídicos y tecnológicos necesarios para la implementación.</p>
             </div>
           </td>
+        </tr>
         <tr>
+          <td>
+            <div class="DDcontainer">
+              <div id="DD2" draggable="true" class="DDcircle" style="background-color:#36a99f;"><p>2</p></div>
+            </div>
+          </td>
+          <td>
+            <div class="DDcontainer">
+              <div class="DDtableLeftSide"></div>
+              <div id="target_2" class="DDcircle DDtarget"></div>
+            </div>
+          </td>
+          <td>
+            <div class="DDtext">
+              <p>5.	Tu organización cuenta con los lineamientos necesarios y puede integrar a nuevos colaboradores a esta modalidad de trabajo.</p>
+            </div>
+          </td>
+        </tr>
           <tr>
             <td>
               <div class="DDcontainer">
-                <div id="DD5" draggable="true" class="DDcircle" style="background-color:#e7ae49;"><p>5</p></div>
+                <div id="DD3" draggable="true" class="DDcircle" style="background-color:#7c94a0;"><p>3</p></div>
               </div>
             </td>
             <td>
               <div class="DDcontainer">
                 <div class="DDtableLeftSide"></div>
-                <div id="target_5" class="DDcircle DDtarget"></div>
+                <div id="target_3" class="DDcircle DDtarget" ></div>
               </div>
             </td>
             <td>
               <div class="DDtext">
-                <p>2.	Identificar las herramientas de uso diario del colaborador. Establecer lineamientos generales, habilidades y cambios culturales necesarios.</p>
+                <p>4.	Realizar pequeñas pruebas para observar la adaptación de los colaboradores, medir resultados y hacer reajustes.</p>
               </div>
             </td>
-          <tr>
-          <tr>
-            <td>
-            </td>
-            <td>
-                <div class="DDtableLeftSideBottom"></div>
-            </td>
-            <td>
-              <div class="DDtextBottom"></div>
-            </td>
-          <tr>
-  </table>
-
-  <div id="Correct" class="interactiveFeedbackContainer">
-    <img src="course/images/quiz_feedback.jpg" class="background_full">
-    <div class="interactiveFeedback">
-      <div id="hr" class="background-green"></div>
-      <h1>Respuesta</h1>
-      <h2 class="color-green">Correcta</h2>
-      <p>¡Excelente! Recuerda que los 5 pasos para la implementación exitosa son: </p>
-      <table style="margin: auto;">
-        <tr id="b1" class="color-white">
-          <td><div class="custom_bullet"><p>1</p></div></td>
-          <td>plantear beneficios y objetivos</td>
-        </tr>
-        <tr id="b2" class="color-white">
-          <td><div class="custom_bullet"><p>2</p></div></td>
-          <td>estructurar el proyecto</td>
-        </tr>
-        <tr id="b3" class="color-white">
-          <td><div class="custom_bullet"><p>3</p></div></td>
-          <td>autoevaluación</td>
-        </tr>
-        <tr id="b4" class="color-white">
-          <td><div class="custom_bullet"><p>4</p></div></td>
-          <td>prueba piloto</td>
-        </tr>
-        <tr id="b5" class="color-white">
-          <td><div class="custom_bullet"><p>5</p></div></td>
-          <td>apropiación del modelo</td>
-        </tr>
+          </tr>
+            <tr>
+              <td>
+                <div class="DDcontainer">
+                  <div id="DD4" draggable="true" class="DDcircle" style="background-color:#a2628d;"><p>4</p></div>
+                </div>
+              </td>
+              <td>
+                <div class="DDcontainer">
+                  <div class="DDtableLeftSide"></div>
+                  <div id="target_4" class="DDcircle DDtarget"></div>
+                </div>
+              </td>
+              <td>
+                <div class="DDtext">
+                  <p>1.	Analizar las ventajas y los propósitos de implementar el teletrabajo.</p>
+                </div>
+              </td>
+            </tr>
+              <tr>
+                <td>
+                  <div class="DDcontainer">
+                    <div id="DD5" draggable="true" class="DDcircle" style="background-color:#e7ae49;"><p>5</p></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="DDcontainer">
+                    <div class="DDtableLeftSide"></div>
+                    <div id="target_5" class="DDcircle DDtarget"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="DDtext">
+                    <p>2.	Identificar las herramientas de uso diario del colaborador. Establecer lineamientos generales, habilidades y cambios culturales necesarios.</p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                </td>
+                <td>
+                    <div class="DDtableLeftSideBottom"></div>
+                </td>
+                <td>
+                  <div class="DDtextBottom"></div>
+                </td>
+              </tr>
       </table>
-      <button class="interactiveFeedbackButton" onclick="nextPage();">CONTINUAR</button>
-    </div>
-  </div>
+      <div id="Correct" class="interactiveFeedbackContainer">
+        <img src="course/images/quiz_feedback.jpg" class="background_full">
+        <div class="interactiveFeedback">
+          <div id="hr" class="background-green"></div>
+          <h1>Respuesta</h1>
+          <h2 class="color-green">Correcta</h2>
+          <p>¡Excelente! Recuerda que los 5 pasos para la implementación exitosa son: </p>
+          <table style="margin: auto;">
+            <tr id="b1" class="color-white">
+              <td><div class="custom_bullet"><p>1</p></div></td>
+              <td>plantear beneficios y objetivos</td>
+            </tr>
+            <tr id="b2" class="color-white">
+              <td><div class="custom_bullet"><p>2</p></div></td>
+              <td>estructurar el proyecto</td>
+            </tr>
+            <tr id="b3" class="color-white">
+              <td><div class="custom_bullet"><p>3</p></div></td>
+              <td>autoevaluación</td>
+            </tr>
+            <tr id="b4" class="color-white">
+              <td><div class="custom_bullet"><p>4</p></div></td>
+              <td>prueba piloto</td>
+            </tr>
+            <tr id="b5" class="color-white">
+              <td><div class="custom_bullet"><p>5</p></div></td>
+              <td>apropiación del modelo</td>
+            </tr>
+          </table>
+          <button class="interactiveFeedbackButton" onclick="nextPage();">CONTINUAR</button>
+        </div>
+      </div>
       ]]></content>
       <script><![CDATA[
         var DDCounter = 0;
@@ -652,7 +644,7 @@
 
         document.addEventListener("dragstart", function(event) {
           event.dataTransfer.setData("Text", event.target.id);
-          event.target.style.opacity = "0.5";
+          event.target.style.opacity = "0.9";
         });
 
         document.addEventListener("drag", function(event) {
@@ -664,8 +656,12 @@
 
         document.addEventListener("dragenter", function(event) {
         event.preventDefault();
+        event.stopPropagation();
+        console.log("dragenter");
+        if(event.target.classList){
           if(event.target.classList.contains("DDtarget")){
             event.target.classList.add("DDtarget_hover");
+          }
           }
         });
 
@@ -675,13 +671,20 @@
         });
 
         document.addEventListener("dragleave", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+          console.log("dragleave");
+          if(event.target.classList){
           if(event.target.classList.contains("DDtarget_hover")){
             event.target.classList.remove("DDtarget_hover");
+          }
           }
         });
 
         document.addEventListener("drop", function(event){
           event.preventDefault();
+          event.stopPropagation();
+          console.log("drop");
           var SourdeID = event.dataTransfer.getData("Text");
           var TargetID = event.target.getAttribute("id");
 
@@ -711,6 +714,8 @@
           }
         });
 
+
+
         function match(source, target)
         {
           var s = document.getElementById(source);
@@ -725,6 +730,276 @@
             $("#Correct").show();
           }
         }
+      ]]></script>
+    </lesson>
+
+    <lesson name="Drag and drop 2">
+      <content><![CDATA[
+        <div style="position:absolute; background-color: #2c2e46; width: 100%; height:100%; top: 0px; left: 0px,"></div>
+
+                <div id="background" class="DDbackground"></div>
+                <div id="DD1" draggable="true" class="DDcircle_2" style="background-color:#a2c173;"><p>1</p></div>
+                <div id="DD2" draggable="true" class="DDcircle_2" style="background-color:#36a99f;"><p>2</p></div>
+                <div id="DD3" draggable="true" class="DDcircle_2" style="background-color:#7c94a0;"><p>3</p></div>
+                <div id="DD4" draggable="true" class="DDcircle_2" style="background-color:#a2628d;"><p>4</p></div>
+                <div id="DD5" draggable="true" class="DDcircle_2" style="background-color:#e7ae49;"><p>5</p></div>
+                <div id="target_1" class="DDcircle_2 DDtarget"></div>
+                <div id="target_2" class="DDcircle_2 DDtarget"></div>
+                <div id="target_3" class="DDcircle_2 DDtarget"></div>
+                <div id="target_4" class="DDcircle_2 DDtarget"></div>
+                <div id="target_5" class="DDcircle_2 DDtarget"></div>
+                <div id="text_1" class="DDtext">
+                  <p>3.	Hacer preguntas clave para asegurarse de que la compañía ya tiene contemplados todos los recursos jurídicos y tecnológicos necesarios para la implementación.</p>
+                </div>
+                <div id="text_2" class="DDtext">
+                  <p>5.	Tu organización cuenta con los lineamientos necesarios y puede integrar a nuevos colaboradores a esta modalidad de trabajo.</p>
+                </div>
+                <div id="text_3" class="DDtext">
+                  <p>4.	Realizar pequeñas pruebas para observar la adaptación de los colaboradores, medir resultados y hacer reajustes.</p>
+                </div>
+                <div id="text_4" class="DDtext">
+                  <p>1.	Analizar las ventajas y los propósitos de implementar el teletrabajo.</p>
+                </div>
+                <div id="text_5" class="DDtext">
+                  <p>2.	Identificar las herramientas de uso diario del colaborador. Establecer lineamientos generales, habilidades y cambios culturales necesarios.</p>
+                </div>
+
+                <div id="Correct" class="interactiveFeedbackContainer">
+                  <img src="course/images/quiz_feedback.jpg" class="background_full">
+                  <div class="interactiveFeedback">
+                    <div id="hr" class="background-green"></div>
+                    <h1>Respuesta</h1>
+                    <h2 class="color-green">Correcta</h2>
+                    <p>¡Excelente! Recuerda que los 5 pasos para la implementación exitosa son: </p>
+                    <table style="margin: auto;">
+                      <tr id="b1" class="color-white">
+                        <td><div class="custom_bullet"><p>1</p></div></td>
+                        <td>plantear beneficios y objetivos</td>
+                      </tr>
+                      <tr id="b2" class="color-white">
+                        <td><div class="custom_bullet"><p>2</p></div></td>
+                        <td>estructurar el proyecto</td>
+                      </tr>
+                      <tr id="b3" class="color-white">
+                        <td><div class="custom_bullet"><p>3</p></div></td>
+                        <td>autoevaluación</td>
+                      </tr>
+                      <tr id="b4" class="color-white">
+                        <td><div class="custom_bullet"><p>4</p></div></td>
+                        <td>prueba piloto</td>
+                      </tr>
+                      <tr id="b5" class="color-white">
+                        <td><div class="custom_bullet"><p>5</p></div></td>
+                        <td>apropiación del modelo</td>
+                      </tr>
+                    </table>
+                    <button class="interactiveFeedbackButton" onclick="nextPage();">CONTINUAR</button>
+                  </div>
+        ]]></content>
+        <script><![CDATA[
+          var DDCounter = 0;
+          var DDTotalTargets = 5;
+          var DD_X = 80;
+          var DDT_X = 180;
+          var Txt_X = 280;
+          var Txt_W = 920;
+          var Y = 120;
+          var Offset = 100;
+          var Padding = 30;
+          var Tw = 80;
+
+      function setDDPositions()
+      {
+        for(var i = 0; i <  DDTotalTargets; i++){
+          var DD = document.getElementById("DD" + (i + 1));
+          var DDT = document.getElementById("target_" + (i + 1));
+          var Txt = document.getElementById("text_" + (i + 1));
+
+          DD.style.top = (Y + (Offset * i)) + "px";
+          DD.style.left = DD_X + "px";
+
+          DDT.style.top = (Y + (Offset * i)) + "px";
+          DDT.style.left = DDT_X + "px";
+
+          Txt.style.position = "absolute";
+          Txt.style.top = (Y + (Offset * i)) + "px";
+          Txt.style.left = Txt_X + "px";
+          Txt.style.width = Txt_W + "px";
+          Txt.style.background = "none";
+        }
+        var BG = document.getElementById("background");
+        BG.style.height = ((Offset * DDTotalTargets) + (Padding * 2) - (Offset - Tw)) + "px";
+        BG.style.width = (Txt_W + Tw) + "px";
+        BG.style.top = (Y - Padding) + "px";
+        BG.style.left =  (DDT_X + (Tw / 2)) + "px";
+      }
+
+      setDDPositions();
+
+      document.addEventListener("dragstart", function(event) {
+        event.dataTransfer.setData("Text", event.target.id);
+        event.target.style.opacity = "0.9";
+      });
+
+      document.addEventListener("drag", function(event) {
+      });
+
+      document.addEventListener("dragend", function(event) {
+        event.target.style.opacity = "1";
+      });
+
+      document.addEventListener("dragenter", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("dragenter");
+      if(event.target.classList){
+        if(event.target.classList.contains("DDtarget")){
+          event.target.classList.add("DDtarget_hover");
+        }
+        }
+      });
+
+      // By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element
+      document.addEventListener("dragover", function(event) {
+        event.preventDefault();
+      });
+
+      document.addEventListener("dragleave", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+        console.log("dragleave");
+        if(event.target.classList){
+        if(event.target.classList.contains("DDtarget_hover")){
+          event.target.classList.remove("DDtarget_hover");
+        }
+        }
+      });
+
+      document.addEventListener("drop", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        console.log("drop");
+        var SourdeID = event.dataTransfer.getData("Text");
+        var TargetID = event.target.getAttribute("id");
+
+        if((SourdeID == "DD1") && (TargetID == "target_4"))
+        {
+          match(SourdeID, TargetID);
+        }
+        if((SourdeID == "DD2") && (TargetID == "target_5"))
+        {
+          match(SourdeID, TargetID);
+        }
+        if((SourdeID == "DD3") && (TargetID == "target_1"))
+        {
+          match(SourdeID, TargetID);
+        }
+        if((SourdeID == "DD4") && (TargetID == "target_3"))
+        {
+          match(SourdeID, TargetID);
+        }
+        if((SourdeID == "DD5") && (TargetID == "target_2"))
+        {
+          match(SourdeID, TargetID);
+        }
+
+        if(event.target.classList.contains("DDtarget_hover")){
+          event.target.classList.remove("DDtarget_hover");
+        }
+      });
+
+          function match(source, target)
+          {
+            console.log("source: " + source + " | target: " + target);
+            var s = document.getElementById(source);
+            var t = document.getElementById(target);
+            s.style.top = "0px";
+            s.style.left = "0px";
+            t.appendChild(s);
+
+            if(t.classList.contains("DDtarget_hover")){
+              t.classList.remove("DDtarget_hover");
+            }
+            DDCounter ++;
+            if(DDCounter == DDTotalTargets)
+            {
+              $("#Correct").show();
+            }
+          }
+        ]]></script>
+      </lesson>
+
+    <lesson name="Mail">
+      <content><![CDATA[
+        <img src="course/images/quiz_feedback.jpg" class="background_full">
+        <div class="mail">
+          <div id="background"></div>
+          <div id="header"></div>
+          <div id="body">
+            <p id="p1">Hola Claudia, <br>Hace mucho que no te escribía, espero que estés bien.</p>
+            <p id="p2">Por favor avisame si pudiste resolver el problema con tu conexión a la VPN y hazme saber si te hace falta algo más para continuar tus labores.</p>
+            <p id="p3">He notado que últimamente has bajado tu rendimiento. Aunque estés en tu casa espero los mismos resultados que entregabas cuando estabas en la oficina.</p>
+            <p id="p4">Tienes hasta mañana a mediodía para llegar a tu meta. <br>Saludos, <br>Lic. Luis R.</p>
+          </div>
+          <div id="question_1" class="question">
+            <p>¿Es esta una buena práctica?</p>
+            <table>
+              <tr>
+                <td>
+                  <div id="button_Yes" class="buttonMail"><p>SI</p></div>
+                </td>
+                <td>
+                  <div id="button_No" class="buttonMail"><p>NO</p></div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="feedback">
+            <h1>Respuesta<h1>
+          </div>
+        </div>
+
+      ]]></content>
+      <events>
+        <event time="0"><![CDATA[
+          document.getElementById("p1").classList.add("mailFocus");
+          stop();
+        ]]></event>
+
+        <event time="1"><![CDATA[
+          document.getElementById("p2").classList.add("mailFocus");
+          stop();
+        ]]></event>
+        <event time="2"><![CDATA[
+          document.getElementById("p3").classList.add("mailFocus");
+          //stop();
+        ]]></event>
+        <event time="3"><![CDATA[
+          document.getElementById("p4").classList.add("mailFocus");
+          //stop();
+        ]]></event>
+      </events>
+      <script><![CDATA[
+        $( document ).ready(function() {
+        var counterQuestion = 0;
+
+        function showFeedBack(){
+          counterQuestion++;
+          document.getElementById("background").style.backgroundColor = "#605888";
+          document.getElementById("body").style.display = "none";
+          document.getElementById("question_" + counterQuestion;).style.display = "none";
+          document.getElementById("p1").classList.remove("mailFocus");
+          document.getElementById("p2").classList.remove("mailFocus");
+          document.getElementById("p3").classList.remove("mailFocus");
+          document.getElementById("p4").classList.remove("mailFocus");
+
+          goToAndStop(counterQuestion);
+        }
+
+        document.getElementById("button_Yes").addEventListener("click", showFeedBack);
+        document.getElementById("button_No").addEventListener("click", showFeedBack);
+        });
+
       ]]></script>
     </lesson>
   </module>
@@ -786,8 +1061,6 @@
       <content><![CDATA[
       <video id="video_01" controls autoplay>
         <source src="course/videos/s133.mp4" type="video/mp4">
-        <!--  <track src="course/videos/sample.vtt" kind="subtitles" srclang="en" label="English" default type="text/vtt">
-          Your browser does not support the video tag. -->
         </source>
       </video>
       <p id="subtitles" class="subtitle"></p>
@@ -803,35 +1076,8 @@
           document.getElementById("subtitles").innerHTML = "";
         ]]></subtitle>
     </subtitles>
-      <!--
-    <events>
-      <event time="2"><![CDATA[
-        document.getElementById("subtitles").innerHTML = "Change of text ;)";
-      ]]></event>
-      <event time="5"><![CDATA[
-        document.getElementById("subtitles").innerHTML = "happy";
-      ]]></event>
-      <event time="8"><![CDATA[
-        document.getElementById("subtitles").innerHTML = "";
-      ]]></event>
-    </events>
-
-    <script><![CDATA[
-      /*
-      var video = document.querySelector('video');
-      video.addEventListener('loadedmetadata', () => {
-      const track = video.addTextTrack("captions", "Subtitles", "en_EN");
-      track.mode = "showing";
-
-      const cueCn = new VTTCue(0, 2.500, '字幕会在0至2.5秒间显示');
-      track.addCue(cueCn);
-
-      var cueEn = new VTTCue(2.6, 4, 'Subtitles will display between 2.6 and 4 seconds');
-      track.addCue(cueEn);
-}); */
-    ]]></script>
-    -->
     </lesson>
+
     <lesson name="scorm 1.2 Test">
       <content><![CDATA[
         <p style="position:absolute; top:100px; left:100px; font-weight: bold;">SCORM TEST</p>

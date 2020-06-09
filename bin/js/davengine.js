@@ -40,7 +40,7 @@ var __portraitAlertCenter;
 var __page;
 var __frame;
 var __events = null;
-var __frameInterval;
+//var __frameInterval;
 var __frameRate = 100;
 var __blockEvent = false;
 var __isPaused = false;
@@ -124,8 +124,10 @@ function setCourseName(name){
 
 function clearCourseContainer()
 {
-  clearInterval(__frameInterval);
+  clearInterval(window.timer);
+  window.timer = undefined;
   clearInterval(__videoTimeInternal);
+  __videoTimeInternal = undefined;
   __courseContainer.innerHTML = "";
 }
 
@@ -226,9 +228,9 @@ function checkVideoTime()
 function loadScript()
 {
   var script = __page.getElementsByTagName("script")[0];
-  console.log("is has a script: " + script);
   if(script != undefined)
   {
+    console.log(script.textContent);
     eval(script.textContent);
   }
 }
@@ -236,8 +238,9 @@ function loadScript()
 function setEvents(){
   __blockEvent = true;
   __frame = 0;
-  __events = null;
-  clearInterval(__frameInterval);
+  __events = undefined;
+  clearInterval(window.timer);
+  window.timer = undefined;
   //__eventPlayed = 0;
 
   playCourse();
@@ -245,31 +248,35 @@ function setEvents(){
 
 function playCourse()
 {
+  console.log("playCourse()");
   if(__page.getElementsByTagName("events")[0] != undefined)
   {
     __playButton.classList.remove("pause");
     __events = __page.getElementsByTagName("events")[0].getElementsByTagName("event");
     __blockEvent = false;
-    __frameInterval = setInterval(playFrame, __frameRate);
+    window.timer = setInterval(playFrame, __frameRate);
   }
 }
 
 function pauseCourse()
 {
+  clearInterval(window.timer);
+  window.timer = undefined;
   __blockEvent = true;
-  clearInterval(__frameInterval);
   __playButton.classList.add("pause");
 }
 
 function playFrame(){
   var milisecondTime = (__frame * 100);
   var totalEvents = __events.length;
-  console.log("playEvent = " + __frame + " | __blockEvent : " + __blockEvent + " | __isPaused : " + __isPaused);
-  if(!__blockEvent){
+  console.log("playFrame(): playEvent = " + __frame + " | __blockEvent : " + __blockEvent + " | __isPaused : " + __isPaused);
+  if(!__blockEvent)
+  {
     for (i = 0; i < totalEvents; i++){
         var sTime = __events[i].getAttribute("time");
         var timing = parseInt(sTime * 1000, 10);
         console.log(i + " of " + totalEvents + " totalEvents");
+        if(__blockEvent){return}
         if(timing == milisecondTime)
         {
           /*
@@ -277,17 +284,27 @@ function playFrame(){
           __eventPlayed ++;
           if(__eventPlayed == totalEvents)
           {
-            clearInterval(__frameInterval);
+            clearInterval(window.timer);
             console.log("events end");
           }
           */
-          eval(__events[i].textContent);
-          console.log("---Event found");
+          if(!__blockEvent)
+          {
+            eval(__events[i].textContent);
+            console.log("---Event found");
+          }
+          else{
+            clearInterval(window.timer); window.timer = undefined; console.log("verga???");
+          }
           break;
         }
       }
+      __frame++;
   }
-    __frame++;
+  else{
+    clearInterval(window.timer); window.timer = undefined; console.log("vvv???");
+  }
+
 }
 
 function setLessonCounter(){
@@ -664,7 +681,7 @@ function goToAndStop(goFrame){
   __frame = goFrame * 10;
   var milisecondTime = (__frame * 100);
   __blockEvent = true;
-  clearInterval(__frameInterval);
+  clearInterval(window.timer);
   var totalEvents = __events.length;
   console.log("---------------------goToAndStop = " + __frame + " | __blockEvent = " + __blockEvent);
 
@@ -680,10 +697,12 @@ function goToAndStop(goFrame){
 }
 
 function goToAndPlay(goFrame){
-  clearInterval(__frameInterval);
+  console.log("goToAndPlay()");
+  clearInterval(window.timer);
+  window.timer = undefined;
   __blockEvent = false;
   __frame = (goFrame * 10);
-  __frameInterval = setInterval(playFrame, __frameRate);
+  window.timer = setInterval(playFrame, __frameRate);
 }
 
 function configReviewItems(nItems){
@@ -712,7 +731,8 @@ function checkReviewItems(frameToGo){
 
 function stop()
 {
+  clearInterval(window.timer);
+  window.timer = undefined;
   __blockEvent = true;
-  clearInterval(__frameInterval);
-  console.log("----------------------------------------------------------------stop");
+  console.log("---stop()---");
 }

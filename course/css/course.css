@@ -407,8 +407,8 @@ td img{
 .subtitle{
   position: absolute;
     left: 0px;
-    width: 100%;
-    margin: 0;
+    width: 80%;
+    margin: 10px 0px 0px 125px;
     height: auto;
     bottom: 30px;
     color: white;
@@ -476,6 +476,7 @@ td img{
     display:none;
     top: 0px;
     left: 0px;
+    z-index: 5;
 }
 
 .interactiveFeedback{
@@ -769,11 +770,38 @@ transform: translateX(-50%);
   opacity: 0.6;
 }
 
+.DDcircle_2{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  position: absolute;
+}
+
+.DDcircle_2 p{
+  color: white;
+  font-family: "LibreFranklin-ExtraBold";
+  font-size: 32px;
+  width: 100%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  margin: 0;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  opacity: 0.6;
+}
+
 .DDtarget{
   z-index: 2;
   background-color: #434763;
   -moz-box-shadow:    inset 0 0 10px #000000;
-   -webkit-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow: inset 0px 3px 6px #000000;
 }
 
@@ -789,9 +817,16 @@ transform: translateX(-50%);
     padding: 60px;
     transform: translateY(-50%);
     border-spacing: 0px;
+    border: none;
   }
 
-  .DDTable th, td {
+  .DDTable td {
+  padding: 0px;
+  border-spacing: 0px;
+  border: none;
+  }
+
+.DDTable_td{
   padding: 0px;
 }
 
@@ -801,7 +836,6 @@ transform: translateX(-50%);
   position: relative;
   top: 0px;
   left: 0px;
-  /*background-color: red;*/
 }
 
 .DDtext{
@@ -862,6 +896,12 @@ transform: translateX(-50%);
   border-radius: 0px 0px 10px 0px;
 }
 
+.DDbackground{
+  position: absolute;
+  background-color: #22243b;
+  border-radius: 10px;
+}
+
 .custom_bullet{
   width: 40px;
   height: 40px;
@@ -886,4 +926,114 @@ transform: translateX(-50%);
     -ms-user-select: none;
     user-select: none;
     text-align: center;
+}
+
+.mail{
+  width: 50%;
+  height: 75%;
+  position: absolute;
+  right: 60px;
+  top: 12.5%;
+}
+
+.mail #background{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  opacity: 0.7;
+}
+
+.mail #header{
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  background-color: #6b5a95;
+  left: 0px;
+  top: 0px;
+}
+.mail #body{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0px;
+  top: 50px;
+}
+
+.mail #body p{
+  margin: 10px 40px 0px 40px;
+  color: gray;
+}
+
+.mailFocus{
+  color:black !important;
+}
+
+.mailFocus::before{
+  content: "";
+  width: 6px;
+  height: 40px;
+  background-color: #aece73;
+  position: absolute;
+  top: auto;
+  left: 30px;
+}
+
+.buttonMail{
+  height: 80px;
+  width: 100%;
+  position: relative;
+  bottom: 0px;
+  left: 0px;
+  background-color: #605888;
+  border-radius: 10px;
+}
+
+.buttonMail p{
+  color: white;
+  text-align: center !important;
+  font-family: "LibreFranklin-Black";
+  font-size: 48px !important;
+  position: absolute !important;
+  top:50%;
+  left: 0px;
+  transform: translateY(-50%);
+  width: 100%;
+  margin: 0 !important;
+}
+
+.buttonMail:hover{
+  background-color: white;
+}
+
+.buttonMail:hover p {
+  color: #605888;
+}
+
+.question table{
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.mail td{
+  padding: 10px;
+}
+
+.question{
+  position: absolute;
+  width: 100%;
+  height: auto;
+  bottom: 0px;
+  left: 0px;
+}
+
+.question p{
+  position: relative;
+text-align: left;
+margin: 0 20px 0 20px;
+font-family: "LibreFranklin-Black";
+font-size: 20px;
 }
