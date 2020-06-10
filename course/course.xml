@@ -934,15 +934,15 @@
         <img src="course/images/quiz_feedback.jpg" class="background_full">
         <div class="mail">
           <div id="background"></div>
-          <div id="header"></div>
+          <div id="header"><p>Nuevo Mensaje</p></div>
           <div id="body">
             <p id="p1">Hola Claudia, <br>Hace mucho que no te escribía, espero que estés bien.</p>
             <p id="p2">Por favor avisame si pudiste resolver el problema con tu conexión a la VPN y hazme saber si te hace falta algo más para continuar tus labores.</p>
             <p id="p3">He notado que últimamente has bajado tu rendimiento. Aunque estés en tu casa espero los mismos resultados que entregabas cuando estabas en la oficina.</p>
             <p id="p4">Tienes hasta mañana a mediodía para llegar a tu meta. <br>Saludos, <br>Lic. Luis R.</p>
           </div>
-          <div id="question_1" class="question">
-            <p>¿Es esta una buena práctica?</p>
+          <div id="question_contaiter" counter="0" class="question">
+            <p id="question">?</p>
             <table>
               <tr>
                 <td>
@@ -954,18 +954,35 @@
               </tr>
             </table>
           </div>
-          <div id="feedback">
-            <h1>Respuesta<h1>
+
+          <div id="feedback" class="feedback">
+            <div class="interactiveIntro">
+              <div id="hr" class="background-green"></div>
+              <h1>Respuesta</h1>
+              <h2 id="correct">Correcta</h2>
+              <p id="response">R</p>
+              <button id="continuar" class="interactiveFeedbackButton">CONTINUAR</button>
+          </div>
+        </div>
+        </div>
+
+        <div id="end" class="interactiveFeedbackContainer">
+          <img src="course/images/quiz_feedback.jpg" class="background_full">
+          <div class="interactiveFeedback">
+            <div id="hr" class="background-green"></div>
+            <h2 class="color-green">¡Felicidades!</h2>
+            <p>Has concluido exitosamente el curso de Fundamentos del teletrabajo para supervisores.<br> Puedes regresar a cualquier parte del curso que necesites revisar.</p>
+            <button class="interactiveFeedbackButton" onclick="nextPage();">CONTINUAR</button>
           </div>
         </div>
 
       ]]></content>
+      <!--
       <events>
         <event time="0"><![CDATA[
           document.getElementById("p1").classList.add("mailFocus");
           stop();
         ]]></event>
-
         <event time="1"><![CDATA[
           document.getElementById("p2").classList.add("mailFocus");
           stop();
@@ -979,25 +996,100 @@
           //stop();
         ]]></event>
       </events>
+    -->
       <script><![CDATA[
         $( document ).ready(function() {
+
         var counterQuestion = 0;
 
-        function showFeedBack(){
-          counterQuestion++;
-          document.getElementById("background").style.backgroundColor = "#605888";
-          document.getElementById("body").style.display = "none";
-          document.getElementById("question_" + counterQuestion;).style.display = "none";
+        var configMail = [];
+        configMail.push(["¿Es esta una buena práctica?",
+          "si",
+          "no",
+          false,
+          true,
+          "No: Recuerda que, como mejor práctica, la comunicación debe ser constante. En esta frase, se evidencia que Luis no contacta a Claudia muy seguido."]);
+
+        configMail.push(["¿Es esta una buena práctica?",
+          "si",
+          "no",
+          true,
+          false,
+          "Sí: Es una mejor práctica identificar y dar seguimiento a las dificultades que se presenten al colaborador en su lugar de trabajo."]);
+
+          configMail.push(["¿Es esta una buena práctica?",
+            "si",
+            "no",
+            false,
+            true,
+            "No: La retroalimentación debe ser uno a uno, oportuna y específica. En este caso, no se abordan con claridad las áreas de oportunidad, ni se proporcionan estrategias para mejorar."]);
+
+            configMail.push(["¿Es esta una buena práctica de comunicación?",
+              "si",
+              "no",
+              false,
+              true,
+              "No: Es correcto plantear los objetivos y tiempos de entrega, sin embargo también es fundamental reconocer el desempeño y motivar al colaborador."]);
+
+        function setMailInfo(){
+        console.log(counterQuestion + " vs " + configMail.length);
+        if(counterQuestion == configMail.length)
+        {
+          console.log("this is the end");
+          document.getElementById("end").style.display = "block";
+          return;
+        }
+          console.log("......hola guapo " + counterQuestion);
           document.getElementById("p1").classList.remove("mailFocus");
           document.getElementById("p2").classList.remove("mailFocus");
           document.getElementById("p3").classList.remove("mailFocus");
           document.getElementById("p4").classList.remove("mailFocus");
-
-          goToAndStop(counterQuestion);
+          document.getElementById("background").style.backgroundColor = "rgba(255,255,255,0.8)";
+          document.getElementById("question").innerHTML = configMail[counterQuestion][0];
+          document.getElementById("body").style.display = "block";
+          document.getElementById("question_contaiter").style.display = "block";
+          document.getElementById("feedback").style.display = "none";
+          document.getElementById("p" + (counterQuestion + 1)).classList.add("mailFocus");
         }
 
-        document.getElementById("button_Yes").addEventListener("click", showFeedBack);
-        document.getElementById("button_No").addEventListener("click", showFeedBack);
+        setMailInfo(counterQuestion);
+
+        document.getElementById("continuar").addEventListener("click", setMailInfo);
+        document.getElementById("button_Yes").addEventListener("click", function(){showFeedBack(true);});
+        document.getElementById("button_No").addEventListener("click", function(){showFeedBack(false);});
+
+        function showFeedBack(isLeft){
+          var isCorrect = false;
+          var hr = document.getElementById("hr");
+          var correct = document.getElementById("correct");
+          hr.classList.remove("color-green");
+          hr.classList.remove("color-red");
+          if(isLeft){
+            isCorrect = configMail[counterQuestion][3];
+          }
+          else{
+              isCorrect = configMail[counterQuestion][4];
+          }
+          console.log("isCorrect: " + isCorrect);
+          if(isCorrect)
+          {
+            hr.classList.add("background-green");
+            correct.classList.add("color-green");
+            correct.innerHTML = "Correcta"
+          }
+          else{
+            hr.classList.add("background-red");
+            correct.classList.add("color-red");
+            correct.innerHTML = "Incorrecta"
+          }
+          document.getElementById("background").style.backgroundColor = "rgba(68,57,123,0.8)";
+          document.getElementById("body").style.display = "none";
+          document.getElementById("question_contaiter").style.display = "none";
+          document.getElementById("feedback").style.display = "block";
+          document.getElementById("response").innerHTML = configMail[counterQuestion][5];
+          counterQuestion++;
+        }
+
         });
 
       ]]></script>
@@ -1057,7 +1149,34 @@
         // document.getElementById("audio_01").play();
   ]]></script>
     </lesson>
-    <lesson name="Video">
+    <lesson name="Video x">
+      <content><![CDATA[
+      <video id="video_01" autoplay>
+        <source src="course/videos/Intro_trabajo_remoto_x.mp4" type="video/mp4">
+        </source>
+      </video>
+      <p id="subtitles" class="subtitle"></p>
+    ]]></content>
+    <subtitles>
+      <subtitle start="3" end="17.8"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "La reciente pandemia de coronavirus hizo que muchas empresas en el mundo tuvieran que adaptarse a una modalidad distinta de trabajo: el teletrabajo, también conocido como trabajo remoto, a distancia o home office. ";
+        ]]></subtitle>
+        <subtitle start="17.9" end="28"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "Esto es posible gracias a las Tecnologías de la Información y la Comunicación (TIC), que nos permiten mantenernos conectados en cualquier momento y desde cualquier parte del mundo.";
+        ]]></subtitle>
+        <subtitle start="28" end="42"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "El teletrabajo no sólo es útil en situaciones de emergencia, muchas organizaciones que ya lo implementaban han observado grandes beneficios, como la reducción de gastos generales y una mayor productividad. ";
+        ]]></subtitle>
+		<subtitle start="42.2" end="57"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "Además, la disminución en los tiempos de traslado permite a las personas reducir el estrés, encontrar un mejor equilibrio entre la vida personal y profesional, y disminuir el impacto ambiental en las ciudades.";
+        ]]></subtitle>
+		<subtitle start="57.5" end="64"><![CDATA[
+          document.getElementById("subtitles").innerHTML = "Sin embargo, con estos beneficios, también se enfrentan algunos retos.";
+        ]]></subtitle>
+
+    </subtitles>
+    </lesson>
+    <lesson name="Video Demo">
       <content><![CDATA[
       <video id="video_01" controls autoplay>
         <source src="course/videos/s133.mp4" type="video/mp4">

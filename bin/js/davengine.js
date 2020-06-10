@@ -210,16 +210,15 @@ function checkVideoTime()
   if(__currentSubtitle == __subtitles.length)
   {
     clearInterval(__videoTimeInternal);
-    console.log("---subtitles ends");
+    //console.log("---subtitles ends");
     return;
   }
   var start = parseInt(__subtitles[__currentSubtitle].getAttribute("start"));
   var end = parseInt(__subtitles[__currentSubtitle].getAttribute("end"));
-  console.log(__video[0].currentTime + " | start " + start + " | end " + end);
+  //console.log(__video[0].currentTime + " | start " + start + " | end " + end);
   var time = __video[0].currentTime;
   if(time >= start && time <= end)
   {
-    console.log("awiwi");
     eval(__subtitles[__currentSubtitle].textContent);
     __currentSubtitle ++;
   }
