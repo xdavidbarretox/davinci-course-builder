@@ -452,3 +452,26 @@ button{
   font-weight: normal;
   display:none;
 }
+
+#Button_Reload{
+  position: absolute;
+  z-index: 101;
+  left: 45px;
+  bottom:0px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.0);
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background-image: url(../images/btn_reload.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  opacity: 0.5;
+  border-radius: 23px;
+}
+
+#Button_Reload:hover{
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.33);
+}

@@ -1,17 +1,14 @@
 console.log("DavEngine v0.5");
 
 /* TODO
-use ECMA script 5
-  +save leson_location scorm
-  +reload button
-  +copyright info loaded by date.year
-  + is needed glossary or help?
-  +exit fullscreen
-  +removes full screen om mobile
-  +developer mode? reload xml and page
-  *developer mode to reload xml
-  external xml and assets
-  +review pool
+  + save leson_location scorm to crate a pop up to go specific lesson
+  + copyright info loaded by date.year
+  + create glosary
+  + exit fullscreen (remove mode?)
+  +removes full screen on mobile
+  + developer mode? reload xml and page
+  * developer mode to reload xml
+  + external xml and assets
 */
 
 var __courseLocation = "course/course.xml";
@@ -25,6 +22,7 @@ var __courseName;
 var __nextButton;
 var __prevButton;
 var __playButton;
+var __reloadButton;
 var __tocButton;
 var __isWindowed;
 var __courseWindow;
@@ -40,7 +38,7 @@ var __portraitAlertCenter;
 var __page;
 var __frame;
 var __events = null;
-//var __frameInterval;
+var __frameInterval;
 var __frameRate = 100;
 var __blockEvent = false;
 var __isPaused = false;
@@ -124,14 +122,21 @@ function setCourseName(name){
 
 function clearCourseContainer()
 {
-  clearInterval(window.timer);
-  window.timer = undefined;
+  clearInterval(__frameInterval);
   clearInterval(__videoTimeInternal);
   __videoTimeInternal = undefined;
   __courseContainer.innerHTML = "";
+  /*
+  __courseContainer.remove();
+  var cc = document.createElement("div");
+  cc.setAttribute("id", "Course_Content");
+  document.getElementById("Course").appendChild(cc);
+  __courseContainer = document.getElementById("Course_Content");
+  */
 }
 
 function setCourseContent(index){
+  console.log("setCourseContent " + index);
   __isPaused = false;
   __page = __lessons[index];
   type = __page.tagName;
@@ -238,8 +243,7 @@ function setEvents(){
   __blockEvent = true;
   __frame = 0;
   __events = undefined;
-  clearInterval(window.timer);
-  window.timer = undefined;
+  clearInterval(__frameInterval);
   //__eventPlayed = 0;
 
   playCourse();
@@ -248,21 +252,23 @@ function setEvents(){
 function playCourse()
 {
   console.log("playCourse()");
+  __playButton.classList.remove("pause");
+  __playButton.classList.add("play");
   if(__page.getElementsByTagName("events")[0] != undefined)
   {
-    __playButton.classList.remove("pause");
     __events = __page.getElementsByTagName("events")[0].getElementsByTagName("event");
     __blockEvent = false;
-    window.timer = setInterval(playFrame, __frameRate);
+    __frameInterval = setInterval(playFrame, __frameRate);
   }
 }
 
 function pauseCourse()
 {
-  clearInterval(window.timer);
-  window.timer = undefined;
+  console.log("pauseCourse()");
+  clearInterval(__frameInterval);
   __blockEvent = true;
   __playButton.classList.add("pause");
+  __playButton.classList.remove("play");
 }
 
 function playFrame(){
@@ -283,7 +289,7 @@ function playFrame(){
           __eventPlayed ++;
           if(__eventPlayed == totalEvents)
           {
-            clearInterval(window.timer);
+            clearInterval(__frameInterval);
             console.log("events end");
           }
           */
@@ -293,7 +299,7 @@ function playFrame(){
             console.log("---Event found");
           }
           else{
-            clearInterval(window.timer); window.timer = undefined; console.log("verga???");
+            clearInterval(__frameInterval);
           }
           break;
         }
@@ -301,7 +307,7 @@ function playFrame(){
       __frame++;
   }
   else{
-    clearInterval(window.timer); window.timer = undefined; console.log("vvv???");
+    clearInterval(__frameInterval);
   }
 
 }
@@ -370,6 +376,7 @@ function set_uiElements()
   __tocButton = document.getElementById("Button_TOC");
   __counter = document.getElementById("Counter");
   __playButton = document.getElementById("Button_Play");
+  __reloadButton = document.getElementById("Button_Reload");
   __tooltipNext = document.getElementById("Next_Page_Tooltip");
   __tooltipPrev = document.getElementById("Prev_Page_Tooltip");
   __nextButton.addEventListener("click", nextPage);
@@ -380,6 +387,7 @@ function set_uiElements()
   __prevButton.addEventListener("mouseout", function(){__tooltipPrev.style.display = "none";});
   __tocButton.addEventListener("click", showTOC);
   __playButton.addEventListener("click", tooglePlayPause);
+  __reloadButton.addEventListener("click", reload);
   document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; if(__isMobile){ if(!__isWindowed){document.body.requestFullscreen();}else{document.exitFullscreen();}}else{ windowedCourse(); }});
   document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
 }
@@ -680,7 +688,7 @@ function goToAndStop(goFrame){
   __frame = goFrame * 10;
   var milisecondTime = (__frame * 100);
   __blockEvent = true;
-  clearInterval(window.timer);
+  clearInterval(__frameInterval);
   var totalEvents = __events.length;
   console.log("---------------------goToAndStop = " + __frame + " | __blockEvent = " + __blockEvent);
 
@@ -697,11 +705,10 @@ function goToAndStop(goFrame){
 
 function goToAndPlay(goFrame){
   console.log("goToAndPlay()");
-  clearInterval(window.timer);
-  window.timer = undefined;
+  clearInterval(__frameInterval);
   __blockEvent = false;
   __frame = (goFrame * 10);
-  window.timer = setInterval(playFrame, __frameRate);
+  __frameInterval = setInterval(playFrame, __frameRate);
 }
 
 function configReviewItems(nItems){
@@ -730,8 +737,12 @@ function checkReviewItems(frameToGo){
 
 function stop()
 {
-  clearInterval(window.timer);
-  window.timer = undefined;
+  clearInterval(__frameInterval);
   __blockEvent = true;
   console.log("---stop()---");
+}
+
+function reload()
+{
+  setCourseContent(__pageCounter);
 }

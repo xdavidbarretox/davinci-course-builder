@@ -977,31 +977,9 @@
         </div>
 
       ]]></content>
-      <!--
-      <events>
-        <event time="0"><![CDATA[
-          document.getElementById("p1").classList.add("mailFocus");
-          stop();
-        ]]></event>
-        <event time="1"><![CDATA[
-          document.getElementById("p2").classList.add("mailFocus");
-          stop();
-        ]]></event>
-        <event time="2"><![CDATA[
-          document.getElementById("p3").classList.add("mailFocus");
-          //stop();
-        ]]></event>
-        <event time="3"><![CDATA[
-          document.getElementById("p4").classList.add("mailFocus");
-          //stop();
-        ]]></event>
-      </events>
-    -->
       <script><![CDATA[
         $( document ).ready(function() {
-
         var counterQuestion = 0;
-
         var configMail = [];
         configMail.push(["¿Es esta una buena práctica?",
           "si",
@@ -1017,19 +995,19 @@
           false,
           "Sí: Es una mejor práctica identificar y dar seguimiento a las dificultades que se presenten al colaborador en su lugar de trabajo."]);
 
-          configMail.push(["¿Es esta una buena práctica?",
-            "si",
-            "no",
-            false,
-            true,
-            "No: La retroalimentación debe ser uno a uno, oportuna y específica. En este caso, no se abordan con claridad las áreas de oportunidad, ni se proporcionan estrategias para mejorar."]);
+        configMail.push(["¿Es esta una buena práctica?",
+          "si",
+          "no",
+          false,
+          true,
+          "No: La retroalimentación debe ser uno a uno, oportuna y específica. En este caso, no se abordan con claridad las áreas de oportunidad, ni se proporcionan estrategias para mejorar."]);
 
-            configMail.push(["¿Es esta una buena práctica de comunicación?",
-              "si",
-              "no",
-              false,
-              true,
-              "No: Es correcto plantear los objetivos y tiempos de entrega, sin embargo también es fundamental reconocer el desempeño y motivar al colaborador."]);
+        configMail.push(["¿Es esta una buena práctica de comunicación?",
+          "si",
+          "no",
+          false,
+          true,
+          "No: Es correcto plantear los objetivos y tiempos de entrega, sin embargo también es fundamental reconocer el desempeño y motivar al colaborador."]);
 
         function setMailInfo(){
         console.log(counterQuestion + " vs " + configMail.length);
@@ -1039,7 +1017,6 @@
           document.getElementById("end").style.display = "block";
           return;
         }
-          console.log("......hola guapo " + counterQuestion);
           document.getElementById("p1").classList.remove("mailFocus");
           document.getElementById("p2").classList.remove("mailFocus");
           document.getElementById("p3").classList.remove("mailFocus");
@@ -1074,14 +1051,17 @@
           if(isCorrect)
           {
             hr.classList.add("background-green");
+            correct.classList.remove("color-red");
             correct.classList.add("color-green");
             correct.innerHTML = "Correcta"
           }
           else{
             hr.classList.add("background-red");
+            correct.classList.remove("color-green");
             correct.classList.add("color-red");
             correct.innerHTML = "Incorrecta"
           }
+
           document.getElementById("background").style.backgroundColor = "rgba(68,57,123,0.8)";
           document.getElementById("body").style.display = "none";
           document.getElementById("question_contaiter").style.display = "none";
@@ -1089,10 +1069,199 @@
           document.getElementById("response").innerHTML = configMail[counterQuestion][5];
           counterQuestion++;
         }
-
         });
-
       ]]></script>
+    </lesson>
+
+    <lesson name="Interactividad: La creación de un ambiente de trabajo óptimo">
+      <content><![CDATA[
+      <img src="course/images/desk.jpg" class="background_full">
+      <div id="watch" style="position:absolute; top:18px; left:1025px; width:198px; height:198px; background-color: rgba(0,0,0,0); border-radius: 50%;"></div>
+      <div id="table" style="position:absolute; top:391px; left:294px; width:732px; height:44px; background-color: rgba(0,0,0,0);"></div>
+      <div id="cloth" style="position: absolute; top: 275px; left: 410px; width: 260px; height: 310px; background-color: rgba(0,0,0,0); border-radius: 50% 50% 0 50%;"></div>
+      <div id="chair" style="position: absolute; top: 433px; left: 426px; width: 197px; height: 201px; background-color: rgba(0,0,0,0); border-radius: 10% 10% 0 50%; opacity: 0.7;"></div>
+      <div id="phone" style="position:absolute; top:327px; left:812px; width:45px; height:80px; background-color: rgba(0,0,0,0);"></div>
+
+      <div id="spot1" class="spot" style="top: 375px; left: 370px;"><div id="inner"><div id="point"></div></div><div class="label">Silla/Escritorio</div></div>
+      <div id="spot2" class="spot" style="top:155px; left: 1080px;"><div id="inner"><div id="point"></div></div><div class="label">Reloj</div></div>
+      <div id="spot3" class="spot" style="top: 290px; left: 475px;"><div id="inner"><div id="point"></div></div><div class="label">Ropa</div></div>
+      <div id="spot4" class="spot" style="top: 350px; left: 780px;"><div id="inner"><div id="point"></div></div><div class="label">Teléfono</div></div>
+
+      <div id="popup_1" class="popup">
+        <div id="background" class="popupBackground backgroundWhite"><img src="course/images/phone.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+        <button class="popupButtonClose">CERRAR</button>
+        <div class="content_left">
+          <div class="hr2"></div>
+          <h1 class="color-black">Plantea los beneficios</h1>
+          <h2>Silla/Escritorio:</h2>
+            <p id="p1p1" class="OpacityZero">En la medida de las posibilidades, debe contar con un espacio dedicado exclusivamente al trabajo y evitar ambientes en los que sea fácil distraerse.</p>
+            <p id="p1p2" class="OpacityZero">Lo mejor es contar con una silla cómoda y un escritorio para uso exclusivo del trabajo. Se recomienda como requisito básico el uso de no break para tener tiempo de respaldar la información en caso de cualquier falla eléctrica.</p>
+        </div>
+      </div>
+
+      <div id="popup_2" class="popup">
+        <div id="background" class="popupBackground backgroundWhite"><img src="course/images/phone.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+        <button class="popupButtonClose">CERRAR</button>
+        <div class="content_left">
+          <div class="hr2"></div>
+          <h1 class="color-black">Plantea los beneficios</h1>
+          <h2>Reloj:</h2>
+            <p id="p2p1" class="OpacityZero">Para encontrar un equilibrio entre la vida personal y profesional, es útil definir los horarios programados para el trabajo y el tiempo libre.</p>
+            <p id="p2p2" class="OpacityZero">Es bueno que todo el equipo conozca la disponibilidad de cada integrante, así sabrán en qué momento contactarse.</p>
+        </div>
+      </div>
+
+      <div id="popup_3" class="popup">
+        <div id="background" class="popupBackground backgroundWhite"><img src="course/images/phone.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+        <button class="popupButtonClose">CERRAR</button>
+        <div class="content_left">
+          <div class="hr2"></div>
+          <h1 class="color-black">Plantea los beneficios</h1>
+          <h2>Ropa:</h2>
+            <p id="p3p1" class="OpacityZero">Para comenzar bien el día, su rutina debe incluir hábitos básicos de higiene personal.</p>
+            <p id="p3p2" class="OpacityZero">Recomienda el uso de ropa cómoda pero que mantenga una imagen profesional, así estarán preparados en caso de juntas inesperadas.</p>
+        </div>
+      </div>
+
+      <div id="popup_4" class="popup">
+        <div id="background" class="popupBackground backgroundWhite"><img src="course/images/phone.png" style="position: absolute; right: 60px; bottom: 60px;"></div>
+        <button class="popupButtonClose">CERRAR</button>
+        <div class="content_left">
+          <div class="hr2"></div>
+          <h1 class="color-black">Plantea los beneficios</h1>
+          <h2>Teléfono:</h2>
+            <p id="p4p1" class="OpacityZero">Solicita a tus colaboradores que expliquen a sus amigos y familiares que a pesar de estar trabajando a distancia requieren cumplir con un horario y no están disponibles para visitas inesperadas.</p>
+            <p id="p4p2" class="OpacityZero">Si tienen niños en casa, recomiéndales generar rutinas para ellos, así evitarán interrupciones y sorpresas durante alguna videoconferencia.</p>
+        </div>
+      </div>
+
+        ]]></content>
+
+        <events>
+          <event time="0"><![CDATA[
+              stop();
+          ]]></event>
+
+          <event time="99"><![CDATA[
+            checkReviewItems(600);
+
+            document.getElementById("p1p1").classList.remove("MoveParagraph");
+            document.getElementById("p1p2").classList.remove("MoveParagraph");
+
+            document.getElementById("p2p1").classList.remove("MoveParagraph");
+            document.getElementById("p2p2").classList.remove("MoveParagraph");
+
+            document.getElementById("p3p1").classList.remove("MoveParagraph");
+            document.getElementById("p3p2").classList.remove("MoveParagraph");
+
+            document.getElementById("p4p1").classList.remove("MoveParagraph");
+            document.getElementById("p4p2").classList.remove("MoveParagraph");
+          ]]></event>
+
+          <event time="100"><![CDATA[
+              $("#popup_1").show();
+              //document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup1-.mp3");
+              //document.getElementById("audio_01").play();
+          ]]></event>
+          <event time="101"><![CDATA[
+              document.getElementById("p1p1").classList.add("MoveParagraph");
+          ]]></event>
+          <event time="101.5"><![CDATA[
+              document.getElementById("p1p2").classList.add("MoveParagraph");
+              stop();
+          ]]></event>
+
+          <event time="200"><![CDATA[
+              $("#popup_2").show();
+              //document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup2-.mp3");
+              //document.getElementById("audio_01").play();
+          ]]></event>
+          <event time="201"><![CDATA[
+              document.getElementById("p2p1").classList.add("MoveParagraph");
+          ]]></event>
+          <event time="201.5"><![CDATA[
+              document.getElementById("p2p2").classList.add("MoveParagraph");
+              stop();
+          ]]></event>
+
+          <event time="300"><![CDATA[
+              $("#popup_3").show();
+              //document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup3-.mp3");
+              //document.getElementById("audio_01").play();
+          ]]></event>
+          <event time="301"><![CDATA[
+              document.getElementById("p3p1").classList.add("MoveParagraph");
+          ]]></event>
+          <event time="301.5"><![CDATA[
+              document.getElementById("p3p2").classList.add("MoveParagraph");
+              stop();
+          ]]></event>
+
+          <event time="400"><![CDATA[
+              $("#popup_4").show();
+              //document.getElementById("audio_01").setAttribute("src", "course/audios/tt_01_popup4-.mp3");
+              //document.getElementById("audio_01").play();
+          ]]></event>
+          <event time="401"><![CDATA[
+              document.getElementById("p4p1").classList.add("MoveParagraph");
+          ]]></event>
+          <event time="401.5"><![CDATA[
+              document.getElementById("p4p2").classList.add("MoveParagraph");
+              stop();
+          ]]></event>
+
+          <event time="600"><![CDATA[
+              nextPage();
+          ]]></event>
+
+        </events>
+        <script><![CDATA[
+          var table = document.getElementById("table");
+          var watch = document.getElementById("watch");
+          var cloth = document.getElementById("cloth");
+          var phone = document.getElementById("phone");
+          var chair = document.getElementById("chair");
+          configReviewItems(4);
+
+          var s1_over = function(){document.getElementById("spot1").style.display = "block";};
+          var s1_out = function(){document.getElementById("spot1").style.display = "none";};
+
+          table.addEventListener("mouseover", s1_over);
+          table.addEventListener("mouseout", s1_out);
+          table.addEventListener("click", function(){goToAndPlay(100);
+            setReviewItem(1);
+            document.getElementById("spot1").classList.remove("spot");
+            document.getElementById("spot1").classList.add("spot_visited");
+            document.getElementById("table").removeEventListener("mouseover", s1_over);
+            document.getElementById("table").removeEventListener("mouseout", s1_out);
+            document.getElementById("chair").removeEventListener("mouseover", s1_over);
+            document.getElementById("chair").removeEventListener("mouseout", s1_out);});
+
+          chair.addEventListener("mouseover", s1_over);
+          chair.addEventListener("mouseout", s1_out);
+          chair.addEventListener("click", function(){goToAndPlay(100); setReviewItem(1); document.getElementById("spot1").classList.remove("spot"); document.getElementById("spot1").classList.add("spot_visited"); document.getElementById("table").removeEventListener("mouseover", s1_over); document.getElementById("table").removeEventListener("mouseout", s1_out); document.getElementById("chair").removeEventListener("mouseover", s1_over); document.getElementById("chair").removeEventListener("mouseout", s1_out);});
+
+          var s2_over = function(){document.getElementById("spot2").style.display = "block";};
+          var s2_out = function(){document.getElementById("spot2").style.display = "none";};
+          watch.addEventListener("mouseover", s2_over);
+          watch.addEventListener("mouseout", s2_out);
+          watch.addEventListener("click", function ___func(){goToAndPlay(200); setReviewItem(2); document.getElementById("spot2").classList.remove("spot"); document.getElementById("spot2").classList.add("spot_visited"); document.getElementById("watch").removeEventListener("mouseover", s2_over); document.getElementById("watch").removeEventListener("mouseout", s2_out);});
+
+          var s3_over = function(){document.getElementById("spot3").style.display = "block";};
+          var s3_out = function(){document.getElementById("spot3").style.display = "none";};
+          cloth.addEventListener("mouseover", s3_over);
+          cloth.addEventListener("mouseout", s3_out);
+          cloth.addEventListener("click", function(){goToAndPlay(300); setReviewItem(3); document.getElementById("spot3").classList.remove("spot"); document.getElementById("spot3").classList.add("spot_visited"); document.getElementById("cloth").removeEventListener("mouseover", s3_over);
+          document.getElementById("cloth").removeEventListener("mouseout", s3_out);});
+
+          var s4_over = function(){document.getElementById("spot4").style.display = "block";};
+          var s4_out = function(){document.getElementById("spot4").style.display = "none";};
+          phone.addEventListener("mouseover",s4_over);
+          phone.addEventListener("mouseout", s4_out);
+          phone.addEventListener("click", function(){goToAndPlay(400); setReviewItem(4); document.getElementById("spot4").classList.remove("spot"); document.getElementById("spot4").classList.add("spot_visited"); document.getElementById("phone").removeEventListener("mouseover", s4_over); document.getElementById("phone").removeEventListener("mouseout", s4_out);});
+
+          $(".popupButtonClose").click(function(){ $( this ).parent().hide(); goToAndStop(99); /*document.getElementById("audio_01").pause();*/});
+          ]]></script>
     </lesson>
   </module>
 
