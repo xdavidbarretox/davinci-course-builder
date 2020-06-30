@@ -714,8 +714,6 @@
           }
         });
 
-
-
         function match(source, target)
         {
           var s = document.getElementById(source);
@@ -928,6 +926,437 @@
           }
         ]]></script>
       </lesson>
+
+      <lesson name="Drag and drop 3">
+        <content><![CDATA[
+          <audio id="audio_01" src="course/audios/correct.mp3"></audio>
+          <div style="position:absolute; background-color: #2c2e46; width: 100%; height:100%; top: 0px; left: 0px,"></div>
+            <div id="content" class="content_interactivity1">
+              <div class="hr2 background-pink"></div>
+            	<h2 class="color-pink">Interactividad</h2>
+              <p id="p1" class="color-white OpacityZero">Organiza los siguientes pasos en el orden correcto.</p>
+
+            <table id="t1" class="Activity1Table OpacityZero">
+              <tr>
+                <td>
+                    <div class="Activity1Row">
+                      <div id="target_1" class="Activity1Circle DDtarget"></div>
+                      <div id="check_1" class="Activity1Circle Activity1CircleNumber" style="background-color:#a2c173;"><p>3</p></div>
+                      <div id="wrong_1" class="Activity1Circle Activity1CircleNumberWrong"><p>X</p></div>
+                      <p>3.	Hacer preguntas clave para asegurarse de que la compañía ya tiene contemplados todos los recursos jurídicos y tecnológicos necesarios para la implementación.</p>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <div class="Activity1Row">
+                      <div id="target_2" class="Activity1Circle DDtarget"></div>
+                      <div id="check_2" class="Activity1Circle Activity1CircleNumber" style="background-color:#36a99f;"><p>5</p></div>
+                      <div id="wrong_2" class="Activity1Circle Activity1CircleNumberWrong"><p>X</p></div>
+                      <p>5.	Tu organización cuenta con los lineamientos necesarios y puede integrar a nuevos colaboradores a esta modalidad de trabajo.</p>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <div class="Activity1Row">
+                      <div id="target_3" class="Activity1Circle DDtarget"></div>
+                      <div id="check_3" class="Activity1Circle Activity1CircleNumber" style="background-color:#7c94a0;"><p>4</p></div>
+                      <div id="wrong_3" class="Activity1Circle Activity1CircleNumberWrong"><p>X</p></div>
+                      <p>4.	Realizar pequeñas pruebas para observar la adaptación de los colaboradores, medir resultados y hacer reajustes.</p>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <div class="Activity1Row">
+                      <div id="target_4" class="Activity1Circle DDtarget"></div>
+                      <div id="check_4" class="Activity1Circle Activity1CircleNumber" style="background-color:#a2628d;"><p>1</p></div>
+                      <div id="wrong_4" class="Activity1Circle Activity1CircleNumberWrong"><p>X</p></div>
+                      <p>1.	Analizar las ventajas y los propósitos de implementar el teletrabajo.</p>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <div class="Activity1Row">
+                      <div id="target_5" class="Activity1Circle DDtarget"></div>
+                      <div id="check_5" class="Activity1Circle Activity1CircleNumber" style="background-color:#e7ae49;"><p>2</p></div>
+                      <div id="wrong_5" class="Activity1Circle Activity1CircleNumberWrong"><p>X</p></div>
+                      <p>2.	Identificar las herramientas de uso diario del colaborador. Establecer lineamientos generales, habilidades y cambios culturales necesarios.</p>
+                    </div>
+                </td>
+              </tr>
+            </table>
+            </div>
+
+            <div id="Correct" class="interactiveFeedbackContainer">
+              <img src="course/images/quiz_feedback.jpg" class="background_full">
+              <div class="interactiveFeedback">
+                <div id="hr" class="background-green"></div>
+                <h1>Respuesta</h1>
+                <h2 class="color-green">Correcta</h2>
+                <p>¡Excelente! Recuerda que los 5 pasos para la implementación exitosa son: </p>
+                <table style="margin: auto;">
+                  <tr id="b1" class="color-white">
+                    <td><div class="custom_bullet"><p>1</p></div></td>
+                    <td>plantear beneficios y objetivos</td>
+                  </tr>
+                  <tr id="b2" class="color-white">
+                    <td><div class="custom_bullet"><p>2</p></div></td>
+                    <td>estructurar el proyecto</td>
+                  </tr>
+                  <tr id="b3" class="color-white">
+                    <td><div class="custom_bullet"><p>3</p></div></td>
+                    <td>autoevaluación</td>
+                  </tr>
+                  <tr id="b4" class="color-white">
+                    <td><div class="custom_bullet"><p>4</p></div></td>
+                    <td>prueba piloto</td>
+                  </tr>
+                  <tr id="b5" class="color-white">
+                    <td><div class="custom_bullet"><p>5</p></div></td>
+                    <td>apropiación del modelo</td>
+                  </tr>
+                </table>
+                <button class="interactiveFeedbackButton" onclick="goToAndStop(2);">CONTINUAR</button>
+              </div>
+          ]]></content>
+
+          <events>
+            <event time="1"><![CDATA[
+              document.getElementById("p1").classList.add("MoveParagraph");
+            ]]></event>
+            <event time="1.5"><![CDATA[
+              document.getElementById("t1").classList.add("MoveParagraph");
+              stop();
+            ]]></event>
+            <event time="2"><![CDATA[
+              document.getElementById("audio_01").setAttribute("src", "course/audios/click.mp3");
+              document.getElementById("audio_01").play();
+              setTimeout(nextPage, 250);
+            ]]></event>
+          </events>
+
+          <script><![CDATA[
+            var attemp = 1;
+            var target1 = document.getElementById("target_4");
+            var target2 = document.getElementById("target_5");
+            var target3 = document.getElementById("target_1");
+            var target4 = document.getElementById("target_3");
+            var target5 = document.getElementById("target_2");
+
+            target1.addEventListener("click", checkanswer);
+            target2.addEventListener("click", checkanswer);
+            target3.addEventListener("click", checkanswer);
+            target4.addEventListener("click", checkanswer);
+            target5.addEventListener("click", checkanswer);
+
+            function playAudioFx(isCorrect)
+            {
+              var audio = document.getElementById("audio_01");
+              audio.pause();
+              if(isCorrect)
+              {
+                audio.setAttribute("src", "course/audios/correct.mp3");
+              }
+              else{
+                audio.setAttribute("src", "course/audios/incorrect.mp3");
+              }
+              audio.play();
+            }
+
+            function checkanswer(event){
+              event.preventDefault;
+              var id = event.target.getAttribute("id");
+              console.log(id);
+              if(id == "target_4")
+              {
+                if(attemp == 1){
+                  console.log("congrats");
+                  document.getElementById("check_4").style.display = "block";
+                  attemp ++;
+                  playAudioFx(true);
+                }
+              }
+
+              if(id == "target_5")
+              {
+                if(attemp == 2){
+                  console.log("congrats");
+                  document.getElementById("check_5").style.display = "block";
+                  attemp ++;
+                  playAudioFx(true);
+                }
+                else{
+                  document.getElementById("wrong_5").style.display = "block";
+                  setTimeout(function(){ document.getElementById("wrong_5").style.display = "none"; }, 500);
+                  playAudioFx(false);
+                }
+              }
+
+              if(id == "target_1")
+              {
+                if(attemp == 3){
+                  console.log("congrats");
+                  document.getElementById("check_1").style.display = "block";
+                  attemp ++;
+                  playAudioFx(true);
+                }
+                else{
+                  document.getElementById("wrong_1").style.display = "block";
+                  setTimeout(function(){ document.getElementById("wrong_1").style.display = "none"; }, 500);
+                  playAudioFx(false);
+                }
+              }
+
+              if(id == "target_3")
+              {
+                if(attemp == 4){
+                  console.log("congrats");
+                  document.getElementById("check_3").style.display = "block";
+                  attemp ++;
+                  playAudioFx(true);
+                }
+                else{
+                  document.getElementById("wrong_3").style.display = "block";
+                  setTimeout(function(){ document.getElementById("wrong_3").style.display = "none"; }, 500);
+                  playAudioFx(false);
+                }
+              }
+
+              if(id == "target_2")
+              {
+                if(attemp == 5){
+                  console.log("congrats");
+                  document.getElementById("check_2").style.display = "block";
+                  attemp ++;
+                  playAudioFx(true);
+                }
+                else{
+                  document.getElementById("wrong_2").style.display = "block";
+                  setTimeout(function(){ document.getElementById("wrong_2").style.display = "none"; }, 500);
+                  playAudioFx(false);
+                }
+              }
+
+                if(attemp == 6)
+                {
+                  setTimeout(function(){ document.getElementById("Correct").style.display = "block"; }, 1000);
+                }
+            }
+        ]]></script>
+    </lesson>
+
+    <lesson name="Actividad 2">
+      <content><![CDATA[
+        <audio id="audio_01" src="course/audios/correct.mp3"></audio>
+        <div style="position:absolute; background-color: #2c2e46; width: 100%; height:100%; top: 0px; left: 0px,"></div>
+          <div id="content" class="content_interactivity2">
+            <div class="hr2 background-pink"></div>
+            <h1 class="color-white">Encuentra la solución</h1>
+            <h2 class="color-pink">Interactividad</h2>
+            <p id="p1" class="color-white OpacityZero">Da click en la solución de abajo que creas es la correcta a cada problema.</p>
+
+            <table id="t1" class="Activity2Table OpacityZero">
+              <tr>
+                <td>
+                    <div id="option_1" class="Activity2Row" style="background-color:#a2c173;">
+                      <div class="Activity2Circle"><img src="course/images/questionmark_1.png"></div>
+                      <p>Los colaboradores no están explotando todo su potencial.</p>
+                    </div>
+                </td>
+                <td>
+                    <div id="option_2" class="Activity2Row Activity2Disable" style="background-color:#2ea99f;">
+                      <div class="Activity2Circle"><img src="course/images/questionmark_2.png"></div>
+                      <p>Dos colaboradores no entregaron avances.</p>
+                    </div>
+                </td>
+                <td>
+                    <div id="option_3" class="Activity2Row Activity2Disable" style="background-color:#e8af3e;">
+                      <div class="Activity2Circle"><img src="course/images/questionmark_3.png"></div>
+                      <p>No hay registro de la información porque se envía a través de whatsapp.</p>
+                    </div>
+                </td>
+                <td>
+                    <div id="option_4" class="Activity2Row Activity2Disable" style="background-color:#a3618e;">
+                      <div class="Activity2Circle"><img src="course/images/questionmark_4.png"></div>
+                      <p>Un proyecto no tiene fecha de entrega.</p>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <div id="target_3" class="Activity2Row Activity2RowTarget">
+                      <div class="Activity2Circle Activity2CircleTarget"><img src="course/images/light.png"></div>
+                      <p>Respuesta 3: Establecer los medios para compartir evidencias, avances y entregas finales.</p>
+                      <div id="wrong_3" class="Activity2Circle Activity2CircleNumberWrong"><p>X</p></div>
+                    </div>
+                </td>
+                <td>
+                    <div id="target_1" class="Activity2Row Activity2RowTarget">
+                      <div class="Activity2Circle Activity2CircleTarget"><img src="course/images/light.png"></div>
+                      <p>Respuesta 1: Asignar las tareas considerando fortalezas y habilidades de cada integrante.</p>
+                    </div>
+                </td>
+                <td>
+                    <div id="target_4" class="Activity2Row Activity2RowTarget">
+                      <div class="Activity2Circle Activity2CircleTarget"><img src="course/images/light.png"></div>
+                      <p>Respuesta 4: Fijar tareas con objetivos claros, específicos, alcanzables y con fecha límite.</p>
+                      <div id="wrong_4" class="Activity2Circle Activity2CircleNumberWrong"><p>X</p></div>
+                    </div>
+                </td>
+                <td>
+                    <div id="target_2" class="Activity2Row Activity2RowTarget">
+                      <div class="Activity2Circle Activity2CircleTarget"><img src="course/images/light.png"></div>
+                      <p>Respuesta 2: Preguntar si existen impedimentos para el proyecto y solicitar el registro de horas empleadas.</p>
+                      <div id="wrong_2" class="Activity2Circle Activity2CircleNumberWrong"><p>X</p></div>
+                    </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div id="Correct" class="interactiveFeedbackContainer">
+            <img src="course/images/quiz_feedback.jpg" class="background_full">
+            <div class="interactiveFeedback">
+              <div id="hr" class="background-green"></div>
+              <h1>Respuesta</h1>
+              <h2 class="color-green">Correcta</h2>
+              <p>Interactividad  finalizada</p>
+              <button class="interactiveFeedbackButton" onclick="goToAndStop(2);">CONTINUAR</button>
+            </div>
+      ]]></content>
+      <events>
+        <event time="1"><![CDATA[
+          document.getElementById("p1").classList.add("MoveParagraph");
+        ]]></event>
+        <event time="1.5"><![CDATA[
+          document.getElementById("t1").classList.add("MoveParagraph");
+          stop();
+        ]]></event>
+        <event time="2"><![CDATA[
+          document.getElementById("audio_01").setAttribute("src", "course/audios/click.mp3");
+          document.getElementById("audio_01").play();
+          setTimeout(nextPage, 250);
+        ]]></event>
+      </events>
+      <script><![CDATA[
+        var attemp = 1;
+        var target1 = document.getElementById("target_3");
+        var target2 = document.getElementById("target_1");
+        var target3 = document.getElementById("target_4");
+        var target4 = document.getElementById("target_2");
+
+        target1.addEventListener("click", checkanswer);
+        target2.addEventListener("click", checkanswer);
+        target3.addEventListener("click", checkanswer);
+        target4.addEventListener("click", checkanswer);
+
+        function playAudioFx(isCorrect)
+        {
+          var audio = document.getElementById("audio_01");
+          audio.pause();
+          if(isCorrect)
+          {
+            audio.setAttribute("src", "course/audios/correct.mp3");
+          }
+          else{
+            audio.setAttribute("src", "course/audios/incorrect.mp3");
+          }
+          audio.play();
+        }
+
+        function checkanswer(event){
+          event.preventDefault;
+          var id = event.target.getAttribute("id");
+          console.log(id);
+          if(id == "target_1")
+          {
+            if(attemp == 1){
+              console.log("congrats");
+              target2.removeEventListener("click", checkanswer);
+              target2.style.backgroundColor = "#a2c173";
+              target2.getElementsByTagName("div")[0].classList.remove("Activity2CircleTarget");
+              target2.getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_1.png");
+              document.getElementById("option_1").getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_1.png");
+              document.getElementById("option_2").classList.remove("Activity2Disable");
+
+              attemp ++;
+              playAudioFx(true);
+            }
+          }
+
+          if(id == "target_2")
+          {
+            if(attemp == 2){
+            console.log("congrats");
+            target4.removeEventListener("click", checkanswer);
+            target4.style.backgroundColor = "#2ea99f";
+            target4.getElementsByTagName("div")[0].classList.remove("Activity2CircleTarget");
+            target4.getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_2.png");
+            document.getElementById("option_2").getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_2.png");
+            document.getElementById("option_3").classList.remove("Activity2Disable");
+
+            attemp ++;
+            playAudioFx(true);
+            }
+            else{
+              playAudioFx(false);
+              document.getElementById("wrong_2").style.display = "block";
+              setTimeout(function(){ document.getElementById("wrong_2").style.display = "none"; }, 500);
+            }
+          }
+
+          if(id == "target_3")
+          {
+            if(attemp == 3){
+            console.log("congrats");
+            target1.removeEventListener("click", checkanswer);
+            target1.style.backgroundColor = "#e8af3e";
+            target1.getElementsByTagName("div")[0].classList.remove("Activity2CircleTarget");
+            target1.getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_3.png");
+            document.getElementById("option_3").getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_3.png");
+            document.getElementById("option_4").classList.remove("Activity2Disable");
+
+            attemp ++;
+            playAudioFx(true);
+            }
+            else{
+              playAudioFx(false);
+              document.getElementById("wrong_3").style.display = "block";
+              setTimeout(function(){ document.getElementById("wrong_3").style.display = "none"; }, 500);
+            }
+          }
+
+          if(id == "target_4")
+          {
+            if(attemp == 4){
+            console.log("congrats");
+            target3.removeEventListener("click", checkanswer);
+            target3.style.backgroundColor = "#a3618e";
+            target3.getElementsByTagName("div")[0].classList.remove("Activity2CircleTarget");
+            target3.getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_4.png");
+            document.getElementById("option_4").getElementsByTagName("div")[0].getElementsByTagName("img")[0].setAttribute("src", "course/images/match_4.png");
+
+            attemp ++;
+            playAudioFx(true);
+            }
+            else{
+              playAudioFx(false);
+              document.getElementById("wrong_4").style.display = "block";
+              setTimeout(function(){ document.getElementById("wrong_4").style.display = "none"; }, 500);
+            }
+          }
+
+            if(attemp == 5)
+            {
+              setTimeout(function(){ document.getElementById("Correct").style.display = "block"; }, 1000);
+            }
+
+        }
+      ]]></script>
+    </lesson>
 
     <lesson name="Mail">
       <content><![CDATA[

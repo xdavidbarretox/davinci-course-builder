@@ -1,56 +1,54 @@
-console.log("DavEngine v0.5");
+console.log("DavEngine v20200624");
 
-/* TODO
-  + save leson_location scorm to crate a pop up to go specific lesson
-  + copyright info loaded by date.year
-  + create glosary
-  + exit fullscreen (remove mode?)
-  +removes full screen on mobile
-  + developer mode? reload xml and page
-  * developer mode to reload xml
-  + external xml and assets
-*/
+var __courseLocation:string = "course/course.xml";
+var __course:XMLDocument;
 
-var __courseLocation = "course/course.xml";
-var __course;
-var __courseContainer;
-var __isMobile = false;
-var __pageCounter = 0;
-var __totalPages;
-var __courseName;
+var __courseContainer:HTMLElement;
+var __isMobile:boolean = false;
+var __pageCounter:number = 0;
+var __totalPages:number;
+var __courseName:string;
 
-var __nextButton;
-var __prevButton;
-var __playButton;
-var __reloadButton;
-var __tocButton;
-var __isWindowed;
-var __courseWindow;
-var __courseWidth;
-var __courseHeight;
-var __displayWindow;
-var __toc;
-var __toogleTOC = false;
+var __nextButton:HTMLElement;
+var __prevButton:HTMLElement;
+var __playButton:HTMLElement;
+var __reloadButton:HTMLElement;
+var __tocButton:HTMLElement;
+var __isWindowed:boolean;
+var __courseWidth:number;
+var __courseHeight:number;
+var __displayWindow:HTMLElement;
+var __toc:HTMLElement;
+var __ui:HTMLElement;
+var __uiButton:HTMLElement;
+var __toogleTOC:boolean = false;
+var __toogleUI:boolean = false;
 
 var __visited = [];
-var __counter;
-var __portraitAlertCenter;
-var __page;
-var __frame;
+var __counter:HTMLElement;
+var __AdvanceBar:HTMLElement;
+var __portraitAlertCenter:number;
+var __frame:number;
 var __events = null;
-var __frameInterval;
-var __frameRate = 100;
-var __blockEvent = false;
-var __isPaused = false;
-var __tooltipNext;
-var __tooltipPrev;
-var __lessons = [];
-//var __eventPlayed;
-var __videoTimeInternal;
-var __video;
-var __subtitles;
-var __currentSubtitle;
-var __reviewPool = new Array();
+var __frameInterval:any;
+var __frameRate:number = 100;
+var __blockEvent:boolean = false;
+var __isPaused:boolean = false;
+var __tooltipNext:HTMLElement;
+var __tooltipPrev:HTMLElement;
+var __lessons:any[] = [];
+var __page:any;
+
+var __videoTimeInternal:any;
+var __video:any;
+var __subtitles:any[] = [];
+var __currentSubtitle:number;
+var __reviewPool:Array<boolean> = new Array();
+var __LMSInitialized:boolean = false;
+
+declare var doLMSSetValue:any;
+declare var doLMSCommit:any;
+declare var loadQuiz:any;
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -62,9 +60,9 @@ function init(){
   loadCourse(__courseLocation);
 }
 
-function loadCourse(src){
+function loadCourse(src:string){
   console.log("loadCourse---");
-  var requestCourse;
+  var requestCourse:any;
   if (window.XMLHttpRequest){
    requestCourse = new XMLHttpRequest();
   }
@@ -79,30 +77,26 @@ function loadCourse(src){
     __course = requestCourse.responseXML;
     console.dir(__course);
     courseConfig();
-};
+  }
 
-requestCourse.onerror = function() { // only triggers if the request couldn't be made at all
-  alert("Network Error");
-};
+  requestCourse.onerror = function() { // only triggers if the request couldn't be made at all
+    alert("Network Error");
+  }
 
-requestCourse.onprogress = function(event) { // triggers periodically
-  console.log("on progress start ------------------------");
-  console.log('Received'+ event.loaded + ' of ' + event.total);
-};
+  requestCourse.onprogress = function(event:any) { // triggers periodically
+    console.log("on progress start ------------------------");
+    console.log('Received'+ event.loaded + ' of ' + event.total);
+    console.log("----------------------------------- on progress ends");
+  }
 
-    requestCourse.setRequestHeader("Content-Type", "text/xml");
-    requestCourse.send();
-    console.log("it was sended");
-    //course = requestCourse.responseXML;
-    //console.log("course - " + course);
-
-console.log("----------------------------------- on progress ends");
+  requestCourse.setRequestHeader("Content-Type", "text/xml");
+  requestCourse.send();
 }
 
 function courseConfig()
 {
   __totalPages = __course.getElementsByTagName("lesson").length + __course.getElementsByTagName("quiz").length;
-  __courseName = __course.getElementsByTagName("course")[0].getAttribute("name");
+  //__courseName = __course.getElementsByTagName("course")[0].getAttribute("name");
   __isWindowed = (__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
   __displayWindow = document.getElementById("Course");
   __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
@@ -110,13 +104,13 @@ function courseConfig()
   __courseContainer = document.getElementById("Course_Content");
   document.getElementById("Welcome_UI").addEventListener("click", function(){setCourseContent(0); this.style.display = "none";});
   windowedCourse();
-  setCourseName(__courseName);
+  //setCourseName(__courseName);
   set_uiElements();
   loadTOC();
   setLessonCounter();
 }
 
-function setCourseName(name){
+function setCourseName(name:string){
   document.getElementById("Course_Name").innerHTML = name;
 }
 
@@ -134,11 +128,11 @@ function clearCourseContainer()
   */
 }
 
-function setCourseContent(index){
+function setCourseContent(index:number){
   console.log("setCourseContent " + index);
   __isPaused = false;
   __page = __lessons[index];
-  type = __page.tagName;
+  var type:string = __page.tagName;
 
   clearCourseContainer();
 
@@ -182,6 +176,7 @@ function setCourseContent(index){
     __tooltipPrev.innerHTML = "";
   }
   cathMedia();
+  highlightTOC(index);
 }
 
 function cathMedia()
@@ -278,9 +273,9 @@ function playFrame(){
   //console.log("playFrame(): playEvent = " + __frame + " | __blockEvent : " + __blockEvent + " | __isPaused : " + __isPaused);
   if(!__blockEvent)
   {
-    for (i = 0; i < totalEvents; i++){
-        var sTime = __events[i].getAttribute("time");
-        var timing = parseInt(sTime * 1000, 10);
+    for (var i:number = 0; i < totalEvents; i++){
+        var sTime:number = Number(__events[i].getAttribute("time"));
+        var timing:number = sTime * 1000;
         //console.log(i + " of " + totalEvents + " totalEvents");
         if(__blockEvent){return}
         if(timing == milisecondTime)
@@ -315,6 +310,8 @@ function playFrame(){
 
 function setLessonCounter(){
   __counter.innerHTML = (__pageCounter + 1) + " / " + __totalPages;
+  var percentage:number = ((__pageCounter + 1) * 100) / __totalPages;
+  __AdvanceBar.getElementsByTagName("div")[0].style.width = percentage + "%";
 }
 
 function checkMobile(){
@@ -345,18 +342,18 @@ function prevPage(){
   }
 }
 
-function setLessonLocation(location)
+function setLessonLocation(location:number)
 {
-  if(__LMSInitialized != "false")
+  if(__LMSInitialized != false)
   {
     doLMSSetValue( "cmi.core.lesson_location", location );
   }
 }
 
-function setVisited(id)
+function setVisited(id:number)
 {
   console.log("setVisited " + id);
-  for(i = 0; i <= __visited.length; i++)
+  for(var i:any = 0; i <= __visited.length; i++)
   {
     if(__visited[i] == id)
     {
@@ -376,10 +373,13 @@ function set_uiElements()
   __prevButton = document.getElementById("Button_Prev");
   __tocButton = document.getElementById("Button_TOC");
   __counter = document.getElementById("Counter");
+  __AdvanceBar = document.getElementById("Advance_Bar");
   __playButton = document.getElementById("Button_Play");
   __reloadButton = document.getElementById("Button_Reload");
   __tooltipNext = document.getElementById("Next_Page_Tooltip");
   __tooltipPrev = document.getElementById("Prev_Page_Tooltip");
+  __ui = document.getElementById("Course_UI");
+  __uiButton = document.getElementById("Button_showUI");
   __nextButton.addEventListener("click", nextPage);
   __nextButton.addEventListener("mouseover", function(){__tooltipNext.style.display = "block";});
   __nextButton.addEventListener("mouseout", function(){__tooltipNext.style.display = "none";});
@@ -391,6 +391,7 @@ function set_uiElements()
   __reloadButton.addEventListener("click", reload);
   document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; if(__isMobile){ if(!__isWindowed){document.body.requestFullscreen();}else{document.exitFullscreen();}}else{ windowedCourse(); }});
   document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
+  __uiButton.addEventListener("click", showUI);
 }
 
 function windowedCourse(){
@@ -401,7 +402,7 @@ function windowedCourse(){
     //1.77777777777778 1280 * 720 HD
 
     var aspecRatio = window.innerWidth / window.innerHeight;
-    var x;
+    var x:number;
 
     if(aspecRatio < 1.7){
       x = window.innerWidth * .5625;
@@ -425,10 +426,6 @@ function windowedCourse(){
       __displayWindow.style.top = 0 + "px";
       __displayWindow.style.transform = ("scale(" + scale + ") translate(" + (translateX * -1) + "px, " + ( translateY * -1 )+"px)");
 
-
-
-
-
     }else{
       x = window.innerHeight * 1.77777777777778;
       /*
@@ -439,7 +436,6 @@ function windowedCourse(){
       */
       console.log("is more than 1.7 --- " + x);
       //when fit to height.
-
 
       //------------------------------------------------
       var scale = ((window.innerHeight * 100) / __courseHeight) / 100;
@@ -492,6 +488,7 @@ function windowedCourse(){
 }
 
 function loadTOC(){
+  console.log("loadTOC");
   __toc = document.getElementById("TOC");
 /*
   var entryTitle = document.createElement("div");
@@ -501,48 +498,56 @@ function loadTOC(){
   entryTitle.appendChild(entryContent);
   __toc.appendChild(entryTitle);
 */
-  var id = 0;
+  var id:number = 0;
+  var moduleList:HTMLCollectionOf<Element> = __course.getElementsByTagName("course")[0].getElementsByTagName("module");
 
-  var moduleList = __course.getElementsByTagName("course")[0].getElementsByTagName("module");
-  for(i = 0; i < moduleList.length; i++)
+  for(var i:any = 0; i < moduleList.length; i ++)
   {
     console.log("Module " + i);
-    var ModuleName = moduleList[i].getAttribute("name");
-    var lessonList = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("lesson");
-    var quiz = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("quiz");
+    var ModuleName:string = moduleList[i].getAttribute("name");
+    var lessonList:HTMLCollectionOf<Element> = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("lesson");
+    var quiz:HTMLCollectionOf<Element> = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("quiz");
 
-    addTOCelement(ModuleName, i, true)
-    for(j = 0; j < lessonList.length; j++){
-      var lessonName = lessonList[j].getAttribute("name");
+    addTOCelement(ModuleName, i, true);
+
+    for(var j:any = 0; j < lessonList.length; j++){
+      var lessonName:string = lessonList[j].getAttribute("name");
       __lessons.push(lessonList[j]);
       addTOCelement(lessonName, id, false);
       id++;
       console.log("Lesson " + id );
     }
-    for(k=0;k < quiz.length;k++){
+    for(var k:any = 0;k < quiz.length; k++){
       console.log("Quiz ---" + k);
-      var quizName = quiz[k].getAttribute("name");
+      var quizName:string = quiz[k].getAttribute("name");
       __lessons.push(quiz[k]);
       addTOCelement(quizName, id, false);
       id++;
     }
   }
-  console.log("loadTOC");
 }
 
-function addTOCelement(name, id, isModule)
+function addTOCelement(name:string, id:number, isModule:boolean)
 {
-  var entry = document.createElement("div");
-  var p = document.createElement("p");
+  var entry:HTMLElement = document.createElement("div");
+  var p:HTMLElement = document.createElement("p");
   if(!isModule)
   {
-    entry.addEventListener("click", function(){var i = parseInt(this.getAttribute("id"),10); __pageCounter = i; setCourseContent( i ); hideTOC();});
+    entry.addEventListener("click", function(){
+      var i:number = parseInt(this.getAttribute("goto"),10);
+      __pageCounter = i;
+      setCourseContent( i );
+      hideTOC();});
+
     entry.classList.add("TOCListElement");
+    entry.setAttribute("id", "L" + id.toString());
+    entry.setAttribute("goto",  id.toString());
   }
   else {
     entry.classList.add("TOCModuleElement");
+    entry.setAttribute("id", "M" + id.toString());
   }
-  entry.setAttribute("id", id);
+
   //entry.classList.add("TOCListElementDisable");
   //TODO read from supend data
   p.innerHTML = name;
@@ -568,6 +573,15 @@ function hideTOC(){
 
 }
 
+function highlightTOC(id:number){
+  var all:any = __toc.getElementsByClassName("highlightTOC");
+  for(var i:number = 0; i < all.length; i++){
+    all[i].classList.remove("highlightTOC");
+  }
+  var e:HTMLElement = document.getElementById("L"+ id);
+  e.classList.add("highlightTOC");
+}
+
 window.addEventListener("orientationchange", function() { checkHorizontal(); }, false);
 
 function checkHorizontal()
@@ -579,10 +593,12 @@ function checkHorizontal()
     __portraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
     if(window.innerHeight < window.innerWidth)
     {
-      var timmerDelay = setTimeout(function(){
+      /*TODO review if you can enter here
+      var timmerDelay:any = setTimeout(function(){
         __portraitAlertCenter = (window.innerHeight / 2) - ((window.innerWidth * 0.66) / 2);
         document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __portraitAlertCenter + "px";
       }, 250);
+      */
     }
     else{
       document.getElementById("PortraitAlert").getElementsByTagName("img")[0].style.top = __portraitAlertCenter + "px";
@@ -599,7 +615,7 @@ function tooglePlayPause()
   play_pause(__isPaused);
 }
 
-function play_pause(isPaused)
+function play_pause(isPaused:boolean)
 {
   __isPaused = isPaused;
   var audios = document.getElementsByTagName("audio");
@@ -608,7 +624,7 @@ function play_pause(isPaused)
   if(audios.length > 0)
   {
     console.log("playing audios ");
-    for(i=0;i<audios.length;i++)
+    for(var i:any = 0; i < audios.length; i++)
     {
       console.log("pausing " + i);
       if(__isPaused)
@@ -667,25 +683,24 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-function showUI(isVisible){
-  if(isVisible){
-    __nextButton.style.display = "block";
-    __prevButton.style.display = "block";
-    __playButton.style.display = "block";
+function showUI(){
+  __toogleUI = !__toogleUI;
+  if(__toogleUI){
+    __ui.style.display = "block";
+    __uiButton.classList.add("hideUI");
   }
   else{
-    __nextButton.style.display = "none";
-    __prevButton.style.display = "none";
-    __playButton.style.display = "node";
+    __ui.style.display = "none";
+    __uiButton.classList.remove("hideUI");
   }
 }
 
-function goTo(goFrame){
+function goTo(goFrame:number){
   __frame = goFrame * 10;
   playCourse();
 }
 
-function goToAndStop(goFrame){
+function goToAndStop(goFrame:number){
   __frame = goFrame * 10;
   var milisecondTime = (__frame * 100);
   __blockEvent = true;
@@ -693,9 +708,9 @@ function goToAndStop(goFrame){
   var totalEvents = __events.length;
   console.log("---------------------goToAndStop = " + __frame + " | __blockEvent = " + __blockEvent);
 
-  for (i = 0; i < totalEvents; i++){
-      var sTime = __events[i].getAttribute("time");
-      var timing = parseInt(sTime * 1000, 10);
+  for (var i:any = 0; i < totalEvents; i++){
+      var sTime:number = Number(__events[i].getAttribute("time"));
+      var timing:number = sTime * 1000;
       if(timing == milisecondTime)
       {
         eval(__events[i].textContent);
@@ -704,7 +719,7 @@ function goToAndStop(goFrame){
   }
 }
 
-function goToAndPlay(goFrame){
+function goToAndPlay(goFrame:number){
   console.log("goToAndPlay()");
   clearInterval(__frameInterval);
   __blockEvent = false;
@@ -712,7 +727,7 @@ function goToAndPlay(goFrame){
   __frameInterval = setInterval(playFrame, __frameRate);
 }
 
-function configReviewItems(nItems){
+function configReviewItems(nItems:number){
   __reviewPool = [];
 
   for(var i = 0; i < nItems; i++){
@@ -720,11 +735,11 @@ function configReviewItems(nItems){
   }
 }
 
-function setReviewItem(nItem){
+function setReviewItem(nItem:number){
     __reviewPool[nItem - 1] = true;
 }
 
-function checkReviewItems(frameToGo){
+function checkReviewItems(frameToGo:number){
   console.log("checkReviewItems");
   for(var i = 0; i < __reviewPool.length; i++){
     if(__reviewPool[i] == false){

@@ -1143,3 +1143,238 @@ font-size: 20px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+/*Activity 1*/
+.color-pink{
+  color: #a46182;
+}
+
+.background-pink{
+  background-color: #a46182;
+}
+
+.Activity1Table{
+  position: relative;
+  width: 90%;
+  border-spacing: 10px;
+  border: none;
+}
+
+.Activity1Row {
+  position: relative;
+  width: 100%;
+  height: 84px;
+  top: 0px;
+  background-color: #22243b;
+  border-radius: 10px;
+  left: 0px;
+  margin: 0;
+  padding: 0;
+}
+
+.Activity1Circle{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.Activity1Row p{
+  margin-left: 120px;
+  margin: 0 20px 0 120px;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.Activity1CircleNumber{
+  z-index: 3;
+  display: none;
+}
+
+.Activity1CircleNumberWrong{
+  z-index: 3;
+  background-color:#cc5f4b;
+  display: none;
+}
+
+.Activity1CircleNumber p{
+  color: white;
+  font-family: "LibreFranklin-ExtraBold";
+  font-size: 32px;
+  width: 100%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  opacity: 0.6;
+}
+
+.Activity1CircleNumberWrong p{
+  color: white;
+  font-family: "LibreFranklin-ExtraBold";
+  font-size: 32px;
+  width: 100%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  opacity: 0.6;
+}
+
+.content_interactivity1 {
+    position: absolute;
+    left: 45px;
+    top: 60px;
+    width: 100%;
+    height: auto;
+  }
+
+  .content_interactivity1 .hr2{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    animation: hr2Right 1.5s forwards;
+  }
+
+.Activity1Wrong{
+  animation: WrongAnimation 1s infinite;
+}
+
+/*Activity 2*/
+.content_interactivity2{
+    position: absolute;
+    left: 5%;
+    top: 60px;
+    width: 100%;
+    height: auto;
+  }
+
+  .content_interactivity2 .hr2{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    animation: hr2Right 1.5s forwards;
+  }
+
+.Activity2Table{
+  position: relative;
+  width: 90%;
+  border-spacing: 10px;
+  border: none;
+}
+
+.Activity2Row {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  top: 0px;
+  background-color: #22243b;
+  border-radius: 10px;
+  left: 0px;
+  margin: 40px 0 0 0 ;
+  padding: 0;
+}
+
+.Activity2Circle{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+}
+
+.Activity2Circle img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: auto;
+}
+
+.Activity2Row p{
+  position: absolute;
+  margin: 20px;
+  padding: 0;
+  top: 30px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+  .Activity2CircleTarget{
+    background-color: #d4d3d9;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0px 3px 6px #000000;
+    pointer-events: none;
+  }
+
+  .Activity2RowTarget {
+    background-color: white;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0px 3px 6px #000000;
+  }
+
+  .Activity2RowTarget:hover {
+    background-color: #d4d3d9;
+  }
+
+  .Activity2Disable{
+    opacity: 0.15;
+  }
+
+  .Activity2CircleNumberWrong{
+    z-index: 3;
+    background-color:#cc5f4b !important;
+    display: none;
+    pointer-events: none;
+  }
+
+  .Activity2CircleNumberWrong p{
+    color: white;
+    font-family: "LibreFranklin-ExtraBold";
+    font-size: 32px;
+    width: 100%;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    opacity: 0.6;
+  }
