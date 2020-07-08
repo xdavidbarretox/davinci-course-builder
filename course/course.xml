@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <course name="Fundamentos del teletrabajo para supervisores" windowed="true" width="1280" height="720" finalExam="course/finalExam.xml">
 
+  <cover><![CDATA[
+    <img src="course/images/start.png">
+  ]]></cover>
+
   <module name="Fundamentos del teletrabajo para supervisores">
     <lesson name="Reconocimiento del desempeño">
       <content><![CDATA[
@@ -1716,6 +1720,7 @@
       <events>
         <event time="0.6"><![CDATA[
           document.getElementById("audio_01").play();
+          movefordwardbyaudio("audio_01");
           document.getElementById("p1").classList.add("MoveParagraph");
         ]]></event>
         <event time="3"><![CDATA[
@@ -1725,7 +1730,7 @@
           document.getElementById("p2").classList.add("MoveParagraph");
         ]]></event>
         <event time="20.6"><![CDATA[
-          nextPage();
+          //nextPage();
           ]]></event>
       </events>
     </lesson>

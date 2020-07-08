@@ -1,4 +1,4 @@
-console.log("DavEngine v20200624");
+console.log("Davinci e-learning player version:20200707 /n by David Barreto");
 var __courseLocation = "course/course.xml";
 var __course;
 var __courseContainer;
@@ -16,6 +16,7 @@ var __courseWidth;
 var __courseHeight;
 var __displayWindow;
 var __toc;
+var __tocList;
 var __ui;
 var __uiButton;
 var __toogleTOC = false;
@@ -40,12 +41,22 @@ var __subtitles = [];
 var __currentSubtitle;
 var __reviewPool = new Array();
 var __LMSInitialized = false;
+var __isPlayEnable = false;
+var __cover;
+var __audio;
+var __audioInterval;
+var __volumeControl;
+var __volumeButton;
+var __isMute = false;
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
+window.addEventListener("click", hideTOC);
+window.addEventListener("orientationchange", function () { checkHorizontal(); }, false);
 function init() {
     console.log("init---");
     checkMobile();
     checkHorizontal();
+    checkLMS();
     loadCourse(__courseLocation);
 }
 function loadCourse(src) {
@@ -84,10 +95,10 @@ function courseConfig() {
     __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
     __courseHeight = parseInt(__course.getElementsByTagName("course")[0].getAttribute("height"));
     __courseContainer = document.getElementById("Course_Content");
-    document.getElementById("Welcome_UI").addEventListener("click", function () { setCourseContent(0); this.style.display = "none"; });
     windowedCourse();
     //setCourseName(__courseName);
     set_uiElements();
+    document.getElementById("Welcome_UI").addEventListener("click", function () { setCourseContent(0); this.style.display = "none"; });
     loadTOC();
     setLessonCounter();
 }
@@ -97,7 +108,10 @@ function setCourseName(name) {
 function clearCourseContainer() {
     clearInterval(__frameInterval);
     clearInterval(__videoTimeInternal);
+    clearInterval(__audioInterval);
+    __audio = undefined;
     __courseContainer.innerHTML = "";
+    hideTOC();
     /*
     __courseContainer.remove();
     var cc = document.createElement("div");
@@ -108,6 +122,13 @@ function clearCourseContainer() {
 }
 function setCourseContent(index) {
     console.log("setCourseContent " + index);
+    disableNext();
+    for (var i = 0; i < __visited.length; i++) {
+        console.log("check to enable next " + __visited[i] + " vs " + (index + 1));
+        if (__visited[i] == (index + 1)) {
+            enableNext();
+        }
+    }
     __isPaused = false;
     __page = __lessons[index];
     var type = __page.tagName;
@@ -149,13 +170,21 @@ function setCourseContent(index) {
     highlightTOC(index);
 }
 function cathMedia() {
+    console.log("catchMedia");
     __currentSubtitle = 0;
     __video = __courseContainer.getElementsByTagName("video");
     if (__video.length > 0) {
         __subtitles = __page.getElementsByTagName("subtitles")[0].getElementsByTagName("subtitle");
         console.log("has video | subtitles " + __subtitles.length);
-        __videoTimeInternal = setInterval(checkVideoTime, 100);
+        __videoTimeInternal = setInterval(checkVideoTime, __frameRate);
     }
+    if (__isMute) {
+        mute();
+    }
+    else {
+        setVolume();
+    }
+    console.log("catchMedia ends ---");
 }
 function checkVideoTime() {
     /*
@@ -276,21 +305,34 @@ function checkMobile() {
 function nextPage() {
     if (__pageCounter < (__totalPages - 1)) {
         __pageCounter++;
-        setCourseContent(__pageCounter);
         setVisited(__pageCounter);
         setLessonLocation(__pageCounter);
+        setCourseContent(__pageCounter);
+        if (__pageCounter == (__totalPages - 1)) {
+            doLMSSetValue("cmi.core.lesson_status", "completed");
+            doLMSCommit();
+        }
     }
+}
+function enableNext() {
+    __isPlayEnable = true;
+    __nextButton.classList.remove("disable");
+}
+function disableNext() {
+    __isPlayEnable = false;
+    __nextButton.classList.add("disable");
 }
 function prevPage() {
     if (__pageCounter > 0) {
         __pageCounter--;
-        setCourseContent(__pageCounter);
         setLessonLocation(__pageCounter);
+        setCourseContent(__pageCounter);
     }
 }
 function setLessonLocation(location) {
-    if (__LMSInitialized != false) {
+    if (__LMSInitialized) {
         doLMSSetValue("cmi.core.lesson_location", location);
+        doLMSCommit();
     }
 }
 function setVisited(id) {
@@ -298,14 +340,12 @@ function setVisited(id) {
     for (var i = 0; i <= __visited.length; i++) {
         if (__visited[i] == id) {
             console.log("find " + id);
-            break;
-        }
-        else {
-            console.log("added " + id);
-            __visited.push(id);
-            break;
+            return;
         }
     }
+    __visited.push(id);
+    saveSuspendData();
+    unlockTOC(id - 1);
 }
 function set_uiElements() {
     __nextButton = document.getElementById("Button_Next");
@@ -319,28 +359,26 @@ function set_uiElements() {
     __tooltipPrev = document.getElementById("Prev_Page_Tooltip");
     __ui = document.getElementById("Course_UI");
     __uiButton = document.getElementById("Button_showUI");
-    __nextButton.addEventListener("click", nextPage);
-    __nextButton.addEventListener("mouseover", function () { __tooltipNext.style.display = "block"; });
-    __nextButton.addEventListener("mouseout", function () { __tooltipNext.style.display = "none"; });
+    __nextButton.addEventListener("click", function () { if (__isPlayEnable) {
+        nextPage();
+    } });
+    //__nextButton.addEventListener("mouseover", function(){__tooltipNext.style.display = "block";});
+    //__nextButton.addEventListener("mouseout", function(){__tooltipNext.style.display = "none";});
     __prevButton.addEventListener("click", prevPage);
-    __prevButton.addEventListener("mouseover", function () { __tooltipPrev.style.display = "block"; });
-    __prevButton.addEventListener("mouseout", function () { __tooltipPrev.style.display = "none"; });
+    //__prevButton.addEventListener("mouseover", function(){__tooltipPrev.style.display = "block";});
+    //__prevButton.addEventListener("mouseout", function(){__tooltipPrev.style.display = "none";});
     __tocButton.addEventListener("click", showTOC);
     __playButton.addEventListener("click", tooglePlayPause);
     __reloadButton.addEventListener("click", reload);
-    document.getElementById("Button_Size").addEventListener("click", function () { __isWindowed = !__isWindowed; if (__isMobile) {
-        if (!__isWindowed) {
-            document.body.requestFullscreen();
-        }
-        else {
-            document.exitFullscreen();
-        }
-    }
-    else {
-        windowedCourse();
-    } });
+    //document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; if(__isMobile){ if(!__isWindowed){document.body.requestFullscreen();}else{document.exitFullscreen();}}else{ windowedCourse(); }});
     document.getElementById("Button_Close").addEventListener("click", function () { window.close(); });
     __uiButton.addEventListener("click", showUI);
+    __cover = document.getElementById("Welcome_UI");
+    __cover.innerHTML = __course.getElementsByTagName("course")[0].getElementsByTagName("cover")[0].textContent;
+    __volumeControl = document.getElementById("Volume_Silider");
+    __volumeControl.oninput = function () { setVolume(); };
+    __volumeButton = document.getElementById("Button_Volume");
+    __volumeButton.addEventListener("click", toogleMute);
 }
 function windowedCourse() {
     if (__isMobile) {
@@ -425,6 +463,7 @@ function windowedCourse() {
 function loadTOC() {
     console.log("loadTOC");
     __toc = document.getElementById("TOC");
+    __tocList = document.getElementById("TOC_List");
     /*
       var entryTitle = document.createElement("div");
       var entryContent = document.createElement("p");
@@ -460,28 +499,35 @@ function loadTOC() {
 function addTOCelement(name, id, isModule) {
     var entry = document.createElement("div");
     var p = document.createElement("p");
+    var line = document.createElement("div");
     if (!isModule) {
-        entry.addEventListener("click", function () {
-            var i = parseInt(this.getAttribute("goto"), 10);
-            __pageCounter = i;
-            setCourseContent(i);
-            hideTOC();
+        entry.addEventListener("click", function (event) {
+            var block = this.classList.contains("TOCListElementDisable");
+            console.log("block = " + block);
+            event.stopPropagation();
+            if (!block) {
+                var i = parseInt(this.getAttribute("goto"), 10);
+                __pageCounter = i;
+                setCourseContent(i);
+                hideTOC();
+            }
         });
         entry.classList.add("TOCListElement");
         entry.setAttribute("id", "L" + id.toString());
         entry.setAttribute("goto", id.toString());
+        entry.classList.add("TOCListElementDisable");
     }
     else {
         entry.classList.add("TOCModuleElement");
         entry.setAttribute("id", "M" + id.toString());
     }
-    //entry.classList.add("TOCListElementDisable");
-    //TODO read from supend data
     p.innerHTML = name;
     entry.appendChild(p);
-    __toc.appendChild(entry);
+    entry.appendChild(line);
+    __tocList.appendChild(entry);
 }
-function showTOC() {
+function showTOC(event) {
+    event.stopPropagation();
     if (__toogleTOC) {
         __toc.style.display = "none";
     }
@@ -502,7 +548,6 @@ function highlightTOC(id) {
     var e = document.getElementById("L" + id);
     e.classList.add("highlightTOC");
 }
-window.addEventListener("orientationchange", function () { checkHorizontal(); }, false);
 function checkHorizontal() {
     var __PortraitAlert = document.getElementById("PortraitAlert");
     if (window.orientation == 0 || window.orientation == 1) {
@@ -572,16 +617,32 @@ function play() {
     __isPaused = false;
     play_pause(__isPaused);
 }
+var map = { 17: false, 39: false };
 document.addEventListener('keydown', function (event) {
     console.log(event.code);
+    console.log(event.keyCode);
     if (event.code == "ArrowRight") {
-        nextPage();
+        if (__isPlayEnable) {
+            nextPage();
+        }
     }
     if (event.code == "ArrowLeft") {
         prevPage();
     }
     if (event.code == "Space") {
         tooglePlayPause();
+    }
+    if (event.keyCode in map) {
+        map[event.keyCode] = true;
+        console.log(map[17] + " - " + map[39]);
+        if (map[17] && map[39]) {
+            nextPage();
+        }
+    }
+});
+document.addEventListener("keyup", function (event) {
+    if (event.keyCode in map) {
+        map[event.keyCode] = false;
     }
 });
 function showUI() {
@@ -649,4 +710,111 @@ function stop() {
 }
 function reload() {
     setCourseContent(__pageCounter);
+}
+function movefordwardbyaudio(sAudio) {
+    __audio = document.getElementById(sAudio);
+    __audioInterval = setInterval(checkAudioEnd, __frameRate);
+}
+function checkAudioEnd() {
+    if (__audio.ended) {
+        clearInterval(__audioInterval);
+        console.log("audio ends----");
+        nextPage();
+    }
+}
+function setVolume() {
+    __volumeButton.classList.remove("mute");
+    __isMute = false;
+    var audios = document.getElementsByTagName("audio");
+    var videos = document.getElementsByTagName("video");
+    if (audios.length > 0) {
+        console.log("there is some audios to play");
+        for (var i = 0; i < audios.length; i++) {
+            console.log("set volume for audio " + i + " audio value " + __volumeControl.value);
+            audios[i].volume = __volumeControl.value / 100;
+        }
+    }
+    if (videos.length > 0) {
+        console.log("there is some videos to play");
+        for (var j = 0; j < videos.length; j++) {
+            console.log("set volume for video " + j + " video value " + __volumeControl.value);
+            videos[j].volume = __volumeControl.value / 100;
+        }
+    }
+}
+function mute() {
+    __isMute = true;
+    __volumeButton.classList.add("mute");
+    var audios = document.getElementsByTagName("audio");
+    var videos = document.getElementsByTagName("video");
+    if (audios.length > 0) {
+        for (var i = 0; i < audios.length; i++) {
+            audios[i].volume = 0;
+        }
+    }
+    if (videos.length > 0) {
+        for (var j = 0; j < videos.length; j++) {
+            videos[j].volume = 0;
+        }
+    }
+}
+function toogleMute() {
+    __isMute = !__isMute;
+    if (__isMute) {
+        mute();
+    }
+    else {
+        setVolume();
+    }
+}
+function toogleWindowed() {
+    __isWindowed = !__isWindowed;
+    if (__isMobile) {
+        if (!__isWindowed) {
+            document.body.requestFullscreen();
+        }
+        else {
+            document.exitFullscreen();
+        }
+    }
+    else {
+        windowedCourse();
+    }
+}
+function checkLMS() {
+    var s = doLMSInitialize();
+    __LMSInitialized = (s == "true");
+    if (__LMSInitialized)
+        console.log("LMS connection available <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    getSuspendData();
+}
+function saveSuspendData() {
+    if (__LMSInitialized) {
+        var data = "";
+        for (var i = 0; i < __visited.length; i++) {
+            data += __visited[i];
+            if (i < (__visited.length - 1)) {
+                data += ",";
+            }
+        }
+        doLMSSetValue("cmi.suspend_data", data);
+        doLMSCommit();
+    }
+}
+function getSuspendData() {
+    if (__LMSInitialized) {
+        var s = doLMSGetValue("cmi.suspend_data");
+        if (s != "") {
+            var a = s.split(",");
+            a.forEach(function (v) {
+                var id = parseInt(v);
+                __visited.push(id);
+                unlockTOC(id - 1);
+            });
+        }
+    }
+}
+function unlockTOC(id) {
+    console.log("unlockTOC " + id);
+    document.getElementById("L" + id).classList.remove("TOCListElementDisable");
 }

@@ -8,19 +8,18 @@
   </metadata>
   <organizations default="ORG-41AFF06209B252DF7F9ADEDDD87FADC3">
     <organization identifier="ORG-41AFF06209B252DF7F9ADEDDD87FADC3" structure="hierarchical">
-      <title>Curso de prueba Dvnci</title>
+      <title>MDC</title>
       <item identifier="ITEM-4B228EBD99C7296285FA82B73A96A8E8" isvisible="true" identifierref="RES-0D60D38DE8E7941A5D80CACE4F0BCD74">
-        <title>Prueba 20200512</title>
+        <title>Teletrabajo</title>
       </item>
     </organization>
   </organizations>
   <resources>
     <resource identifier="RES-0D60D38DE8E7941A5D80CACE4F0BCD74" type="webcontent" href="index.html" adlcp:scormtype="sco">
       <file href="index.html" />
-      <file href="css/davengine.css" />
-      <file href="js/davengine.js" />
+      <file href="css/davinci.css" />
+      <file href="js/davinci.js" />
       <file href="js/SCORM_12_APIWrapper.js" />
     </resource>
   </resources>
 </manifest>
-

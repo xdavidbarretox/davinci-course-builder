@@ -3,20 +3,16 @@
   <head>
     <link rel="shortcut icon" type="image/png" href="bin/images/favicon.ico"/>
     <meta charset="utf-8">
-    <title>DavEngine</title>
+    <title>Teletrabajo</title>
     <script type="text/javascript" src="bin/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="bin/js/SCORM_12_APIWrapper.js"></script>
     <script>
     var __LMSInitialized = false;
     __LMSInitialized = doLMSInitialize();
-    if (__LMSInitialized != true)
-    {
-                 // handle error
-    }
     </script>
     <script type="text/javascript" src="bin/js/davinci.js"></script>
     <script type="text/javascript" src="bin/js/quiz.js"></script>
-    <link rel="stylesheet" type="text/css" href="bin/css/davengine.css">
+    <link rel="stylesheet" type="text/css" href="bin/css/davinci.css">
     <link rel="stylesheet" type="text/css" href="course/css/course.css">
     <link rel="stylesheet" type="text/css" href="course/css/quiz.css">
   </head>
@@ -24,24 +20,36 @@
     <div id="Course">
       <div id="Course_UI">
         <div id="UI_Background"></div>
-        <img id="UI_Logo" src="bin/images/ico_MDC_128.png"/>
-        <h1 id="Course_Name">Course Name</h1>
-        <div id="TOC"></div>
-        <button id="Button_TOC"></button>
-        <button id="Button_Size"></button>
-        <button id="Button_Close"></button>
+        <!--<img id="UI_Logo" src="bin/images/ico_MDC_128.png"/>-->
+        <!--<h1 id="Course_Name">Course Name</h1>-->
+        <button id="Button_TOC" class="ButtonUI"><p>Tabla de contenido</p></button>
+        <button id="Button_Close" class="ButtonUI"><p>Cerrar</p></button>
+
+        <button id="Button_Next" class="ButtonUI"><p>Adelante</p></button>
+        <button id="Button_Prev" class="ButtonUI"><p>Atrás</p></button>
+        <button id="Button_Play" class="ButtonUI"><p>Tocar/Pausa</p></button>
+        <button id="Button_Reload" class="ButtonUI"><p>Recarga</p></button>
+        <p id="Counter"></p>
+        <button id="Button_Volume" class="ButtonUI"><p>Sonido</p></button>
+        <input type="range" id="Volume_Silider" class="slider" name="vol" min="0" max="100">
       </div>
+      <!--<button id="Button_Size"></button>-->
+      <div id="TOC">
+        <div id="TOC_Header"><p>
+          Tabla de contenido
+        </p></div>
+        <div id="TOC_List"></div>
+      </div>
+      <div id="Advance_Bar"><div></div></div>
+      <button id="Button_showUI" class="ButtonUI"><p>Controles</p></button>
+
       <div id="Course_Content"></div>
-      <button id="Button_Next"></button>
-      <button id="Button_Prev"></button>
-      <button id="Button_Play"></button>
-      <button id="Button_Reload"></button>
+
       <div id="Next_Page_Tooltip"></div>
       <div id="Prev_Page_Tooltip"></div>
-      <p id="Counter"></p>
+
       <div id="Welcome_UI">
-        <img src="bin/images/ico_MDC_128.png"/>
-        <p>PLEASE CLICK TO START</p>
+        <!--<img src="course/images/start.png">-->
       </div>
     </div>
     <div id="PortraitAlert">
