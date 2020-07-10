@@ -2,7 +2,28 @@
 <course name="Fundamentos del teletrabajo para supervisores" windowed="true" width="1280" height="720" finalExam="course/finalExam.xml">
 
   <cover><![CDATA[
-    <img src="course/images/start.png">
+    <img src="course/images/background.jpg" class="background_full">
+    <img src="course/images/ilustracion.png" alt="Fundamentos de Teletrabajo Para Supervisores" style="position:relative; left:50%; transform:translateX(-50%); width:auto; height:25%; margin:40px 0 20px 0;">
+      <div id="content" style="position: relative; width: 100%; height: auto;">
+      <div style="width:60px; height:10px; position: relative; background-color:#a2c074 left:50%; transform:translateX(-50%);"></div>
+      <h1 class="welcome" style="color: white;">Fundamentos de</h1>
+      <h2 class="welcome" style="color:#a2c074;">Teletrabajo</h2>
+      <h3 class="welcome">PARA SUPERVISORES</h3>
+      <h4 class="welcome">Bienvenido #name</h4>
+      <h4 class="welcome">Avance: #percentage</h4>
+      <h4 id="location" class="welcome">Modulo: #module.<br> Lección: #lesson</h4>
+    </div>
+    <div style="position: relative; width: auto; height: 45px; margin: 20px;">
+      <div id="ButtonStart" class="buttonWelcome" style="left:33%; transform:translateX(-50%); border-radius:5px;">
+        <p>COMENZAR CURSO</p>
+      </div>
+      <div id="ButtonContinue" class="buttonWelcome" style="left:66%; transform:translateX(-50%); border-radius:5px;">
+        <p>CONTINUAR CURSO</p>
+      </div>
+    </div>
+    <img src="course/images/logoMDC.png" style="position:relative; left:50%; transform:translateX(-50%); width: auto; height: auto; margin: 10px;">
+    <p class="welcome welcomeNotice">Este curso no se debe tomar como asesoría legal.<br> Consulta primero con las políticas de tu organización antes de poner en práctica las recomendaciones.<br> Las marcas mencionadas son para uso educativo y no son propiedad de MDC.</p>
+    <p class="welcome welcomeNotice">©#year Mexico Development Center, Inc. Todos los Derechos Reservados</p>
   ]]></cover>
 
   <module name="Fundamentos del teletrabajo para supervisores">

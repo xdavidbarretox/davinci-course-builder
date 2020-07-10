@@ -287,31 +287,17 @@ body{
   z-index: 500;
 }
 
-#Welcome_UI img{
-  width: 100%;
-  height: 100%;
-  /*margin-left: 100%;*/
-  /*margin-top: 10%;*/
-  position: absolute;
-  top:0px;
-  left:0px;
-}
-
 #Welcome_UI p{
   width: 100%;
   color: white;
-  font-size: 32px;
-  bottom: 10%;
-  position: absolute;
-  left: 0%;
+  font-size: 12px;
   text-align: center;
-  margin: 0;
   -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
 /*
@@ -597,4 +583,38 @@ button{
   padding: 10px;
   font-family: "Roboto";
   color: #66578b;
+}
+
+.welcome{
+  position: relative;
+  text-align: center;
+  left: 50% !important;
+  transform: translateX(-50%);
+  margin: 0 auto 15px auto !important;
+  animation: none;
+  opacity: 1.0;
+}
+
+.buttonWelcome{
+  position:absolute;
+  top:0px;
+  width:270px;
+  height:45px;
+  background-color:#187c85;
+}
+
+.buttonWelcome p{
+  color:white;
+  position:absolute;
+  width:90% !important;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:16px !important;
+  margin:0 !important;
+  padding:5%;
+}
+
+.welcomeNotice{
+  font-size:10px !important;
+  opacity: 0.5;
 }

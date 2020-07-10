@@ -1,27 +1,35 @@
 @font-face {
     font-family: "LibreFranklin-Regular";
-    src: url("../fonts/LibreFranklin-Regular.ttf") format('truetype');
+    src: url("../fonts/LibreFranklin-Thin.ttf") format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: "LibreFranklin-Black";
-    src: url("../fonts/LibreFranklin-Black.ttf") format('truetype');
+    src: url("../fonts/LibreFranklin-Bold.ttf") format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: "LibreFranklin-ExtraBold";
-    src: url("../fonts/LibreFranklin-ExtraBold.ttf") format('truetype');
+    src: url("../fonts/LibreFranklin-Bold.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "LibreFranklin-Light";
+    src: url("../fonts/LibreFranklin-Light.ttf") format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 p{
-  font-family: "LibreFranklin-Regular";
+  font-family: "LibreFranklin-Light";
   font-size: 18px;
+  margin: 0;
 }
 
 h1{
@@ -31,6 +39,7 @@ h1{
   margin: 10px auto auto auto;
   opacity: 0;
   animation: AnimateH1 0.5s forwards;
+  line-height: 100%;
 }
 
 @keyframes AnimateH1{
@@ -48,9 +57,10 @@ h2{
   font-family: "LibreFranklin-Black";
   font-size: 53px;
   color: #009ea3;
-  margin: auto;
+  margin: 4px auto 20px auto;
   opacity: 0;
   animation: AnimateH1 0.5s 0.5s forwards;
+  line-height: 80%;
 }
 
 @keyframes AnimateH2{
@@ -74,7 +84,7 @@ h2{
   position: absolute;
   right: 45px;
   top: 60px;
-  width: 49%;
+  width: 50%;
   height: auto;
 }
 
@@ -104,7 +114,7 @@ h2{
 }
 
 .content_right p{
-  text-align: left;
+  text-align: right;
 }
 
 /*Content left*/
@@ -112,7 +122,7 @@ h2{
   position: absolute;
   left: 45px;
   top: 60px;
-  width: 49%;
+  width: 50%;
   height: auto;
 }
 
@@ -147,15 +157,12 @@ li{
 td{
   font-family: "LibreFranklin-Regular";
   font-size: 18px;
-}
-
-td img{
-  margin: 0 20px 0 20px;
+  vertical-align: top;
 }
 
 .avance{
   position: absolute;
-  bottom: 30px;
+  bottom: 45px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -407,13 +414,13 @@ td img{
 .subtitle{
   position: absolute;
     left: 0px;
-    width: 80%;
-    margin: 10px 0px 0px 125px;
+    width: 97%;
+    margin: 10px 0px 0px 15px;
     height: auto;
-    bottom: 30px;
+    bottom: 65px;
     color: white;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 22px;
     text-align: center;
     /* background-color: rgba(0, 0, 0, 0.6); */
     z-index: 100;
@@ -431,7 +438,7 @@ td img{
 
 
 .interactivityTable tbody tr td{
-  width: 50px;
+  width: 50%;
   padding: 5px;
 }
 
@@ -461,6 +468,55 @@ td img{
   }
 
   .interactivityTable tbody tr td div span{
+    color:#7461a3;
+    font-size: 45px;
+    font-weight: bold;
+    font-family: "LibreFranklin-Black";
+    position: absolute;
+    margin: 10px 0 0 10px;
+  }
+
+  .interactivityTable_3options{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 60px;
+  }
+
+
+
+.interactivityTable_3options tbody tr td{
+  width: 30%;
+  padding: 5px;
+}
+
+  .interactivityTable_3options tbody tr td div{
+    background-color: rgba(68,57,123,0.7);
+    width: 100%;
+    height: 80px;
+    border-radius: 10px;
+  }
+
+  .interactivityTable_3options tbody tr td div:hover{
+    background-color: rgba(255,255,255,0.7);
+  }
+
+  .interactivityTable_3options tbody tr td div:hover p{
+    color:black;
+  }
+
+
+  .interactivityTable_3options tbody tr td div p{
+    color:white;
+    transform: translate(-0%, -50%);
+    position: relative;
+    top: 50%;
+    margin: 0 10px 0 60px;
+    font-size: 16px;
+  }
+
+  .interactivityTable_3options tbody tr td div span{
     color:#7461a3;
     font-size: 45px;
     font-weight: bold;
@@ -649,13 +705,19 @@ transform: translateX(-50%);
     padding: 60px;
   }
 
-/*
 
-.popupTable tbody tr td{
-  width: 50px;
-  padding: 5px;
+
+.popupTable tbody tr td img{
+  /*width: 50px;
+  padding: 5px;*/
+
+  margin: auto;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
 }
 
+/*
   .popupTable tbody tr td div{
     background-color: rgba(68,57,123,0.7);
     width: 100%;
@@ -703,7 +765,7 @@ transform: translateX(-50%);
 .popupButtonClose {
     height: 70px;
     width: 270px;
-    background-color: #0d8188ee;
+    background-color: #0d8188;
     border: none;
     cursor: pointer;
     border-radius: 10px;
@@ -730,6 +792,11 @@ transform: translateX(-50%);
   color: white;
   text-align: center;
 }
+
+.popupButtonDisable{
+  filter: saturate(0);
+}
+
 /* TODO erase*/
 .droptarget {
   float: left;
@@ -903,11 +970,11 @@ transform: translateX(-50%);
 }
 
 .custom_bullet{
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   border-radius: 50% 50% 0% 50%;
   background-color: #7461a3;
-  margin:5px;
+  margin:0;
 }
 
 .custom_bullet p{
@@ -1037,9 +1104,9 @@ transform: translateX(-50%);
   position: relative;
 }
 
-.mail td{
+/*.mail td{
   padding: 10px;
-}
+}*/
 
 .question{
   position: absolute;
@@ -1377,4 +1444,74 @@ font-size: 20px;
     transform: translate(-50%, -50%);
     font-size: 48px;
     opacity: 0.6;
+  }
+
+  /*Content full*/
+  .content_full{
+    position: absolute;
+    left: 45px;
+    top: 60px;
+    width: 1190px;
+    height: auto;
+  }
+
+  .content_full .hr2{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    animation: hr2Right 1.5s forwards;
+  }
+
+  .content_full h1{
+    text-align: left;
+  }
+
+  .content_full h2{
+    text-align: left;
+  }
+
+  .content_full p{
+    text-align: left;
+  }
+
+  .white_text{
+    color: white;
+    font-family: "LibreFranklin-Regular";
+  }
+
+  table{
+    border-spacing: 20px;
+  }
+
+  h3{
+    font-family: "LibreFranklin-Light";
+    color: white;
+    font-size: 16px;
+    letter-spacing: 6px;
+    opacity: 0;
+    animation: AnimateH3 0.5s 1.0s forwards;
+  }
+
+  @keyframes AnimateH3{
+      from{
+          margin-top: 40px;
+          opacity: 0;
+      }
+      to{
+          margin-top: 10px;
+          opacity: 1
+      }
+  }
+
+  h4{
+    color:white;
+    font-size:12px;
+    font-family: "LibreFranklin-Light";
+    letter-spacing: 6px;
+    opacity: 0;
+    animation: AnimateH3 0.5s 1.5s forwards;
+  }
+
+  br{
+    margin-top: 15px;
   }

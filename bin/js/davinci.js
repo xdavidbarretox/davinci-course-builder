@@ -1,4 +1,11 @@
 console.log("Davinci e-learning player version:20200707 /n by David Barreto");
+/* TODO:
++avance window at start [iniciar][continuar] naaa just start on last page
++welcome menu in fullscreen
+*/
+/*Wish list
++student name on front
+*/
 var __courseLocation = "course/course.xml";
 var __course;
 var __courseContainer;
@@ -48,6 +55,9 @@ var __audioInterval;
 var __volumeControl;
 var __volumeButton;
 var __isMute = false;
+var __lessonsContinue = 0;
+var __suspendDataVisited;
+var __suspendData = "";
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
 window.addEventListener("click", hideTOC);
@@ -56,8 +66,8 @@ function init() {
     console.log("init---");
     checkMobile();
     checkHorizontal();
-    checkLMS();
     loadCourse(__courseLocation);
+    checkLMS();
 }
 function loadCourse(src) {
     console.log("loadCourse---");
@@ -98,8 +108,12 @@ function courseConfig() {
     windowedCourse();
     //setCourseName(__courseName);
     set_uiElements();
-    document.getElementById("Welcome_UI").addEventListener("click", function () { setCourseContent(0); this.style.display = "none"; });
     loadTOC();
+    if ((__LMSInitialized) && (__suspendData != "")) {
+        for (var i; i < __visited.length; i++) {
+            unlockTOC(__visited[i] - 1);
+        }
+    }
     setLessonCounter();
 }
 function setCourseName(name) {
@@ -374,7 +388,8 @@ function set_uiElements() {
     document.getElementById("Button_Close").addEventListener("click", function () { window.close(); });
     __uiButton.addEventListener("click", showUI);
     __cover = document.getElementById("Welcome_UI");
-    __cover.innerHTML = __course.getElementsByTagName("course")[0].getElementsByTagName("cover")[0].textContent;
+    //__cover.innerHTML = __course.getElementsByTagName("course")[0].getElementsByTagName("cover")[0].textContent;
+    setWelcomeInfo();
     __volumeControl = document.getElementById("Volume_Silider");
     __volumeControl.oninput = function () { setVolume(); };
     __volumeButton = document.getElementById("Button_Volume");
@@ -617,7 +632,7 @@ function play() {
     __isPaused = false;
     play_pause(__isPaused);
 }
-var map = { 17: false, 39: false };
+var map = { 17: false, 39: false, 40: false };
 document.addEventListener('keydown', function (event) {
     console.log(event.code);
     console.log(event.keyCode);
@@ -637,6 +652,11 @@ document.addEventListener('keydown', function (event) {
         console.log(map[17] + " - " + map[39]);
         if (map[17] && map[39]) {
             nextPage();
+        }
+        if (map[17] && map[40]) {
+            for (var i = 0; i < __totalPages; i++) {
+                unlockTOC(i);
+            }
         }
     }
 });
@@ -803,13 +823,12 @@ function saveSuspendData() {
 }
 function getSuspendData() {
     if (__LMSInitialized) {
-        var s = doLMSGetValue("cmi.suspend_data");
-        if (s != "") {
-            var a = s.split(",");
-            a.forEach(function (v) {
+        __suspendData = doLMSGetValue("cmi.suspend_data");
+        if (__suspendData != "") {
+            __suspendDataVisited = __suspendData.split(",");
+            __suspendDataVisited.forEach(function (v) {
                 var id = parseInt(v);
                 __visited.push(id);
-                unlockTOC(id - 1);
             });
         }
     }
@@ -817,4 +836,86 @@ function getSuspendData() {
 function unlockTOC(id) {
     console.log("unlockTOC " + id);
     document.getElementById("L" + id).classList.remove("TOCListElementDisable");
+}
+function setWelcomeInfo() {
+    console.log("setWelcomeInfo");
+    var studentName = "";
+    var percentage = Math.floor((__visited.length * 100) / __totalPages);
+    var d = new Date();
+    var year = d.getFullYear();
+    var ModuleName = "";
+    var LessoneName = "";
+    var aids;
+    var sids = "";
+    var ModuleID = 0;
+    var LessonID = 0;
+    if (__LMSInitialized) {
+        studentName = doLMSGetValue("cmi.core.student_name");
+    }
+    console.log("getLessonId " + getLessonId());
+    sids = getLessonId();
+    aids = sids.split("|");
+    ModuleID = parseInt(aids[0]);
+    LessonID = parseInt(aids[1]);
+    __lessonsContinue = LessonID;
+    console.log("ModuleID " + ModuleID);
+    ModuleName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getAttribute("name");
+    LessoneName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getElementsByTagName("lesson")[LessonID].getAttribute("name");
+    var cover = __course.getElementsByTagName("cover")[0].textContent;
+    cover = cover.replace("#name", studentName);
+    cover = cover.replace("#percentage", percentage + "%");
+    cover = cover.replace("#module", ModuleName);
+    cover = cover.replace("#lesson", LessoneName);
+    cover = cover.replace("#year", year);
+    __cover.innerHTML = cover;
+    document.getElementById("ButtonStart").addEventListener("click", function () { setCourseContent(0); document.getElementById("Welcome_UI").style.display = "none"; });
+    document.getElementById("ButtonContinue").addEventListener("click", function () { setCourseContent(__lessonsContinue); document.getElementById("Welcome_UI").style.display = "none"; });
+    if (percentage == 0) {
+        document.getElementById("location").style.display = "none";
+        document.getElementById("ButtonStart").style.left = "50%";
+        document.getElementById("ButtonContinue").style.display = "none";
+    }
+}
+function getLessonId() {
+    var lessonLocation = "";
+    var LessonTarget = 1;
+    var LessonID = 0;
+    var ModuleID = 0;
+    var output = "0|0";
+    var moduleList = __course.getElementsByTagName("course")[0].getElementsByTagName("module");
+    if (__LMSInitialized) {
+        lessonLocation = doLMSGetValue("cmi.core.lesson_location");
+        if (lessonLocation != "") {
+            LessonTarget = parseInt(lessonLocation);
+        }
+        console.log("lessonLocation " + lessonLocation);
+        for (var i = 0; i < moduleList.length; i++) {
+            console.log("Module " + i);
+            //ModuleName = moduleList[i].getAttribute("name");
+            var lessonList = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("lesson");
+            var quiz = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("quiz");
+            for (var j = 0; j < lessonList.length; j++) {
+                //var lessonName:string = lessonList[j].getAttribute("name");
+                if (LessonID + 1 == LessonTarget) {
+                    output = ModuleID + "|" + LessonID;
+                    return output;
+                }
+                LessonID++;
+                console.log("Lesson " + LessonID);
+            }
+            for (var k = 0; k < quiz.length; k++) {
+                console.log("Quiz ---" + k);
+                //var quizName:string = quiz[k].getAttribute("name");
+                if (LessonID + 1 == LessonTarget) {
+                    output = ModuleID + "|" + LessonID;
+                    return output;
+                }
+                LessonID++;
+            }
+            ModuleID++;
+        }
+    }
+    else {
+        return output;
+    }
 }
