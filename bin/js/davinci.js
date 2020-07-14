@@ -1,10 +1,6 @@
 console.log("Davinci e-learning player version:20200707 /n by David Barreto");
 /* TODO:
-+avance window at start [iniciar][continuar] naaa just start on last page
 +welcome menu in fullscreen
-*/
-/*Wish list
-+student name on front
 */
 var __courseLocation = "course/course.xml";
 var __course;
@@ -843,37 +839,42 @@ function setWelcomeInfo() {
     var percentage = Math.floor((__visited.length * 100) / __totalPages);
     var d = new Date();
     var year = d.getFullYear();
-    var ModuleName = "";
-    var LessoneName = "";
-    var aids;
-    var sids = "";
-    var ModuleID = 0;
+    //var ModuleName:string = "";
+    //var LessoneName:string = "";
+    //var aids:any;
+    //var sids:string = "";
+    //var ModuleID:number = 0;
     var LessonID = 0;
     if (__LMSInitialized) {
         studentName = doLMSGetValue("cmi.core.student_name");
     }
-    console.log("getLessonId " + getLessonId());
-    sids = getLessonId();
-    aids = sids.split("|");
-    ModuleID = parseInt(aids[0]);
-    LessonID = parseInt(aids[1]);
+    //console.log("getLessonId " + getLessonId());
+    //sids = getLessonId();
+    //aids = sids.split("|");
+    //ModuleID = parseInt(aids[0]);
+    //LessonID = parseInt(aids[1]);
     __lessonsContinue = LessonID;
-    console.log("ModuleID " + ModuleID);
-    ModuleName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getAttribute("name");
-    LessoneName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getElementsByTagName("lesson")[LessonID].getAttribute("name");
+    //console.log("ModuleID " + ModuleID);
+    //ModuleName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getAttribute("name");
+    //LessoneName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getElementsByTagName("lesson")[LessonID].getAttribute("name");
     var cover = __course.getElementsByTagName("cover")[0].textContent;
     cover = cover.replace("#name", studentName);
-    cover = cover.replace("#percentage", percentage + "%");
-    cover = cover.replace("#module", ModuleName);
-    cover = cover.replace("#lesson", LessoneName);
+    //cover = cover.replace("#percentage", percentage + "%");
+    //cover = cover.replace("#module", ModuleName);
+    //cover = cover.replace("#lesson", LessoneName);
     cover = cover.replace("#year", year);
     __cover.innerHTML = cover;
     document.getElementById("ButtonStart").addEventListener("click", function () { setCourseContent(0); document.getElementById("Welcome_UI").style.display = "none"; });
     document.getElementById("ButtonContinue").addEventListener("click", function () { setCourseContent(__lessonsContinue); document.getElementById("Welcome_UI").style.display = "none"; });
     if (percentage == 0) {
-        document.getElementById("location").style.display = "none";
-        document.getElementById("ButtonStart").style.left = "50%";
+        console.log("here to set welcome ui");
+        //document.getElementById("location").style.display = "none";
+        document.getElementById("ButtonStart").classList.add("buttonWelcomeCentred");
         document.getElementById("ButtonContinue").style.display = "none";
+    }
+    else {
+        document.getElementById("ButtonStart").classList.remove("buttonWelcomeCentred");
+        document.getElementById("ButtonContinue").style.display = "block";
     }
 }
 function getLessonId() {

@@ -597,10 +597,11 @@ button{
 
 .buttonWelcome{
   position:absolute;
-  top:0px;
+  bottom:0px;
   width:270px;
   height:45px;
   background-color:#187c85;
+  border-radius:5px;
 }
 
 .buttonWelcome p{
@@ -617,4 +618,14 @@ button{
 .welcomeNotice{
   font-size:10px !important;
   opacity: 0.5;
+  margin-bottom: 10px !important;
+}
+
+.buttonWelcome:hover{
+  background-color:#e7af3d;
+}
+
+.buttonWelcomeCentred{
+  left: 50%;
+  transform: translateX(-50%);
 }
