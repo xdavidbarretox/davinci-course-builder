@@ -64,7 +64,7 @@ var __volumeControl:any;
 var __volumeButton:HTMLElement;
 var __isMute:boolean = false;
 
-var __lessonsContinue:number = 0;
+//var __lessonsContinue:number = 0;
 var __suspendDataVisited:any;
 var __suspendData:string = "";
 
@@ -129,7 +129,8 @@ function courseConfig()
   loadTOC();
   if((__LMSInitialized) && (__suspendData != ""))
   {
-    for(var i:number; i < __visited.length; i++){
+    console.log("__visited = " + __visited.toString());
+    for(var i:number = 0; i < __visited.length; i++){
       unlockTOC(__visited[i] - 1);
     }
   }
@@ -986,7 +987,7 @@ function getSuspendData(){
 
 function unlockTOC(id:number){
   console.log("unlockTOC " + id);
-  document.getElementById("L"+id).classList.remove("TOCListElementDisable");
+  document.getElementById("L" + id).classList.remove("TOCListElementDisable");
 }
 
 function setWelcomeInfo()
@@ -1005,12 +1006,15 @@ function setWelcomeInfo()
   //var sids:string = "";
 
   //var ModuleID:number = 0;
-  var LessonID:number = 0;
+  //var LessonID:number = 0;
 
   if(__LMSInitialized)
   {
     studentName = doLMSGetValue("cmi.core.student_name");
-
+    if(doLMSGetValue("cmi.core.lesson_location") != "")
+    {
+      __pageCounter = parseInt(doLMSGetValue("cmi.core.lesson_location"));
+    }
   }
 
   //console.log("getLessonId " + getLessonId());
@@ -1020,7 +1024,7 @@ function setWelcomeInfo()
   //ModuleID = parseInt(aids[0]);
   //LessonID = parseInt(aids[1]);
 
-__lessonsContinue = LessonID;
+//__lessonsContinue = LessonID;
   //console.log("ModuleID " + ModuleID);
   //ModuleName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getAttribute("name");
   //LessoneName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getElementsByTagName("lesson")[LessonID].getAttribute("name");
@@ -1032,7 +1036,7 @@ __lessonsContinue = LessonID;
   cover = cover.replace("#year", year);
   __cover.innerHTML = cover;
   document.getElementById("ButtonStart").addEventListener("click", function(){setCourseContent(0); document.getElementById("Welcome_UI").style.display = "none";});
-  document.getElementById("ButtonContinue").addEventListener("click", function(){setCourseContent(__lessonsContinue); document.getElementById("Welcome_UI").style.display = "none";});
+  document.getElementById("ButtonContinue").addEventListener("click", function(){setCourseContent(__pageCounter); document.getElementById("Welcome_UI").style.display = "none";});
 
   if(percentage == 0)
   {

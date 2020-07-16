@@ -51,7 +51,7 @@ var __audioInterval;
 var __volumeControl;
 var __volumeButton;
 var __isMute = false;
-var __lessonsContinue = 0;
+//var __lessonsContinue:number = 0;
 var __suspendDataVisited;
 var __suspendData = "";
 document.addEventListener('DOMContentLoaded', init, false);
@@ -106,7 +106,8 @@ function courseConfig() {
     set_uiElements();
     loadTOC();
     if ((__LMSInitialized) && (__suspendData != "")) {
-        for (var i; i < __visited.length; i++) {
+        console.log("__visited = " + __visited.toString());
+        for (var i = 0; i < __visited.length; i++) {
             unlockTOC(__visited[i] - 1);
         }
     }
@@ -844,16 +845,19 @@ function setWelcomeInfo() {
     //var aids:any;
     //var sids:string = "";
     //var ModuleID:number = 0;
-    var LessonID = 0;
+    //var LessonID:number = 0;
     if (__LMSInitialized) {
         studentName = doLMSGetValue("cmi.core.student_name");
+        if (doLMSGetValue("cmi.core.lesson_location") != "") {
+            __pageCounter = parseInt(doLMSGetValue("cmi.core.lesson_location"));
+        }
     }
     //console.log("getLessonId " + getLessonId());
     //sids = getLessonId();
     //aids = sids.split("|");
     //ModuleID = parseInt(aids[0]);
     //LessonID = parseInt(aids[1]);
-    __lessonsContinue = LessonID;
+    //__lessonsContinue = LessonID;
     //console.log("ModuleID " + ModuleID);
     //ModuleName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getAttribute("name");
     //LessoneName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getElementsByTagName("lesson")[LessonID].getAttribute("name");
@@ -865,7 +869,7 @@ function setWelcomeInfo() {
     cover = cover.replace("#year", year);
     __cover.innerHTML = cover;
     document.getElementById("ButtonStart").addEventListener("click", function () { setCourseContent(0); document.getElementById("Welcome_UI").style.display = "none"; });
-    document.getElementById("ButtonContinue").addEventListener("click", function () { setCourseContent(__lessonsContinue); document.getElementById("Welcome_UI").style.display = "none"; });
+    document.getElementById("ButtonContinue").addEventListener("click", function () { setCourseContent(__pageCounter); document.getElementById("Welcome_UI").style.display = "none"; });
     if (percentage == 0) {
         console.log("here to set welcome ui");
         //document.getElementById("location").style.display = "none";

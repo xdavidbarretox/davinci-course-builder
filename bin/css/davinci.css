@@ -9,13 +9,14 @@
 
 body{
   margin: 0;
-  background-color: #282c34;
+  background-color: #25263b;
 }
 
 #Course{
   margin: 0;
   position: absolute;
-  background-image: url("../images/background.jpg");
+  /*background-image: url("../images/background.jpg");*/
+  background-color: #25263b;
 }
 /*
 #Course_Name{
@@ -61,7 +62,7 @@ body{
 
 #TOC{
   position: absolute;
-  width: 33%;
+  width: 40%;
   display: none;
   box-shadow: 5px 10px 18px #0006;
   z-index: 101;
@@ -93,7 +94,7 @@ body{
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  width: 350px;
+  width: 470px;
   border-radius: 5px;
   white-space: nowrap;
   padding: 2px 6px 2px 6px;
@@ -112,7 +113,7 @@ body{
 
 .TOCModuleElement div{
   position: absolute;
-  width: 380px;
+  width: 470px;
   height: 1px;
   background-color: #c6c6c6;
   bottom: 0px;
@@ -149,7 +150,7 @@ body{
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  width: 350px;
+  width: 440px;
   /* left: 10%; */
   border-radius: 5px;
   white-space: nowrap;
@@ -159,7 +160,7 @@ body{
 
 .TOCListElement div{
   position: absolute;
-  width: 380px;
+  width: 470px;
   height: 1px;
   background-color: #c6c6c6;
   bottom: 0px;
@@ -628,4 +629,52 @@ button{
 .buttonWelcomeCentred{
   left: 50%;
   transform: translateX(-50%);
+}
+
+p{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+span{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+h1{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+h2{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+h3{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+h4{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+div{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+td{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
 }
