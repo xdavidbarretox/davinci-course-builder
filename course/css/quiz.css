@@ -17,6 +17,10 @@
   border-radius: 20px;
 }
 
+.fail{
+  background-color: red;
+}
+
 .introQuizTextbox p{
   color: white;
   font-weight: bold;
@@ -74,7 +78,7 @@
   bottom: 0px;
   left: 0px;
   width: 100%;
-  margin: 0 0 20px 0;
+  margin: 0 0 60px 0;
 }
 
 .questionAnswer{

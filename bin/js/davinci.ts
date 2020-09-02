@@ -1,7 +1,4 @@
-console.log("Davinci e-learning player version:20200707 /n by David Barreto");
-/* TODO:
-+welcome menu in fullscreen
-*/
+console.log("Davinci e-learning player version:20200820_nonhack /n by David Barreto");
 
 var __courseLocation:string = "course/course.xml";
 var __course:XMLDocument;
@@ -64,9 +61,13 @@ var __volumeControl:any;
 var __volumeButton:HTMLElement;
 var __isMute:boolean = false;
 
-//var __lessonsContinue:number = 0;
 var __suspendDataVisited:any;
 var __suspendData:string = "";
+var __isiE:boolean = false;
+var __isEdge:boolean = false;
+var __mainAudio:any;
+var __fxAudio:any;
+var __testMode = false;
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -75,6 +76,8 @@ window.addEventListener("orientationchange", function() { checkHorizontal(); }, 
 
 function init(){
   console.log("init---");
+  __isiE = msieversion();
+  __isEdge = edgeversion();
   checkMobile();
   checkHorizontal();
   loadCourse(__courseLocation);
@@ -123,6 +126,8 @@ function courseConfig()
   __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
   __courseHeight = parseInt(__course.getElementsByTagName("course")[0].getAttribute("height"));
   __courseContainer = document.getElementById("Course_Content");
+  __mainAudio = document.getElementById("main_audio");
+  __fxAudio = document.getElementById("fx_audio");
   windowedCourse();
   //setCourseName(__courseName);
   set_uiElements();
@@ -135,6 +140,12 @@ function courseConfig()
     }
   }
     setLessonCounter();
+    if(__testMode){
+      console.log("--- Test Mode ---");
+      for(var i:number = 0; i < __totalPages; i++){
+        unlockTOC(i);
+      }
+    }
   }
 
 function setCourseName(name:string){
@@ -160,6 +171,8 @@ function clearCourseContainer()
 
 function setCourseContent(index:number){
   console.log("setCourseContent " + index);
+  playAudio("");
+  pauseAudio();
   disableNext();
   for(var i:number = 0; i < __visited.length; i++){
     console.log("check to enable next " + __visited[i] + " vs " + (index+1));
@@ -180,7 +193,6 @@ function setCourseContent(index:number){
     loadScript();
   }
   if(type == "quiz"){
-
     loadQuiz(__lessons[index].getAttribute("file"));
   }
 
@@ -215,6 +227,8 @@ function setCourseContent(index:number){
   }
   cathMedia();
   highlightTOC(index);
+
+  setLessonLocation(index + 1);
 }
 
 function cathMedia()
@@ -260,6 +274,13 @@ function checkVideoTime()
     nextPage();
     return;
   }
+
+  console.log("__currentSubtitle " + __currentSubtitle + " | __subtitles.length " + __subtitles.length);
+  if(__currentSubtitle == __subtitles.length)
+  {
+    return;
+  }
+
   var start = parseInt(__subtitles[__currentSubtitle].getAttribute("start"));
   var end = parseInt(__subtitles[__currentSubtitle].getAttribute("end"));
   //console.log(__video[0].currentTime + " | start " + start + " | end " + end);
@@ -276,7 +297,7 @@ function loadScript()
   var script = __page.getElementsByTagName("script")[0];
   if(script != undefined)
   {
-    //console.log(script.textContent);
+    console.log(script.textContent);
     eval(script.textContent);
   }
 }
@@ -366,7 +387,7 @@ function checkMobile(){
       __isMobile = true;
     }
     else {
-      __isMobile = false;
+      __isMobile = isIpad();
     }
     console.log("__isMobile = " + __isMobile);
 }
@@ -375,7 +396,7 @@ function nextPage(){
   if(__pageCounter < (__totalPages -1)){
     __pageCounter ++;
     setVisited(__pageCounter);
-    setLessonLocation(__pageCounter);
+    //setLessonLocation(__pageCounter);
     setCourseContent(__pageCounter);
     if(__pageCounter == (__totalPages -1))
     {
@@ -398,7 +419,7 @@ function disableNext(){
 function prevPage(){
   if(__pageCounter > 0){
     __pageCounter --;
-    setLessonLocation(__pageCounter);
+    //setLessonLocation(__pageCounter);
     setCourseContent(__pageCounter);
   }
 }
@@ -430,6 +451,9 @@ function setVisited(id:number)
 
 function set_uiElements()
 {
+  __cover = document.getElementById("Welcome_UI");
+  setWelcomeInfo();
+
   __nextButton = document.getElementById("Button_Next");
   __prevButton = document.getElementById("Button_Prev");
   __tocButton = document.getElementById("Button_TOC");
@@ -441,6 +465,8 @@ function set_uiElements()
   __tooltipPrev = document.getElementById("Prev_Page_Tooltip");
   __ui = document.getElementById("Course_UI");
   __uiButton = document.getElementById("Button_showUI");
+  __volumeControl = document.getElementById("Volume_Silider");
+  __volumeButton = document.getElementById("Button_Volume");
   __nextButton.addEventListener("click", function(){if(__isPlayEnable){nextPage();}});
   //__nextButton.addEventListener("mouseover", function(){__tooltipNext.style.display = "block";});
   //__nextButton.addEventListener("mouseout", function(){__tooltipNext.style.display = "none";});
@@ -451,18 +477,23 @@ function set_uiElements()
   __playButton.addEventListener("click", tooglePlayPause);
   __reloadButton.addEventListener("click", reload);
   //document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; if(__isMobile){ if(!__isWindowed){document.body.requestFullscreen();}else{document.exitFullscreen();}}else{ windowedCourse(); }});
-  document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
+  //document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
   __uiButton.addEventListener("click", showUI);
-  __cover = document.getElementById("Welcome_UI");
-  //__cover.innerHTML = __course.getElementsByTagName("course")[0].getElementsByTagName("cover")[0].textContent;
-  setWelcomeInfo();
-  __volumeControl = document.getElementById("Volume_Silider");
   __volumeControl.oninput = function() { setVolume();};
-  __volumeButton = document.getElementById("Button_Volume");
+
   __volumeButton.addEventListener("click", toogleMute);
+  if(__isiE)
+  {
+    __volumeControl.classList.add("iESlider");
+  }
+  if(__isEdge)
+  {
+    __volumeControl.classList.add("EdgeSlider");
+  }
 }
 
 function windowedCourse(){
+  console.log("windowedCourse");
   if(__isMobile)
   {
     //1.333333333333333‬ ipad
@@ -470,10 +501,10 @@ function windowedCourse(){
     //1.77777777777778 1280 * 720 HD
 
     var aspecRatio = window.innerWidth / window.innerHeight;
-    var x:number;
 
-    if(aspecRatio < 1.7){
-      x = window.innerWidth * .5625;
+    console.log("aspecRatio:" + aspecRatio);
+    if(aspecRatio < 1.8){
+      console.log("aspecRatio is less");
       /*
       __displayWindow.style.width = "100%";
       __displayWindow.style.height = x + "px";
@@ -486,30 +517,29 @@ function windowedCourse(){
 
 
       var scale = ((window.innerWidth * 100) / __courseWidth) / 100;
-      var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
-      var translateY = ((__courseHeight - window.innerHeight)  / scale) / 2;
+      //var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
+      var translateY = ( window.innerHeight - (__courseHeight * scale)) / 2;
       __displayWindow.style.width = __courseWidth + "px";
       __displayWindow.style.height =  __courseHeight + "px";
       __displayWindow.style.left = 0 + "px";
       __displayWindow.style.top = 0 + "px";
-      __displayWindow.style.transform = ("scale(" + scale + ") translate(" + (translateX * -1) + "px, " + ( translateY * -1 )+"px)");
+      __displayWindow.style.transform = ("scale(" + scale + ") translate(" + 0 + "px, " + translateY +"px)");
 
     }else{
-      x = window.innerHeight * 1.77777777777778;
+        console.log("aspecRatio is more");
       /*
       __displayWindow.style.width = x + "px";
       __displayWindow.style.height = "100%";
       __displayWindow.style.left = (window.innerWidth / 2) - (x / 2) + "px";
       __displayWindow.style.top = 0 + "px";
       */
-      console.log("is more than 1.7 --- " + x);
       //when fit to height.
 
       //------------------------------------------------
       var scale = ((window.innerHeight * 100) / __courseHeight) / 100;
-    //  var translateX = (__courseWidth - window.innerWidth) * scale;
-    var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
-      var translateY = ((__courseHeight - window.innerHeight)  / scale) / 2;
+      //var translateX = (__courseWidth - window.innerWidth) * scale;
+      var translateX = (window.innerWidth - (__courseWidth * scale)) / 2;
+      //var translateY = ((__courseHeight - window.innerHeight)  / scale) / 2;
 
       //alert("(window.innerHeight = " + window.innerHeight + " | window.outerHeight = " + window.outerHeight + " | scale = " + scale + " | translateX = " + translateY  + " | translateY = " + translateY);
 
@@ -520,7 +550,7 @@ function windowedCourse(){
 
       __displayWindow.style.top = 0 + "px";
 
-      __displayWindow.style.transform = ("scale(" + scale + ") translate(" + (translateX * -1) + "px, " + ( translateY * -1 )+"px)");
+      __displayWindow.style.transform = ("scale(" + scale + ") translate(" + translateX + "px, " + 0 +"px)");
       /*
       __displayWindow.style.webkitTransform = ("scale(" + scale + ")");
     __displayWindow.style.MozTransform = ("scale(" + scale + ")");
@@ -572,7 +602,7 @@ function loadTOC(){
 
   for(var i:number = 0; i < moduleList.length; i ++)
   {
-    console.log("Module " + i);
+    //console.log("Module " + i);
     var ModuleName:string = moduleList[i].getAttribute("name");
     var lessonList:HTMLCollectionOf<Element> = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("lesson");
     var quiz:HTMLCollectionOf<Element> = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("quiz");
@@ -584,10 +614,10 @@ function loadTOC(){
       __lessons.push(lessonList[j]);
       addTOCelement(lessonName, id, false);
       id++;
-      console.log("Lesson " + id );
+      //console.log("Lesson " + id );
     }
     for(var k:number = 0;k < quiz.length; k++){
-      console.log("Quiz ---" + k);
+      //console.log("Quiz ---" + k);
       var quizName:string = quiz[k].getAttribute("name");
       __lessons.push(quiz[k]);
       addTOCelement(quizName, id, false);
@@ -751,7 +781,7 @@ document.addEventListener('keydown', function(event) {
   console.log(event.keyCode);
 
   if (event.code == "ArrowRight") {
-      if(__isPlayEnable){nextPage();}
+      if(__isPlayEnable){console.log("ArrowRight"); nextPage();}
   }
   if (event.code == "ArrowLeft") {
     prevPage();
@@ -763,7 +793,7 @@ document.addEventListener('keydown', function(event) {
         map[event.keyCode] = true;
         console.log(map[17] + " - " + map[39]);
         if (map[17] && map[39]) {
-            nextPage();
+            //console.log("hack nextPage"); nextPage();
         }
 
         if (map[17] && map[40]) {
@@ -771,7 +801,6 @@ document.addEventListener('keydown', function(event) {
             unlockTOC(i);
           }
         }
-
     }
 });
 
@@ -861,13 +890,13 @@ function reload()
   setCourseContent(__pageCounter);
 }
 
-function movefordwardbyaudio(sAudio:string){
- __audio = document.getElementById(sAudio);
+function movefordwardbyaudio(){
+ //__audio = document.getElementById(sAudio);
  __audioInterval = setInterval(checkAudioEnd, __frameRate);
 }
 
 function checkAudioEnd(){
-  if(__audio.ended)
+  if(__mainAudio.ended)
   {
     clearInterval(__audioInterval);
     console.log("audio ends----");
@@ -994,17 +1023,13 @@ function setWelcomeInfo()
 {
   console.log("setWelcomeInfo");
   var studentName:string = "";
-
   var percentage:number = Math.floor((__visited.length * 100) / __totalPages);
   var d:any = new Date();
   var year:any = d.getFullYear();
-
-
   //var ModuleName:string = "";
   //var LessoneName:string = "";
   //var aids:any;
   //var sids:string = "";
-
   //var ModuleID:number = 0;
   //var LessonID:number = 0;
 
@@ -1013,7 +1038,7 @@ function setWelcomeInfo()
     studentName = doLMSGetValue("cmi.core.student_name");
     if(doLMSGetValue("cmi.core.lesson_location") != "")
     {
-      __pageCounter = parseInt(doLMSGetValue("cmi.core.lesson_location"));
+      __pageCounter = parseInt(doLMSGetValue("cmi.core.lesson_location")) - 1;
     }
   }
 
@@ -1024,20 +1049,22 @@ function setWelcomeInfo()
   //ModuleID = parseInt(aids[0]);
   //LessonID = parseInt(aids[1]);
 
-//__lessonsContinue = LessonID;
+  //__pageCounter = LessonID;
+  //console.log("__lessonsContinue:"+__pageCounter);
   //console.log("ModuleID " + ModuleID);
   //ModuleName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getAttribute("name");
   //LessoneName = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[ModuleID].getElementsByTagName("lesson")[LessonID].getAttribute("name");
-  var cover:string = __course.getElementsByTagName("cover")[0].textContent;
+  var cover:string = __course.getElementsByTagName("cover")[0].getElementsByTagName("content")[0].textContent;
   cover = cover.replace("#name", studentName);
   //cover = cover.replace("#percentage", percentage + "%");
   //cover = cover.replace("#module", ModuleName);
   //cover = cover.replace("#lesson", LessoneName);
   cover = cover.replace("#year", year);
   __cover.innerHTML = cover;
-  document.getElementById("ButtonStart").addEventListener("click", function(){setCourseContent(0); document.getElementById("Welcome_UI").style.display = "none";});
-  document.getElementById("ButtonContinue").addEventListener("click", function(){setCourseContent(__pageCounter); document.getElementById("Welcome_UI").style.display = "none";});
-
+  /*
+  document.getElementById("ButtonStart").addEventListener("click", function(){});
+  document.getElementById("ButtonContinue").addEventListener("click", function(){});
+*/
   if(percentage == 0)
   {
     console.log("here to set welcome ui");
@@ -1050,10 +1077,17 @@ function setWelcomeInfo()
     document.getElementById("ButtonContinue").style.display = "block";
   }
 
+  var script:string = __course.getElementsByTagName("cover")[0].getElementsByTagName("script")[0].textContent;
+  if(script != undefined)
+  {
+    //console.log(script);
+    eval(script);
+  }
 }
 
 function getLessonId()
 {
+  console.log("---getLessonId | __LMSInitialized = " + __LMSInitialized);
   var lessonLocation:string = "";
   var LessonTarget:number = 1;
   var LessonID:number = 0;
@@ -1066,6 +1100,7 @@ function getLessonId()
   if(__LMSInitialized)
   {
     lessonLocation = doLMSGetValue("cmi.core.lesson_location");
+    console.log("lessonLocation:" + lessonLocation);
 
     if(lessonLocation != "")
     {
@@ -1107,4 +1142,75 @@ function getLessonId()
   else{
     return output;
   }
+}
+
+function msieversion() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
+    {
+      return true;
+    }
+    return false;
+}
+
+function edgeversion() {
+    var isEdge:boolean = navigator.appVersion.indexOf('Edge') > -1;
+    return isEdge;
+}
+
+function startCourse(start:boolean){
+  console.log("startCourse " + start + " | __lessonsContinue:"+__pageCounter);
+  windowedCourse();
+  document.getElementById("Welcome_UI").style.display = "none";
+  if(start){ __pageCounter = 0;}
+  setCourseContent(__pageCounter);
+}
+
+/*
+function playAudio(id:string){
+  var promise = document.querySelector(id).play();
+
+  if (promise !== undefined) {
+      promise.catch(error => {
+          // Auto-play was prevented
+          // Show a UI element to let the user manually start playback
+          alert("que la chin");
+      }).then(() => {
+          // Auto-play started
+          alert("okas");
+      });
+}
+*/
+
+function playAudio(src:string){
+  __mainAudio.pause();
+  __mainAudio.setAttribute("src", src);
+  __mainAudio.play();
+}
+
+function pauseAudio(){
+  __mainAudio.pause();
+}
+
+function playFxAudio(src:string){
+  __fxAudio.pause();
+  __fxAudio.setAttribute("src", src);
+  __fxAudio.play();
+}
+
+function isIpad() {
+    const ua = window.navigator.userAgent;
+    if (ua.indexOf('iPad') > -1) {
+        return true;
+    }
+
+    if (ua.indexOf('Macintosh') > -1) {
+        try {
+            document.createEvent("TouchEvent");
+            return true;
+        } catch (e) {}
+    }
+
+    return false;
 }

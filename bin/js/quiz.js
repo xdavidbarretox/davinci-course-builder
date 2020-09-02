@@ -164,12 +164,23 @@ function showResult()
   clearCourseContainer();
   showUI(true);
   var intro = __quiz.getElementsByTagName("result")[0];
-  var content = intro.getElementsByTagName("content")[0].textContent;
   var goodAnswers = __answerPool.length;
+  var minToPass = parseInt(__quiz.getElementsByTagName("quiz")[0].getAttribute("minToPass"));
   var result = Math.floor((goodAnswers / __maxQuestionNumber) * 100);
+  var content;
+  if(result >= minToPass)
+  {
+    content = intro.getElementsByTagName("pass")[0].textContent;
+  }
+  else {
+    content = intro.getElementsByTagName("fail")[0].textContent;
+  }
+  
   var txt = content.replace("#", result);
   __courseContainer.innerHTML = txt;
   var script = intro.getElementsByTagName("script")[0];
+
+  console.log("minToPass = " + minToPass);
   doLMSSetValue('cmi.core.score.raw', result.toString());doLMSCommit();
   if(script != undefined)
   {

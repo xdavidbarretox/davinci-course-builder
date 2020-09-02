@@ -18,7 +18,7 @@
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">1 ¿Cuales son los <b>retos</b> que enfrentas al dirigir a un colaborador remoto?</p>
+      <p class="questionText">¿Cuales son los <b>retos</b> que enfrentas al dirigir a un colaborador remoto?</p>
     ]]></text>
     <answer showFeedback="wrong">Falta de comunicación efectiva, desmotivación, desorganización al no tener horarios definidos para trabajo y tiempo libre.</answer>
     <answer showFeedback="wrong">Reducción de gastos generales, mayor productividad, disminución en el impacto ambiental.</answer>
@@ -52,7 +52,7 @@
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">2 ¿Qué modalidad de teletrabajo consiste en que el colaborador realiza sus tareas alternando algunos días dentro de la empresa y mínimo 2 días fuera de ella?</p>
+      <p class="questionText">¿Qué modalidad de teletrabajo consiste en que el colaborador realiza sus tareas alternando algunos días dentro de la empresa y mínimo 2 días fuera de ella?</p>
     ]]></text>
     <answer showFeedback="wrong">Autónomo</answer>
     <answer showFeedback="wrong">Centro de teletrabajo</answer>
@@ -145,13 +145,21 @@
   </question>
 
   <result>
-    <content><![CDATA[
+    <pass><![CDATA[
     <div class="introQuiz"></div>
     <div class="introQuizTextbox">
       <p>You score</p>
       <p>Tu calificación es #</p>
       <button id="startCourseButton" class="quizButton" onclick="nextPage();">CONTINUAR</button>
     </div>
-  ]]></content>
+  ]]></pass>
+  <fail><![CDATA[
+  <div class="introQuiz"></div>
+  <div class="introQuizTextbox fail">
+    <p>Fail</p>
+    <p>Tu calificación es #</p>
+    <button id="startCourseButton" class="quizButton" onclick="nextPage();">CONTINUAR</button>
+  </div>
+]]></fail>
 </result>
 </quiz>
