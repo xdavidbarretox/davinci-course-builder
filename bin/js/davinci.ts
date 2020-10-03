@@ -1,4 +1,4 @@
-console.log("Davinci e-learning player version:20200820_nonhack /n by David Barreto");
+console.log("Davinci e-learning player version:20201001 /n by David Barreto");
 
 var __courseLocation:string = "course/course.xml";
 var __course:XMLDocument;
@@ -68,6 +68,8 @@ var __isEdge:boolean = false;
 var __mainAudio:any;
 var __fxAudio:any;
 var __testMode = false;
+var __suspendDataAttemps:any;
+var __attemps = [];
 
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
@@ -342,7 +344,7 @@ function playFrame(){
   {
     for (var i:number = 0; i < totalEvents; i++){
         var sTime:number = Number(__events[i].getAttribute("time"));
-        var timing:number = sTime * 1000;
+        var timing:number = Math.round(sTime * 1000);
         //console.log(i + " of " + totalEvents + " totalEvents");
         if(__blockEvent){return}
         if(timing == milisecondTime)
@@ -992,6 +994,17 @@ function saveSuspendData(){
       data += __visited[i];
       if(i < (__visited.length - 1))
       {
+        data += ",";
+      }
+    }
+
+    data += "|";
+
+    for(var j:number = 0; j < __attemps.length; j++)
+    {
+      data += __attemps[j];
+      if(j < (__attemps.length - 1))
+      {
         data += ","
       }
     }
@@ -1005,11 +1018,20 @@ function getSuspendData(){
   if(__LMSInitialized){
     __suspendData = doLMSGetValue("cmi.suspend_data");
     if(__suspendData != ""){
-      __suspendDataVisited = __suspendData.split(",");
+       var parseCategory:any = __suspendData.split("|");
+
+      __suspendDataVisited = parseCategory[0].split(",");
       __suspendDataVisited.forEach(function(v:string) {
         var id:number = parseInt(v);
         __visited.push(id);
       });
+
+      __suspendDataAttemps = parseCategory[1].split(",");
+      __suspendDataAttemps.forEach(function(v:string) {
+        var score:number = parseInt(v);
+        __attemps.push(score);
+      });
+
     }
   }
 }
@@ -1186,6 +1208,7 @@ function playAudio(id:string){
 function playAudio(src:string){
   __mainAudio.pause();
   __mainAudio.setAttribute("src", src);
+  if(src == ""){return;}
   __mainAudio.play();
 }
 
@@ -1213,4 +1236,25 @@ function isIpad() {
     }
 
     return false;
+}
+
+var __TimingDelay:number = 1.0;
+var __wordsPerMinute:number = 120;
+var __characteresPerMinute = 14.3;
+
+function getTiming() {
+    console.log("__characteresPerMinute="+__characteresPerMinute);
+    var ps:any = __courseContainer.querySelectorAll("p");
+    var globalTiming:number = __TimingDelay;
+    var globalCharacters:number =  0;
+    for (var i:number = 0; i < ps.length; i++) {
+        console.log(ps[i].getAttribute("id") + ":" + globalTiming);
+        var wordCounter:number = ps[i].innerText.trim().length;
+        console.log(wordCounter);
+        globalCharacters += wordCounter;
+        var localTiming:number = (Math.round((wordCounter / __characteresPerMinute) * 10) / 10);
+        ps[i].setAttribute("timing", globalTiming);
+        globalTiming += localTiming;
+    }
+    console.log("total timing: " + globalTiming + " - total characers: " + globalCharacters);
 }

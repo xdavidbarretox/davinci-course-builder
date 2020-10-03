@@ -5,6 +5,12 @@ var __questionCounter;
 var __maxQuestionNumber;
 var __answerPool;
 var __questionPool;
+var __maxAttemps;
+var __quizBlocked = false;
+
+/*
+// TODO: show closed dialog;
+*/
 
 function loadQuiz(src)
 {
@@ -41,7 +47,11 @@ function loadQuiz(src)
 }
 
 function quizConfig(){
-  setQuestionsPool();
+  if(!__quizBlocked)
+  {
+    setQuestionsPool();
+  }
+  attempConfig();
 }
 
 function loadIntro(){
@@ -54,6 +64,10 @@ function loadIntro(){
   if(script != undefined)
   {
     eval(script.textContent);
+  }
+  var audio = intro.getElementsByTagName("content")[0].getAttribute("audio");
+  if(audio != null){
+    playAudio(audio);
   }
 }
 
@@ -78,6 +92,7 @@ function setQuestion(index){
   var content = questionText.textContent;
   var replaceStr;
   var currentQuestion = index + 1;
+
   if(currentQuestion < 10)
   {
     replaceStr = "0" + currentQuestion.toString();
@@ -92,12 +107,17 @@ function setQuestion(index){
   var answerContainer = document.createElement("div");
   answerContainer.classList.add("questionAnswerContainer");
   __courseContainer.appendChild(answerContainer);
+
   for(i=0;i<answers.length;i++){
     console.log(answers[i]);
     var answer = answers[i].innerHTML;
+    //var audioFx = question.getElementsByTagName("answer")[i].getAttribute("audio");
     addAnswer(i, answer, answerContainer, __questionPool[index]);
   }
-
+  var audio = questionText.getAttribute("audio");
+  if(audio != null){
+    playAudio(audio);
+  }
 }
 
 function addAnswer(index, answer, container, question){
@@ -119,10 +139,17 @@ function checkAnswer()
 {
   var question_id = parseInt(this.parentElement.getAttribute("question"));
   var answer_id = parseInt(this.getAttribute("index"));
-  console.log("que pasa " + question_id);
   var question = __quiz.getElementsByTagName("question")[question_id];
   var feedback = question.getElementsByTagName("answer")[answer_id].getAttribute("showFeedback");
   showFeedback(question_id, feedback, true);
+
+  //pauseAudio();
+  var audioFx = question.getElementsByTagName("answer")[answer_id].getAttribute("audio");
+
+  if(audioFx != null)
+  {
+    playFxAudio(audioFx);
+  }
 }
 
 function showFeedback(question_id, feedback, isCorrect)
@@ -139,9 +166,15 @@ function showFeedback(question_id, feedback, isCorrect)
       {
         content = feedbacks[i].textContent;
         __courseContainer.innerHTML = content;
+
+        var audio = question.getElementsByTagName("feedback")[i].getAttribute("audio");
+        if(audio != null){
+          playAudio(audio);
+        }
+
       }
     }
-console.log(question_id, feedback, isCorrect);
+    console.log(question_id, feedback, isCorrect);
 }
 
 function nextQuestion(isRight){
@@ -163,28 +196,45 @@ function showResult()
 {
   clearCourseContainer();
   showUI(true);
-  var intro = __quiz.getElementsByTagName("result")[0];
+  var feedback = __quiz.getElementsByTagName("result")[0];
   var goodAnswers = __answerPool.length;
   var minToPass = parseInt(__quiz.getElementsByTagName("quiz")[0].getAttribute("minToPass"));
   var result = Math.floor((goodAnswers / __maxQuestionNumber) * 100);
   var content;
   if(result >= minToPass)
   {
-    content = intro.getElementsByTagName("pass")[0].textContent;
+    content = feedback.getElementsByTagName("pass")[0];
   }
   else {
-    content = intro.getElementsByTagName("fail")[0].textContent;
+    content = feedback.getElementsByTagName("fail")[0];
   }
-  
-  var txt = content.replace("#", result);
+
+  var txt = content.textContent.replace("#", result);
   __courseContainer.innerHTML = txt;
-  var script = intro.getElementsByTagName("script")[0];
+  var script = feedback.getElementsByTagName("script")[0];
 
   console.log("minToPass = " + minToPass);
-  doLMSSetValue('cmi.core.score.raw', result.toString());doLMSCommit();
+  if(__attemps.length < __maxAttemps){
+    __attemps.push(result);
+    saveSuspendData();
+  }
+
+  if((__attemps.length <= __maxAttemps) && (result >= minToPass)){
+    doLMSSetValue('cmi.core.score.raw', result.toString());doLMSCommit();
+  }
+  else if(__attemps.length == __maxAttemps)
+  {
+    doLMSSetValue('cmi.core.score.raw', result.toString());doLMSCommit();
+  }
+
   if(script != undefined)
   {
     eval(script.textContent);
+  }
+
+  var audio = content.getAttribute("audio");
+  if(audio != null){
+    playAudio(audio);
   }
 }
 
@@ -221,4 +271,30 @@ function setQuestionsPool()
   }
   setQuestionNumber();
   loadIntro();
+}
+
+function attempConfig()
+{
+  __maxAttemps = parseInt(__quiz.firstElementChild.getAttribute("maxAttemps"));
+  if(__attemps.length >= __maxAttemps)
+  {
+    blockQuiz();
+  }
+}
+
+function blockQuiz()
+{
+  __quizBlocked = true;
+  //alert("You get __maxAttemps " + __maxAttemps);
+  clearCourseContainer();
+  var feedback = __quiz.getElementsByTagName("result")[0];
+  var content = feedback.getElementsByTagName("block")[0].textContent;
+
+  //var txt = content.replace("#", __maxAttemps);
+  __courseContainer.innerHTML = content;
+
+  var audio = content.getAttribute("audio");
+  if(audio != null){
+    playAudio(audio);
+  }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <course name="Fundamentos del teletrabajo para supervisores" windowed="true" width="1280" height="720" finalExam="course/finalExam.xml">
 
-  <cover><![CDATA[
+  <cover>
+    <content><![CDATA[
     <div style="position:absolute; width:100%; height:100%; left:0px; top:0px; background-color:#25263b;"></div>
     <div id="customerLogo" style="position:relative; width:100%; height:20%;">
       <img src="course/images/logo_empresa.png" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:auto; height:50%">
@@ -22,7 +23,7 @@
       </div>
 
         <h4 class="welcome" style="position: absolute; bottom: 50px; color: #8eab67; text-transform: uppercase;">Bienvenido #name</h4>
-        <div id="ButtonStart" class="buttonWelcome" style="right:51%; ">
+        <div id="ButtonStart" class="buttonWelcome" style="right:51%;">
           <p>INICIAR</p>
         </div>
         <div id="ButtonContinue" class="buttonWelcome" style="left:51%;">
@@ -34,10 +35,15 @@
         <div style="position:absolute; left:0px; width:max-content; height:auto; left: 50%; transform: translate(-50%,-50%); top: 50%;">
           <img src="course/images/logoMDC.png" style="position:relative; left:50%; transform:translateX(-50%); width: auto; height: auto; margin-bottom: 10px;">
           <p class="welcome welcomeNotice">Este curso no se debe tomar como asesoría legal.<br> Consulta primero las políticas de tu organización antes de poner en práctica las recomendaciones.<br> Las marcas mencionadas son para uso educativo y no son propiedad de MDC.</p>
-          <p class="welcome welcomeNotice" style="margin:0 !important">©#year Mexico Development Center, Inc. Todos los Derechos Reservados</p>
+          <p class="welcome welcomeNotice" style="margin:0 !important">©#year Mexico Development Center, Inc. Todos los Derechos Reservados.</p>
         </div>
     <div>
-  ]]></cover>
+  ]]></content>
+  <script><![CDATA[
+    document.getElementById("ButtonStart").addEventListener("click", function(){ playAudio("course/audios/click.mp3"); setTimeout(startCourse, 100, true); });
+    document.getElementById("ButtonContinue").addEventListener("click", function(){ playAudio("course/audios/click.mp3"); setTimeout(startCourse, 100, false); });
+  ]]></script>
+  </cover>
 
   <module name="Fundamentos del teletrabajo para supervisores">
     <lesson name="Reconocimiento del desempeño">
@@ -63,13 +69,13 @@
           //document.getElementById("audio").play();
           document.getElementById("p1").classList.add("MoveParagraph");
         ]]></event>
-        <event time="1.5"><![CDATA[
+        <event time="4.2"><![CDATA[
           document.getElementById("p2").classList.add("MoveParagraph");
         ]]></event>
-        <event time="2"><![CDATA[
+        <event time="7.1"><![CDATA[
           document.getElementById("p3").classList.add("MoveParagraph");
         ]]></event>
-        <event time="2.5"><![CDATA[
+        <event time="8.7"><![CDATA[
           document.getElementById("p4").classList.add("MoveParagraph");
         ]]></event>
         <event time="10"><![CDATA[

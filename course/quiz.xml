@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<quiz minToPass="70" retakes="0" maxQuestions="10">
+<quiz minToPass="70" maxAttemps="3" maxQuestions="10">
   <intro>
-    <content><![CDATA[
+    <content audio="course/audios/evaluacion.mp3"><![CDATA[
     <div class="introQuiz"></div>
     <div class="introQuizTextbox">
       <p>Examen Final</p>
       <p>Debes de contestar # preguntas</p>
-      <button id="startCourseButton" class="quizButton" onclick="startQuiz();">COMENZAR</button>
+      <button id="startCourseButton" class="quizButton" onclick="startQuiz(); playFxAudio('course/audios/click.mp3');">COMENZAR</button>
     </div>
   ]]></content>
   <script><![CDATA[
@@ -14,152 +14,160 @@
 </intro>
 
   <question>
-    <text><![CDATA[
+    <text audio="course/audios/question.mp3"><![CDATA[
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
       <p class="questionText">¿Cuales son los <b>retos</b> que enfrentas al dirigir a un colaborador remoto?</p>
     ]]></text>
-    <answer showFeedback="wrong">Falta de comunicación efectiva, desmotivación, desorganización al no tener horarios definidos para trabajo y tiempo libre.</answer>
-    <answer showFeedback="wrong">Reducción de gastos generales, mayor productividad, disminución en el impacto ambiental.</answer>
-    <answer showFeedback="wrong">Dificultad para registrar avances en proyectos, riesgo de pérdida de información por descuidos.</answer>
-    <answer showFeedback="correct">A y C son correctas.</answer>
-    <answer showFeedback="wrong">A y B son correctas.</answer>
-    <feedback id="correct"><![CDATA[
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falta de comunicación efectiva, desmotivación, desorganización al no tener horarios definidos para trabajo y tiempo libre.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Reducción de gastos generales, mayor productividad, disminución en el impacto ambiental.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Dificultad para registrar avances en proyectos, riesgo de pérdida de información por descuidos.</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">A y C son correctas.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">A y B son correctas.</answer>
+    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/right.png">
           <p>La Respuesta<br> <span>Correcta es <b>D</b></span></p>
         <div class="questionFeedbackFrame">
           <p>La opción A y C enlistan los principales retos que deben enfrentar los líderes de colaboradores remotos.<br> El inciso B contiene algunos de los muchos beneficios que ofrece el teletrabajo.</p>
-          <button class="quizButton" onclick="nextQuestion(true);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
-    <feedback id="wrong"><![CDATA[
+    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/wrong.png">
           <p>La Respuesta<br> <span>Correcta es <b>D</b></span></p>
         <div class="questionFeedbackFrame">
           <p>La opción A y C enlistan los principales retos que deben enfrentar los líderes de colaboradores remotos.<br> El inciso B contiene algunos de los muchos beneficios que ofrece el teletrabajo.</p>
-          <button class="quizButton" onclick="nextQuestion(false);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
   </question>
 
   <question>
-    <text><![CDATA[
+    <text audio="course/audios/question.mp3"><![CDATA[
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
       <p class="questionText">¿Qué modalidad de teletrabajo consiste en que el colaborador realiza sus tareas alternando algunos días dentro de la empresa y mínimo 2 días fuera de ella?</p>
     ]]></text>
-    <answer showFeedback="wrong">Autónomo</answer>
-    <answer showFeedback="wrong">Centro de teletrabajo</answer>
-    <answer showFeedback="correct">Suplementario</answer>
-    <answer showFeedback="wrong">Móvil</answer>
-    <feedback id="correct"><![CDATA[
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Autónomo</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Centro de teletrabajo</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Suplementario</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Móvil</answer>
+    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/right.png">
           <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
         <div class="questionFeedbackFrame">
           <p>El modelo <b>suplementario</b> permite al colaborador alternar sus labores trabajando algunos días dentro de la empresa y otros días fuera.</p>
-          <button class="quizButton" onclick="nextQuestion(true);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
-    <feedback id="wrong"><![CDATA[
+    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/wrong.png">
           <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
         <div class="questionFeedbackFrame">
           <p>El modelo <b>suplementario</b> permite al colaborador alternar sus labores trabajando algunos días dentro de la empresa y otros días fuera.</p>
-          <button class="quizButton" onclick="nextQuestion(true);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
   </question>
 
   <question>
-    <text><![CDATA[
+    <text audio="course/audios/question.mp3"><![CDATA[
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
       <p class="questionText">3 Antes de realizar una prueba piloto para aplicar el teletrabajo en tu organización es necesario haber estructurado el proyecto y comprobar que la organización ya cumple con todos los requisitos legales e infraestructura tecnológica necesaria:</p>
     ]]></text>
-    <answer showFeedback="correct">Verdadero</answer>
-    <answer showFeedback="wrong">Falso</answer>
-    <feedback id="correct"><![CDATA[
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/right.png">
           <p>La Respuesta<br> <span>Correcta es <b>A</b></span></p>
         <div class="questionFeedbackFrame">
           <p>Es recomendable corroborar que la organización ya tiene contemplados todos los aspectos legales, regulatorios y de  infraestructura tecnológica, necesarios para implementar el teletrabajo antes de realizar cualquier prueba. Si se identifican impedimentos hay que buscarles solución y de no haberla, reconsiderar si la organización está lista para integrar el teletrabajo a sus políticas.</p>
-          <button class="quizButton" onclick="nextQuestion(true);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
-    <feedback id="wrong"><![CDATA[
+    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/wrong.png">
           <p>La Respuesta<br> <span>Correcta es <b>A</b></span></p>
         <div class="questionFeedbackFrame">
           <p>Es recomendable corroborar que la organización ya tiene contemplados todos los aspectos legales, regulatorios y de  infraestructura tecnológica, necesarios para implementar el teletrabajo antes de realizar cualquier prueba. Si se identifican impedimentos hay que buscarles solución y de no haberla, reconsiderar si la organización está lista para integrar el teletrabajo a sus políticas.</p>
-          <button class="quizButton" onclick="nextQuestion(true);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
   </question>
 
   <question>
-    <text><![CDATA[
+    <text audio="course/audios/question.mp3"><![CDATA[
       <div class="questionBackground"></div>
       <img class="questionImg" src="course/images/quiz/quiz_01.png">
       <p class="questionHeader">PREGUNTA <span>#</span></p>
       <p class="questionText">4 ¿Cuál de las siguientes opciones es una mejor práctica del teletrabajo para la seguridad física de los dispositivos? </p>
     ]]></text>
-    <answer showFeedback="wrong">Utilizar únicamente dispositivos personales que cuenten con actualización automática.</answer>
-    <answer showFeedback="wrong">Utilizar una contraseña fácil de recordar.</answer>
-    <answer showFeedback="correct">Utilizar dispositivos previamente autorizados que cuenten con un firewall personal.</answer>
-    <answer showFeedback="wrong">Todas las anteriores.</answer>
-    <feedback id="correct"><![CDATA[
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Utilizar únicamente dispositivos personales que cuenten con actualización automática.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Utilizar una contraseña fácil de recordar.</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Utilizar dispositivos previamente autorizados que cuenten con un firewall personal.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Todas las anteriores.</answer>
+    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/right.png">
           <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
         <div class="questionFeedbackFrame">
           <p>Sólo se deben utilizar dispositivos previamente autorizados, que cuenten con un firewall personal, actualización automática y que cuenten con una contraseña fuerte. A estos equipos se les debe dar un mantenimiento constante. Siempre mantén un registro de todos los equipos que salen de las instalaciones y exhorta a tus colaboradores a mantener sus equipos con ellos o en lugares seguros.</p>
-          <button class="quizButton" onclick="nextQuestion(true);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
-    <feedback id="wrong"><![CDATA[
+    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
       <div class="questionFeedback">
         <img src="course/images/wrong.png">
           <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
         <div class="questionFeedbackFrame">
           <p>Sólo se deben utilizar dispositivos previamente autorizados, que cuenten con un firewall personal, actualización automática y que cuenten con una contraseña fuerte. A estos equipos se les debe dar un mantenimiento constante. Siempre mantén un registro de todos los equipos que salen de las instalaciones y exhorta a tus colaboradores a mantener sus equipos con ellos o en lugares seguros.</p>
-          <button class="quizButton" onclick="nextQuestion(true);">CONTINUE</button>
+          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
         </div>
       </div>
     ]]></feedback>
   </question>
 
   <result>
-    <pass><![CDATA[
+    <pass audio="course/audios/aprobado.mp3"><![CDATA[
     <div class="introQuiz"></div>
     <div class="introQuizTextbox">
       <p>You score</p>
       <p>Tu calificación es #</p>
-      <button id="startCourseButton" class="quizButton" onclick="nextPage();">CONTINUAR</button>
+      <button id="startCourseButton" class="quizButton" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
     </div>
   ]]></pass>
-  <fail><![CDATA[
+  <fail audio="course/audios/noaprobado.mp3"><![CDATA[
   <div class="introQuiz"></div>
   <div class="introQuizTextbox fail">
     <p>Fail</p>
     <p>Tu calificación es #</p>
-    <button id="startCourseButton" class="quizButton" onclick="nextPage();">CONTINUAR</button>
+    <button id="startCourseButton" class="quizButton" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
   </div>
-]]></fail>
+  ]]></fail>
+  <block audio="course/audios/noaprobado.mp3"><![CDATA[
+  <div class="introQuiz"></div>
+  <div class="introQuizTextbox fail">
+    <p>Haz superado el número de intentos</p>
+    <p>Tu calificación es #</p>
+    <button id="startCourseButton" class="quizButton" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
+  </div>
+  ]]></block>
 </result>
 </quiz>
