@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<quiz minToPass="70" maxAttemps="3" maxQuestions="10">
+<quiz minToPass="70" maxAttemps="0" maxQuestions="10">
   <intro>
     <content audio="course/audios/evaluacion.mp3"><![CDATA[
     <div class="introQuiz"></div>

@@ -272,6 +272,10 @@ function setQuestionsPool()
 function attempConfig()
 {
   __maxAttemps = parseInt(__quiz.firstElementChild.getAttribute("maxAttemps"));
+  if((__maxAttemps == 0) || (__maxAttemps == NaN))
+  {
+    return;
+  }
   if(__attemps.length >= __maxAttemps)
   {
     blockQuiz();
