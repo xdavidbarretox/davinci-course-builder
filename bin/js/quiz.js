@@ -287,11 +287,17 @@ function blockQuiz()
   var content = feedback.getElementsByTagName("block")[0].textContent;
 
   var txtAttemps = content.replace("&", __maxAttemps);
-  var score = doLMSGetValue('cmi.core.score.raw');
+  var score = "";
+  if(__LMSInitialized){
+    score = doLMSGetValue('cmi.core.score.raw');
+  }
+  else{
+    score = __attemps[__attemps.length - 1].toString();
+  }
   var txt = txtAttemps.replace("#", score);
   __courseContainer.innerHTML = txt;
 
-  var audio = content.getAttribute("audio");
+  var audio = feedback.getElementsByTagName("block")[0].getAttribute("audio");
   if(audio != null){
     playAudio(audio);
   }

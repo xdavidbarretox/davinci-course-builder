@@ -158,7 +158,7 @@
   <div class="introQuizTextbox fail">
     <p>Fail</p>
     <p>Tu calificación es #</p>
-    <button id="startCourseButton" class="quizButton" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
+    <button id="startCourseButton" class="quizButton" onclick="reload(); playFxAudio('course/audios/click.mp3');">RETOMAR</button>
   </div>
   ]]></fail>
   <block audio="course/audios/noaprobado.mp3"><![CDATA[
