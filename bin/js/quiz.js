@@ -8,10 +8,6 @@ var __questionPool;
 var __maxAttemps;
 var __quizBlocked = false;
 
-/*
-// TODO: show closed dialog;
-*/
-
 function loadQuiz(src)
 {
   console.log("--------------------------------"+src);
@@ -290,8 +286,10 @@ function blockQuiz()
   var feedback = __quiz.getElementsByTagName("result")[0];
   var content = feedback.getElementsByTagName("block")[0].textContent;
 
-  //var txt = content.replace("#", __maxAttemps);
-  __courseContainer.innerHTML = content;
+  var txtAttemps = content.replace("&", __maxAttemps);
+  var score = doLMSGetValue('cmi.core.score.raw');
+  var txt = txtAttemps.replace("#", score);
+  __courseContainer.innerHTML = txt;
 
   var audio = content.getAttribute("audio");
   if(audio != null){

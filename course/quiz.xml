@@ -164,8 +164,8 @@
   <block audio="course/audios/noaprobado.mp3"><![CDATA[
   <div class="introQuiz"></div>
   <div class="introQuizTextbox fail">
-    <p>Haz superado el número de intentos</p>
-    <p>Tu calificación es #</p>
+    <p>Haz superado el número de intentos &</p>
+    <p>Tu calificación final es #</p>
     <button id="startCourseButton" class="quizButton" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
   </div>
   ]]></block>
