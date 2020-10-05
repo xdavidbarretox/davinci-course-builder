@@ -112,6 +112,13 @@ function courseConfig() {
     //setCourseName(__courseName);
     set_uiElements();
     loadTOC();
+    if (__LMSInitialized) {
+        var lessonStatus = doLMSGetValue("cmi.core.lesson_status");
+        if ((lessonStatus != "completed") && (lessonStatus != "passed") && (lessonStatus != "failed") && (lessonStatus != "incomplete") && (lessonStatus != "browsed")) {
+            //alert(doLMSGetValue("cmi.core.lesson_status"));
+            doLMSSetValue("cmi.core.lesson_status", "incomplete");
+        }
+    }
     if ((__LMSInitialized) && (__suspendData != "")) {
         console.log("__visited = " + __visited.toString());
         for (var i = 0; i < __visited.length; i++) {
