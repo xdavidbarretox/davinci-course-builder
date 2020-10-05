@@ -1266,3 +1266,19 @@ function getTiming() {
     }
     console.log("total timing: " + globalTiming + " - total characers: " + globalCharacters);
 }
+
+function hideUI(hide:boolean)
+{
+  if(hide)
+  {
+    __uiButton.style.display = "none";
+    __ui.style.display = "none";
+  }
+  else
+  {
+    __toogleUI = !__toogleUI;
+    __uiButton.style.display = "block";
+    __ui.style.display = "block";
+    showUI();
+  }
+}

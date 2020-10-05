@@ -68,7 +68,7 @@ function loadIntro(){
 }
 
 function startQuiz(){
-  showUI(false);
+  hideUI(true);
   __questionCounter = 0;
   __answerPool = new Array();
 
@@ -191,7 +191,7 @@ function nextQuestion(isRight){
 function showResult()
 {
   clearCourseContainer();
-  showUI(true);
+  hideUI(false);
   var feedback = __quiz.getElementsByTagName("result")[0];
   var goodAnswers = __answerPool.length;
   var minToPass = parseInt(__quiz.getElementsByTagName("quiz")[0].getAttribute("minToPass"));
