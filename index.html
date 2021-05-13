@@ -1,26 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="es" dir="ltr">
   <head>
-    <title>Fundamentos del teletrabajo para supervisores</title>
-    <link rel="shortcut icon" type="image/png" href="bin/images/favicon.ico"/>
-    <meta charset="utf-8">
+    <title>Sistema Integral de Ética y Cumplimiento</title>
+    <link rel="shortcut icon" type="image/png" href="bin/images/favicon.ico" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script type="text/javascript" src="bin/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="bin/js/SCORM_12_APIWrapper.js"></script>
     <script>
-    var __LMSInitialized = false;
-    __LMSInitialized = doLMSInitialize();
+      var __LMSInitialized = false;
+      __LMSInitialized = doLMSInitialize();
     </script>
     <script type="text/javascript" src="bin/js/davinci.js"></script>
     <script type="text/javascript" src="bin/js/quiz.js"></script>
-    <link rel="stylesheet" type="text/css" href="bin/css/davinci.css">
-    <link rel="stylesheet" type="text/css" href="course/css/course.css">
-    <link rel="stylesheet" type="text/css" href="course/css/quiz.css">
+    <script type="text/javascript" src="course/functions.js"></script>
+    <script type="text/javascript" src="bin/js/interact.min.js"></script>
+    <script type="text/javascript" src="bin/js/dom-to-image.js"></script>
+    <script type="text/javascript" src="bin/js/FileSaver.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" type="text/css" href="bin/css/davinci.css" />
+    <link rel="stylesheet" type="text/css" href="course/css/course.css" />
+    <link rel="stylesheet" type="text/css" href="course/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="course/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="course/css/quiz.css" />
   </head>
   <body>
     <audio id="main_audio" src="course/audios/click.mp3" type="audio/mp3"></audio>
     <audio id="fx_audio" src="course/audios/click.mp3" type="audio/mp3"></audio>
-    <div id="layoutViewport" style="position: fixed; width: 100%; height: 100%; visibility: hidden;);"></div>
+    <div id="layoutViewport" style="position: fixed; width: 100%; height: 100%; visibility: hidden"></div>
     <div id="Course">
       <div id="Course_UI">
         <div id="UI_Background"></div>
@@ -28,36 +35,37 @@
         <!--<h1 id="Course_Name">Course Name</h1>-->
         <button id="Button_TOC" class="ButtonUI"><p>Tabla de contenido</p></button>
         <!--<button id="Button_Close" class="ButtonUI"><p>Cerrar</p></button>-->
-
         <button id="Button_Next" class="ButtonUI"><p>Adelante</p></button>
         <button id="Button_Prev" class="ButtonUI"><p>Atrás</p></button>
         <button id="Button_Play" class="ButtonUI"><p>Reproducir / Pausa</p></button>
-        <button id="Button_Reload" class="ButtonUI"><p>Recarga</p></button>
+        <button id="Button_Reload" class="ButtonUI"><p>Recargar</p></button>
         <p id="Counter"></p>
         <button id="Button_Volume" class="ButtonUI"><p>Volumen</p></button>
-        <input type="range" id="Volume_Silider" class="slider" name="vol" min="0" max="100">
+        <input type="range" id="Volume_Silider" class="slider" name="vol" min="0" max="100" />
+        <button id="Button_Info" class="ButtonUI"><p>Información</p></button>
       </div>
       <!--<button id="Button_Size"></button>-->
-      <div id="TOC">
-        <div id="TOC_Header"><p>
-          Tabla de contenido
-        </p></div>
-        <div id="TOC_List"></div>
+      <div id="TOC" class="TOC-C2">
+        <div class="TOC-C2-wrapper">
+          <div id="TOC_Header"><p>Tabla de contenido</p></div>
+          <div id="TOC_List" class="TOC-C2-list"></div>
+        </div>
       </div>
       <div id="Advance_Bar"><div></div></div>
-      <button id="Button_showUI" class="ButtonUI"><p>Controles</p></button>
+      <button id="Button_showUI" class="ButtonUI ButtonUI--controles"><p>Controles</p></button>
 
       <div id="Course_Content"></div>
 
       <div id="Next_Page_Tooltip"></div>
       <div id="Prev_Page_Tooltip"></div>
       <div id="Welcome_UI"></div>
+      <div id="Guide"></div>
+      <div id="About"></div>
     </div>
 
     <div id="PortraitAlert">
-      <img src="bin/images/portrait_alert.png"/>
+      <img src="bin/images/portrait_alert.png" />
       <p>Please use horizontal</p>
     </div>
-
   </body>
 </html>

@@ -28,8 +28,6 @@
 
 p{
   font-family: "LibreFranklin-Light";
-  font-size: 18px;
-  margin: 0;
 }
 
 h1{
@@ -40,6 +38,7 @@ h1{
   opacity: 0;
   animation: AnimateH1 0.5s forwards;
   line-height: 100%;
+  font-weight: normal;
 }
 
 @keyframes AnimateH1{
@@ -60,7 +59,7 @@ h2{
   margin: 4px auto 20px auto;
   opacity: 0;
   animation: AnimateH1 0.5s 0.5s forwards;
-  line-height: 80%;
+  line-height: 100%;
 }
 
 @keyframes AnimateH2{
@@ -96,7 +95,7 @@ h2{
 }
 
 @keyframes hr2Right {
-  0%   {width: : 1px;}
+  0%   {width: 1px;}
   50%  {width: 45px;}
   75%  {opacity: 1;}
   76%  {opacity: 0;}
@@ -1046,7 +1045,7 @@ transform: translateX(-50%);
 
 .mail #body p{
   margin: 10px 40px 0px 40px;
-  color: gray;
+  color: #aaa;
 }
 
 .mail .feedback{
@@ -1104,10 +1103,6 @@ transform: translateX(-50%);
   position: relative;
 }
 
-/*.mail td{
-  padding: 10px;
-}*/
-
 .question{
   position: absolute;
   width: 100%;
@@ -1118,7 +1113,7 @@ transform: translateX(-50%);
 
 .question p{
   position: relative;
-text-align: left;
+text-align: center;
 margin: 0 20px 0 20px;
 font-family: "LibreFranklin-Black";
 font-size: 20px;
@@ -1130,8 +1125,8 @@ font-size: 20px;
   background-color: #6b5a95cc;
   position: absolute;
   border-radius: 50%;
-  display: none;
-  pointer-events: none;
+  /*display: none;*/
+  /*pointer-events: none;*/
 }
 
 .spot #inner{
@@ -1166,7 +1161,7 @@ font-size: 20px;
 
 .label{
   background-color: white;
-  width: fit-content;
+  width: max-content;
   height: fit-content;
   margin: 0 10px 0 0;
   padding: 10px;
@@ -1177,6 +1172,7 @@ font-size: 20px;
   transform: translateY(-50%);
   font-family: "LibreFranklin-Black";
   font-size: 18px;
+  display: none;
 }
 
 .spot_visited{
@@ -1186,7 +1182,7 @@ font-size: 20px;
   position: absolute;
   border-radius: 50%;
   display: block;
-  pointer-events: none;
+  /*pointer-events: none;*/
 }
 
 .spot_visited #inner{
@@ -1354,7 +1350,7 @@ font-size: 20px;
 .Activity2Row {
   position: relative;
   width: 100%;
-  height: 170px;
+  height: 180px;
   top: 0px;
   background-color: #22243b;
   border-radius: 10px;
@@ -1372,6 +1368,10 @@ font-size: 20px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
+  
+}
+.Activity2Row p{
+  line-height: 1.35 !important;
 }
 
 .Activity2Circle img{
@@ -1512,6 +1512,3 @@ font-size: 20px;
     animation: AnimateH3 0.5s 1.5s forwards;
   }
 
-  br{
-    margin-top: 15px;
-  }

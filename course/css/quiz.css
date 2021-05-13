@@ -32,11 +32,13 @@
 
 .questionBackground{
   background-color: #d9d9d9;
+  background: no-repeat url("../images/etica/bgQuestions.jpg") center;
   width: 100%;
   height: 100%;
   position: absolute;
   top:0px;
   left:0px;
+  background-size: cover;
 }
 
 .questionImg{
@@ -82,7 +84,7 @@
 }
 
 .questionAnswer{
-  background-color: #44397b;
+  background-color: #2f89c9;
   border-radius: 10px;
   height: 60px;
   width: 90%;
@@ -93,7 +95,7 @@
 }
 
 .questionAnswer:hover{
-  background-color: #2fa89f;
+  background-color: #164790;
 }
 
 .questionAnswer p{
@@ -112,7 +114,7 @@
 }
 
 .questionAnswer div{
-  color: #e7af3d;
+  color: #50baf5;
   position: absolute;
   top: 0px;
   left: 0px;

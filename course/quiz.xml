@@ -1,173 +1,1135 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<quiz minToPass="70" maxAttemps="0" maxQuestions="10">
+<quiz minToPass="80" maxAttemps="3" maxQuestions="5" randomQuestions="true">
   <intro>
-    <content audio="course/audios/evaluacion.mp3"><![CDATA[
-    <div class="introQuiz"></div>
-    <div class="introQuizTextbox">
-      <p>Examen Final</p>
-      <p>Debes de contestar # preguntas</p>
-      <button id="startCourseButton" class="quizButton" onclick="startQuiz(); playFxAudio('course/audios/click.mp3');">COMENZAR</button>
-    </div>
-  ]]></content>
-  <script><![CDATA[
-  ]]></script>
-</intro>
+    <content><![CDATA[
+      <img src="course/images/etica/exam_intro.jpg" class="img_bg">
+      <div class="flex-wraper flex-centerContent">
+          <div class="row">
+            <div class="column flex-centerContent">
+              <div class="hr-line bg-lightBlue"></div>
+              <h1 class="introQuiz--C2-subtitle">Evaluación de</h1>
+              <h1 class="introQuiz--C2-title">conocimientos</h1>
+              <p class="C2-text-quiz txt-center" style="max-width: 540px;">La evaluación de conocimientos consta de 5 preguntas.<br>La calificación mínima para aprobar el curso es de 80%.<br><br>A continuación, selecciona la opción que consideres correcta.</p>
+              <button id="startCourseButton" class="quizButton--C2 buttonWelcome--C2--skew" onclick="startQuiz(); playFxAudio('course/audios/click.mp3');">COMENZAR</button>
+            </div>
 
+          </div>
+      </div>
+
+  ]]>    </content>
+    <script><![CDATA[
+  ]]>    </script>
+  </intro>
+  <!-- Pregunta 1 -->
   <question>
-    <text audio="course/audios/question.mp3"><![CDATA[
-      <div class="questionBackground"></div>
-      <img class="questionImg" src="course/images/quiz/quiz_01.png">
-      <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">¿Cuales son los <b>retos</b> que enfrentas al dirigir a un colaborador remoto?</p>
-    ]]></text>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falta de comunicación efectiva, desmotivación, desorganización al no tener horarios definidos para trabajo y tiempo libre.</answer>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Reducción de gastos generales, mayor productividad, disminución en el impacto ambiental.</answer>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Dificultad para registrar avances en proyectos, riesgo de pérdida de información por descuidos.</answer>
-    <answer showFeedback="correct" audio="course/audios/correct.mp3">A y C son correctas.</answer>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">A y B son correctas.</answer>
-    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/right.png">
-          <p>La Respuesta<br> <span>Correcta es <b>D</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>La opción A y C enlistan los principales retos que deben enfrentar los líderes de colaboradores remotos.<br> El inciso B contiene algunos de los muchos beneficios que ofrece el teletrabajo.</p>
-          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
+    <text audio=""><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
         </div>
-      </div>
-    ]]></feedback>
-    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/wrong.png">
-          <p>La Respuesta<br> <span>Correcta es <b>D</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>La opción A y C enlistan los principales retos que deben enfrentar los líderes de colaboradores remotos.<br> El inciso B contiene algunos de los muchos beneficios que ofrece el teletrabajo.</p>
-          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
         </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">¿Cuál de las siguientes opciones NO es una responsabilidad del área de Compliance?</p>
+        </div>
+
       </div>
-    ]]></feedback>
+
+    ]]>    </text>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Observar las conductas de Ética e Integridad Corporativa.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Gestionar los conflictos de interés.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Asegurar un ambiente de trabajo y condiciones laborales dentro del marco de la Ética.</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Calificar el desempeño de todos los colaboradores de la empresa.</answer>
+
+    <feedback id="correct"><![CDATA[
+
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent ">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p></p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>D</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p></p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
   </question>
 
-  <question>
-    <text audio="course/audios/question.mp3"><![CDATA[
-      <div class="questionBackground"></div>
-      <img class="questionImg" src="course/images/quiz/quiz_01.png">
-      <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">¿Qué modalidad de teletrabajo consiste en que el colaborador realiza sus tareas alternando algunos días dentro de la empresa y mínimo 2 días fuera de ella?</p>
-    ]]></text>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Autónomo</answer>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Centro de teletrabajo</answer>
-    <answer showFeedback="correct" audio="course/audios/correct.mp3">Suplementario</answer>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Móvil</answer>
-    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/right.png">
-          <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>El modelo <b>suplementario</b> permite al colaborador alternar sus labores trabajando algunos días dentro de la empresa y otros días fuera.</p>
-          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
-        </div>
-      </div>
-    ]]></feedback>
-    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/wrong.png">
-          <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>El modelo <b>suplementario</b> permite al colaborador alternar sus labores trabajando algunos días dentro de la empresa y otros días fuera.</p>
-          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
-        </div>
-      </div>
-    ]]></feedback>
-  </question>
+  <!-- Pregunta 2 -->
 
   <question>
-    <text audio="course/audios/question.mp3"><![CDATA[
-      <div class="questionBackground"></div>
-      <img class="questionImg" src="course/images/quiz/quiz_01.png">
-      <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">3 Antes de realizar una prueba piloto para aplicar el teletrabajo en tu organización es necesario haber estructurado el proyecto y comprobar que la organización ya cumple con todos los requisitos legales e infraestructura tecnológica necesaria:</p>
-    ]]></text>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">“Ética Medix” es el nombre del Sistema Integral de Ética y Cumplimiento:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
     <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
     <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
-    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/right.png">
-          <p>La Respuesta<br> <span>Correcta es <b>A</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>Es recomendable corroborar que la organización ya tiene contemplados todos los aspectos legales, regulatorios y de  infraestructura tecnológica, necesarios para implementar el teletrabajo antes de realizar cualquier prueba. Si se identifican impedimentos hay que buscarles solución y de no haberla, reconsiderar si la organización está lista para integrar el teletrabajo a sus políticas.</p>
-          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
         </div>
-      </div>
-    ]]></feedback>
-    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/wrong.png">
-          <p>La Respuesta<br> <span>Correcta es <b>A</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>Es recomendable corroborar que la organización ya tiene contemplados todos los aspectos legales, regulatorios y de  infraestructura tecnológica, necesarios para implementar el teletrabajo antes de realizar cualquier prueba. Si se identifican impedimentos hay que buscarles solución y de no haberla, reconsiderar si la organización está lista para integrar el teletrabajo a sus políticas.</p>
-          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
         </div>
-      </div>
-    ]]></feedback>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p></p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p></p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
   </question>
+
+  <!-- Pregunta 3 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">El cumplimiento a los principios del Sistema Integral de Ética y Cumplimiento es obligatorio:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p></p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 4 -->
 
   <question>
-    <text audio="course/audios/question.mp3"><![CDATA[
-      <div class="questionBackground"></div>
-      <img class="questionImg" src="course/images/quiz/quiz_01.png">
-      <p class="questionHeader">PREGUNTA <span>#</span></p>
-      <p class="questionText">4 ¿Cuál de las siguientes opciones es una mejor práctica del teletrabajo para la seguridad física de los dispositivos? </p>
-    ]]></text>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Utilizar únicamente dispositivos personales que cuenten con actualización automática.</answer>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Utilizar una contraseña fácil de recordar.</answer>
-    <answer showFeedback="correct" audio="course/audios/correct.mp3">Utilizar dispositivos previamente autorizados que cuenten con un firewall personal.</answer>
-    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Todas las anteriores.</answer>
-    <feedback id="correct" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/right.png">
-          <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>Sólo se deben utilizar dispositivos previamente autorizados, que cuenten con un firewall personal, actualización automática y que cuenten con una contraseña fuerte. A estos equipos se les debe dar un mantenimiento constante. Siempre mantén un registro de todos los equipos que salen de las instalaciones y exhorta a tus colaboradores a mantener sus equipos con ellos o en lugares seguros.</p>
-          <button class="quizButton" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
         </div>
-      </div>
-    ]]></feedback>
-    <feedback id="wrong" audio="course/audios/feedback.mp3"><![CDATA[
-      <div class="questionFeedback">
-        <img src="course/images/wrong.png">
-          <p>La Respuesta<br> <span>Correcta es <b>C</b></span></p>
-        <div class="questionFeedbackFrame">
-          <p>Sólo se deben utilizar dispositivos previamente autorizados, que cuenten con un firewall personal, actualización automática y que cuenten con una contraseña fuerte. A estos equipos se les debe dar un mantenimiento constante. Siempre mantén un registro de todos los equipos que salen de las instalaciones y exhorta a tus colaboradores a mantener sus equipos con ellos o en lugares seguros.</p>
-          <button class="quizButton" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3');">CONTINUE</button>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
         </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">El Manual Corporativo del Sistema Integral de Ética y Cumplimiento, el Código de Ética y Conducta y la Política de Integridad son elementos del Sistema Integral de Ética y Cumplimiento, así como:</p>
+        </div>
+
       </div>
-    ]]></feedback>
+
+    ]]>    </text>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Leyes y regulaciones federales, estatales y municipales nacionales e internacionales. </answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Órganos regulatorios de los países donde tenemos presencia. </answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Códigos emitidos por el Consejo de Ética y Transparencia de la Industria Farmacéutica (CETIFARMA).</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Todas las anteriores.</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p></p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>D</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p></p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
   </question>
 
+  <!-- Pregunta 5 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">La capacitación constante es un elemento del Sistema Integral de Ética y Cumplimiento:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 6 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">En caso de duda o ante cualquier dilema ético, puedes consultar a tu jefe inmediato, Gerente, Director o al Oficial de Cumplimiento:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 7 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">El Modelo del SIEC consta de 7 elementos, ¿Cuál de los siguientes NO corresponde a estos elementos?</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Estándares, políticas y procedimientos.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Reporte e Investigación de desviaciones o faltas.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Mejora Continua.</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Constitución Política de los EUM.</answer>
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>D</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 8 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">La responsabilidad de mantener altas normas éticas recae en todos los colaboradores de <i>medix®.</i></p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 9 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Uno de los objetivos de “Ética Medix” es fortalecer la cultura ética, así como ayudar a que nuestros procesos y operaciones se realicen dentro del marco de ética: </p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 10 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Los medios de denuncia operan de una forma autónoma e imparcial para registrar, documentar, y en su caso investigar violaciones al Código de Ética y Conducta, al Manual Corporativo del Sistema Integral de Ética y Cumplimiento y/o a las Políticas de Cumplimiento de <i>medix®.</i> </p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 11 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Con el objetivo de ofrecer un ambiente de denuncia seguro, imparcial, anónimo y 100% confidencial, nuestro sistema multimedios de denuncia: </p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Es operado por la Dirección de Finanzas.</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Es operado por un tercero.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Todas las anteriores.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Ninguna de las anteriores.</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>B</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 12 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Identifica cuál de las siguientes respuestas contiene un medio de comunicación que NO es parte de los medios de denuncia:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Apartado Postal, Fax, teléfono, página web, correo electrónico, presencial en la Oficina de Cumplimiento.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Teléfono, página web, correo electrónico, presencial en la Oficina de Cumplimiento.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Apartado postal, Fax, teléfono, correo electrónico, página web.</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Apartado postal, Fax, teléfono, página web, correo electrónico, Telégrafo.</answer>
+
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>D</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 13 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Al realizar una denuncia, debe proporcionarse toda la información y pruebas posibles para facilitar la correcta gestión del caso: </p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 14 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Los medios de denuncia NO deben utilizarse en forma ilegítima con el propósito de perjudicar a un tercero y su mal uso será sancionado.</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 15 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Todas las denuncias son analizadas y tratadas con estricto apego a los principios de ética, integridad y profesionalismo, verificando la procedencia y veracidad de la información, por lo que comprenden diferentes tiempos para ser atendidas y resueltas.</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 16 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">¿Cuál de las siguientes opciones NO es información relevante en la denuncia?</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">¿Qué, cuándo y dónde sucedió?</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">¿Quiénes están involucrados?</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">¿Existe algún testigo o evidencia?</answer>
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Lista de colores favoritos de los testigos.</answer>
+
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>D</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 17 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Los conflictos de interés reales o potenciales entre clientes, proveedores o colaboradores son un ejemplo de situación a reportar en los medios de denuncia de “Ética Medix”:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 18 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">En caso de tener preocupaciones sobre las posibles represalias o acoso, podrás consultarlas y/o reportarlas para que sean investigadas y, en su caso, sancionadas a:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Oficial de Cumplimiento.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Dirección General.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Jefe de seguridad patrimonial.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Ninguna de las anteriores.</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+  <!-- Pregunta 19 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">La protección al denunciante aplica en todo momento para cualquier persona que realice una denuncia y/o que participe en un proceso de investigación, directa o indirectamente:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Verdadero</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Falso</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+
+  <!-- Pregunta 20 -->
+  <question>
+    <text><![CDATA[
+      <div class="questionBackground">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/iconexam.json" background="transparent" speed="1" class="questionSvg" autoplay></lottie-player>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionHeader-C2">PREGUNTA <span>#</span></p>
+        </div>
+
+        <div class="row flex-centerContent">
+          <p class="questionText-C2">Cualquier persona que realice una acusación falsa o proporcione información falsa de manera dolosa:</p>
+        </div>
+
+      </div>
+
+    ]]>    </text>
+
+    <answer showFeedback="correct" audio="course/audios/correct.mp3">Puede ser sujeto a las medidas disciplinarias que la empresa determine, de acuerdo a lo indicado en el RIT.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Puede ser sujeto a un reconocimiento.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">No debe preocuparse por consecuencias.</answer>
+    <answer showFeedback="wrong" audio="course/audios/incorrect.mp3">Todas las anteriores.</answer>
+
+
+    <feedback id="correct"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+         <lottie-player src="course/data_anim/correct.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+        <div class="row flex-centerContent my-1">
+          <h1 class="Feedback-title">¡Correcto!</h1>
+        </div>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(true); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+    <feedback id="wrong"><![CDATA[
+      <div class="questionFeedback-C2">
+        <div class="row flex-centerContent">
+          <lottie-player src="course/data_anim/incorrect.json" background="transparent" speed="1" class="Feedback-Svg" autoplay></lottie-player>
+        </div>
+          <p class="Feedback-text">La Respuesta<br> <span>Correcta es <b>A</b></span></p>
+        <div class="questionFeedbackFrame--C2-nofeedback">
+          <!-- <p> </p> -->
+<button class="quizButton--C2" onclick="nextQuestion(false); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+</div>
+</div>
+    ]]>    </feedback>
+  </question>
+
+
+
+
+
+
+
   <result>
-    <pass audio="course/audios/aprobado.mp3"><![CDATA[
-    <div class="introQuiz"></div>
-    <div class="introQuizTextbox">
-      <p>You score</p>
-      <p>Tu calificación es #</p>
-      <button id="startCourseButton" class="quizButton" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
-    </div>
-  ]]></pass>
-  <fail audio="course/audios/noaprobado.mp3"><![CDATA[
-  <div class="introQuiz"></div>
-  <div class="introQuizTextbox fail">
-    <p>Fail</p>
-    <p>Tu calificación es #</p>
-    <button id="startCourseButton" class="quizButton" onclick="reload(); playFxAudio('course/audios/click.mp3');">RETOMAR</button>
-  </div>
-  ]]></fail>
-  <block audio="course/audios/noaprobado.mp3"><![CDATA[
-  <div class="introQuiz"></div>
-  <div class="introQuizTextbox fail">
-    <p>Haz superado el número de intentos &</p>
-    <p>Tu calificación final es #</p>
-    <button id="startCourseButton" class="quizButton" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
-  </div>
-  ]]></block>
-</result>
+    <pass><![CDATA[
+    <img src="course/images/etica/pass.jpg" class="img_bg">
+      <div class="flex-wraper">
+          <div class="row row-score-wrapper--C2">
+            <div class="column score-wrapper--C2">
+              <lottie-player src="course/data_anim/win.json" background="transparent" speed="1" class="iconwin--C2" autoplay></lottie-player>
+
+              <h1 class="scoretxt--C2-med">Puntuación:</h1>
+               <b class="scoretxt--C2-extra">#%</b>
+              <p class="scoretxt--C2-bold" style="margin-bottom: 15px;">¡Felicidades!</p>
+              
+              <button id="startCourseButton" class="quizButton--C2-inverted buttonWelcome--C2--skew" onclick="nextPage(); playFxAudio('course/audios/click.mp3');">CONTINUAR</button>
+            </div>
+
+          </div>
+      </div>
+
+  ]]>    </pass>
+    <fail><![CDATA[
+     <img src="course/images/etica/fail.jpg" class="img_bg">
+      <div class="flex-wraper">
+          <div class="row row-score-wrapper--C2">
+            <div class="column score-wrapper--C2">
+              <lottie-player src="course/data_anim/lost.json" background="transparent" speed="1" class="iconlost--C2" autoplay></lottie-player>
+
+              <h1 class="scoretxt--C2-med">Puntuación:</h1>
+               <b class="scoretxt--C2-extra">#%</b>
+              <p class="scoretxt--C2-light"> No has obtenido el puntaje necesario para aprobar el examen. </p>
+              <button id="startCourseButton" class="quizButton--C2-inverted buttonWelcome--C2--skew" onclick="reload(); playFxAudio('course/audios/click.mp3');">REINTENTAR</button>
+            </div>
+
+          </div>
+      </div>
+]]>    </fail>
+    <block audio=""><![CDATA[
+    <img src="course/images/etica/exam_intro.jpg" class="img_bg">
+      <div class="flex-wraper">
+          <div class="row row-score-wrapper--C2" style="align-items: center; margin-top: 0px;">
+            <div class="column score-wrapper--C2">
+              
+
+              <h1 class="scoretxt--C2-med">Puntuación:</h1>
+               <b class="scoretxt--C2-extra">#%</b>
+              <p class="scoretxt--C2-light"> La evaluación ha concluido. Gracias.</p>
+              <p class="C2-text-quiz txt-center"><b>Nota:</b> <i>En caso de no haber aprobado el examen, contacta a tu administrador para tomar el curso nuevamente.</i></p>
+              <button id="startCourseButton" class="quizButton--C2-inverted buttonWelcome--C2--skew" onclick="nextPage(); playFxAudio('course/audios/click.mp3'); ">CONTINUAR</button>
+            </div>
+
+          </div>
+      </div>
+
+    ]]>
+    </block>
+  </result>
 </quiz>
