@@ -1,4 +1,10 @@
-console.log("Davinci e-learning player version:20201001 /n by David Barreto");
+var __version = 20210211;
+console.log("Davinci e-learning player version:" + __version + " /n by David Barreto");
+/*TODO
+- create an array whith all info into slides
+- create a xml to word
+- add load method check the behavior on sequences and made for video and audio
+*/
 var __courseLocation = "course/course.xml";
 var __course;
 var __courseContainer;
@@ -57,21 +63,34 @@ var __fxAudio;
 var __testMode = false;
 var __suspendDataAttemps;
 var __attemps = [];
+var __scale = 1;
+var __isHackeable = false;
+var __spacePressed = false;
+var __sessionStatTime = new Date();
+var __guide;
+var __guideInterval;
+var __isGuide = false;
+var __addonsPath = "bin/addons/addons.xml";
+var __addons;
+var __aboutButton;
+var __about;
+var __fastMode = false;
 document.addEventListener('DOMContentLoaded', init, false);
 window.addEventListener('resize', windowedCourse);
 window.addEventListener("click", hideTOC);
 window.addEventListener("orientationchange", function () { checkHorizontal(); }, false);
 function init() {
-    console.log("init---");
+    //console.log("init---");
     __isiE = msieversion();
     __isEdge = edgeversion();
     checkMobile();
     checkHorizontal();
     loadCourse(__courseLocation);
+    loadAddons(__addonsPath);
     checkLMS();
 }
 function loadCourse(src) {
-    console.log("loadCourse---");
+    //console.log("loadCourse---");
     var requestCourse;
     if (window.XMLHttpRequest) {
         requestCourse = new XMLHttpRequest();
@@ -82,9 +101,9 @@ function loadCourse(src) {
     requestCourse.overrideMimeType('text/xml');
     requestCourse.open('GET', src);
     requestCourse.onload = function () {
-        console.log("on load start ------------------------");
+        //console.log("on load start ------------------------");
         __course = requestCourse.responseXML;
-        console.dir(__course);
+        //console.dir(__course);
         courseConfig();
     };
     requestCourse.onerror = function () {
@@ -99,35 +118,32 @@ function loadCourse(src) {
     requestCourse.send();
 }
 function courseConfig() {
+    __displayWindow = document.getElementById("Course");
     __totalPages = __course.getElementsByTagName("lesson").length + __course.getElementsByTagName("quiz").length;
     //__courseName = __course.getElementsByTagName("course")[0].getAttribute("name");
     __isWindowed = (__course.getElementsByTagName("course")[0].getAttribute("windowed") == "true");
-    __displayWindow = document.getElementById("Course");
     __courseWidth = parseInt(__course.getElementsByTagName("course")[0].getAttribute("width"));
     __courseHeight = parseInt(__course.getElementsByTagName("course")[0].getAttribute("height"));
     __courseContainer = document.getElementById("Course_Content");
     __mainAudio = document.getElementById("main_audio");
     __fxAudio = document.getElementById("fx_audio");
+    __guide = document.getElementById("Guide");
+    __about = document.getElementById("About");
+    __isGuide = (__course.getElementsByTagName("course")[0].getAttribute("guide") == "true");
     windowedCourse();
     //setCourseName(__courseName);
     set_uiElements();
     loadTOC();
-    if (__LMSInitialized) {
-        var lessonStatus = doLMSGetValue("cmi.core.lesson_status");
-        if ((lessonStatus != "completed") && (lessonStatus != "passed") && (lessonStatus != "failed") && (lessonStatus != "incomplete") && (lessonStatus != "browsed")) {
-            //alert(doLMSGetValue("cmi.core.lesson_status"));
-            doLMSSetValue("cmi.core.lesson_status", "incomplete");
-        }
-    }
+    setCourseStatus();
     if ((__LMSInitialized) && (__suspendData != "")) {
-        console.log("__visited = " + __visited.toString());
+        //console.log("__visited = " + __visited.toString());
         for (var i = 0; i < __visited.length; i++) {
             unlockTOC(__visited[i] - 1);
         }
     }
     setLessonCounter();
     if (__testMode) {
-        console.log("--- Test Mode ---");
+        //console.log("--- Test Mode ---");
         for (var i = 0; i < __totalPages; i++) {
             unlockTOC(i);
         }
@@ -143,21 +159,15 @@ function clearCourseContainer() {
     __audio = undefined;
     __courseContainer.innerHTML = "";
     hideTOC();
-    /*
-    __courseContainer.remove();
-    var cc = document.createElement("div");
-    cc.setAttribute("id", "Course_Content");
-    document.getElementById("Course").appendChild(cc);
-    __courseContainer = document.getElementById("Course_Content");
-    */
 }
 function setCourseContent(index) {
-    console.log("setCourseContent " + index);
+    //console.log("setCourseContent " + index);
     playAudio("");
+    playFxAudio("");
     pauseAudio();
     disableNext();
     for (var i = 0; i < __visited.length; i++) {
-        console.log("check to enable next " + __visited[i] + " vs " + (index + 1));
+        //console.log("check to enable next " + __visited[i] + " vs " + (index+1));
         if (__visited[i] == (index + 1)) {
             enableNext();
         }
@@ -204,13 +214,15 @@ function setCourseContent(index) {
     setLessonLocation(index + 1);
 }
 function cathMedia() {
-    console.log("catchMedia");
+    //console.log("catchMedia");
     __currentSubtitle = 0;
     __video = __courseContainer.getElementsByTagName("video");
     if (__video.length > 0) {
         __subtitles = __page.getElementsByTagName("subtitles")[0].getElementsByTagName("subtitle");
-        console.log("has video | subtitles " + __subtitles.length);
+        //console.log("has video | subtitles " + __subtitles.length);
         __videoTimeInternal = setInterval(checkVideoTime, __frameRate);
+        play_pause(true);
+        __video[0].addEventListener("canplay", videoWithBuffer);
     }
     if (__isMute) {
         mute();
@@ -218,7 +230,7 @@ function cathMedia() {
     else {
         setVolume();
     }
-    console.log("catchMedia ends ---");
+    //console.log("catchMedia ends ---");
 }
 function checkVideoTime() {
     /*
@@ -226,15 +238,15 @@ function checkVideoTime() {
       {
         var start = parseInt(__subtitles[i].getAttribute("start"));
         var end = parseInt(__subtitles[i].getAttribute("end"));
-        console.log(__video[0].currentTime + " | start " + start + " | end " + end);
+        //console.log(__video[0].currentTime + " | start " + start + " | end " + end);
         var time = __video[0].currentTime;
         if(time >= start && time <= end)
         {
-          console.log("awiwi");
+          //console.log("awiwi");
           eval(__subtitles[i].textContent);
         }
       } */
-    console.log(__currentSubtitle + " vs " + __subtitles.length);
+    //console.log(__currentSubtitle + " vs " + __subtitles.length);
     //console.log("__video.ended " + __video[0].ended);
     if (__video[0].ended) {
         clearInterval(__videoTimeInternal);
@@ -242,7 +254,7 @@ function checkVideoTime() {
         nextPage();
         return;
     }
-    console.log("__currentSubtitle " + __currentSubtitle + " | __subtitles.length " + __subtitles.length);
+    //console.log("__currentSubtitle " + __currentSubtitle + " | __subtitles.length " + __subtitles.length);
     if (__currentSubtitle == __subtitles.length) {
         return;
     }
@@ -258,7 +270,7 @@ function checkVideoTime() {
 function loadScript() {
     var script = __page.getElementsByTagName("script")[0];
     if (script != undefined) {
-        console.log(script.textContent);
+        //console.log(script.textContent);
         eval(script.textContent);
     }
 }
@@ -271,17 +283,19 @@ function setEvents() {
     playCourse();
 }
 function playCourse() {
-    console.log("playCourse()");
+    //console.log("playCourse()");
     __playButton.classList.remove("pause");
     __playButton.classList.add("play");
-    if (__page.getElementsByTagName("events")[0] != undefined) {
-        __events = __page.getElementsByTagName("events")[0].getElementsByTagName("event");
-        __blockEvent = false;
-        __frameInterval = setInterval(playFrame, __frameRate);
+    if (__page != undefined) {
+        if (__page.getElementsByTagName("events")[0] != undefined) {
+            __events = __page.getElementsByTagName("events")[0].getElementsByTagName("event");
+            __blockEvent = false;
+            __frameInterval = setInterval(playFrame, __frameRate);
+        }
     }
 }
 function pauseCourse() {
-    console.log("pauseCourse()");
+    //console.log("pauseCourse()");
     clearInterval(__frameInterval);
     __blockEvent = true;
     __playButton.classList.add("pause");
@@ -301,17 +315,21 @@ function playFrame() {
             }
             if (timing == milisecondTime) {
                 /*
-                console.log("--- Play frame : " + __frame + " second: " + sTime + " ... comes from event " + i);
+                //console.log("--- Play frame : " + __frame + " second: " + sTime + " ... comes from event " + i);
                 __eventPlayed ++;
                 if(__eventPlayed == totalEvents)
                 {
                   clearInterval(__frameInterval);
-                  console.log("events end");
+                  //console.log("events end");
                 }
                 */
                 if (!__blockEvent) {
-                    eval(__events[i].textContent);
-                    console.log("---Event found");
+                    var script = __events[i].textContent;
+                    if (__fastMode) {
+                        script = script.replace("nextPage();", "");
+                    }
+                    eval(script);
+                    //console.log("---Event found");
                 }
                 else {
                     clearInterval(__frameInterval);
@@ -338,7 +356,7 @@ function checkMobile() {
     else {
         __isMobile = isIpad();
     }
-    console.log("__isMobile = " + __isMobile);
+    //console.log("__isMobile = " + __isMobile);
 }
 function nextPage() {
     if (__pageCounter < (__totalPages - 1)) {
@@ -374,14 +392,15 @@ function setLessonLocation(location) {
     }
 }
 function setVisited(id) {
-    console.log("setVisited " + id);
+    //console.log("setVisited " + id);
     for (var i = 0; i <= __visited.length; i++) {
         if (__visited[i] == id) {
-            console.log("find " + id);
+            //console.log("find " + id);
             return;
         }
     }
     __visited.push(id);
+    sessionTime();
     saveSuspendData();
     unlockTOC(id - 1);
 }
@@ -401,49 +420,79 @@ function set_uiElements() {
     __uiButton = document.getElementById("Button_showUI");
     __volumeControl = document.getElementById("Volume_Silider");
     __volumeButton = document.getElementById("Button_Volume");
-    __nextButton.addEventListener("click", function () { if (__isPlayEnable) {
-        nextPage();
-    } });
+    __nextButton.addEventListener("click", function () {
+        if (__isPlayEnable && !__isGuide) {
+            nextPage();
+        }
+    });
     //__nextButton.addEventListener("mouseover", function(){__tooltipNext.style.display = "block";});
     //__nextButton.addEventListener("mouseout", function(){__tooltipNext.style.display = "none";});
-    __prevButton.addEventListener("click", prevPage);
+    __prevButton.addEventListener("click", function () {
+        if (!__isGuide) {
+            prevPage();
+        }
+    });
     //__prevButton.addEventListener("mouseover", function(){__tooltipPrev.style.display = "block";});
     //__prevButton.addEventListener("mouseout", function(){__tooltipPrev.style.display = "none";});
     __tocButton.addEventListener("click", showTOC);
-    __playButton.addEventListener("click", tooglePlayPause);
-    __reloadButton.addEventListener("click", reload);
+    __playButton.addEventListener("click", function () {
+        if (!__isGuide) {
+            tooglePlayPause();
+        }
+    });
+    __reloadButton.addEventListener("click", function () {
+        if (!__isGuide) {
+            reload();
+        }
+    });
     //document.getElementById("Button_Size").addEventListener("click", function(){__isWindowed = !__isWindowed; if(__isMobile){ if(!__isWindowed){document.body.requestFullscreen();}else{document.exitFullscreen();}}else{ windowedCourse(); }});
     //document.getElementById("Button_Close").addEventListener("click", function(){window.close();});
-    __uiButton.addEventListener("click", showUI);
+    __uiButton.addEventListener("click", function () {
+        if (!__isGuide) {
+            showUI();
+        }
+    });
     __volumeControl.oninput = function () { setVolume(); };
-    __volumeButton.addEventListener("click", toogleMute);
+    __volumeButton.addEventListener("click", function () {
+        if (!__isGuide) {
+            toogleMute();
+        }
+    });
     if (__isiE) {
         __volumeControl.classList.add("iESlider");
     }
     if (__isEdge) {
         __volumeControl.classList.add("EdgeSlider");
     }
+    __aboutButton = document.getElementById("Button_Info");
+    __aboutButton.addEventListener("click", function () {
+        if (!__isGuide) {
+            about();
+        }
+    });
+    __about.addEventListener("click", closeAbout);
 }
 function windowedCourse() {
-    console.log("windowedCourse");
+    //console.log("windowedCourse");
     if (__isMobile) {
         //1.333333333333333‬ ipad
         //2.165333333333333 iphonex
         //1.77777777777778 1280 * 720 HD
         var aspecRatio = window.innerWidth / window.innerHeight;
-        console.log("aspecRatio:" + aspecRatio);
+        //console.log("aspecRatio:" + aspecRatio);
         if (aspecRatio < 1.8) {
-            console.log("aspecRatio is less");
+            //console.log("aspecRatio is less");
             /*
             __displayWindow.style.width = "100%";
             __displayWindow.style.height = x + "px";
             __displayWindow.style.left = 0 + "px";
             __displayWindow.style.top = (window.innerHeight / 2) - (x / 2) + "px" ;
-            console.log(" is less than 1.7 ---- " + x);
+            //console.log(" is less than 1.7 ---- " + x);
             //iPad when fit with width.
       */
             //------------------------------
             var scale = ((window.innerWidth * 100) / __courseWidth) / 100;
+            __scale = scale;
             //var translateX = ((__courseWidth - window.innerWidth) / scale) / 2;
             var translateY = (window.innerHeight - (__courseHeight * scale)) / 2;
             __displayWindow.style.width = __courseWidth + "px";
@@ -453,7 +502,7 @@ function windowedCourse() {
             __displayWindow.style.transform = ("scale(" + scale + ") translate(" + 0 + "px, " + translateY + "px)");
         }
         else {
-            console.log("aspecRatio is more");
+            //console.log("aspecRatio is more");
             /*
             __displayWindow.style.width = x + "px";
             __displayWindow.style.height = "100%";
@@ -463,10 +512,10 @@ function windowedCourse() {
             //when fit to height.
             //------------------------------------------------
             var scale = ((window.innerHeight * 100) / __courseHeight) / 100;
+            __scale = scale;
             //var translateX = (__courseWidth - window.innerWidth) * scale;
             var translateX = (window.innerWidth - (__courseWidth * scale)) / 2;
             //var translateY = ((__courseHeight - window.innerHeight)  / scale) / 2;
-            //alert("(window.innerHeight = " + window.innerHeight + " | window.outerHeight = " + window.outerHeight + " | scale = " + scale + " | translateX = " + translateY  + " | translateY = " + translateY);
             __displayWindow.style.width = __courseWidth + "px";
             __displayWindow.style.height = __courseHeight + "px";
             //__displayWindow.style.left = (window.innerWidth / 2) - ((x * scale) / 2) + "px";
@@ -505,7 +554,7 @@ function windowedCourse() {
     }
 }
 function loadTOC() {
-    console.log("loadTOC");
+    //console.log("loadTOC");
     __toc = document.getElementById("TOC");
     __tocList = document.getElementById("TOC_List");
     /*
@@ -547,7 +596,7 @@ function addTOCelement(name, id, isModule) {
     if (!isModule) {
         entry.addEventListener("click", function (event) {
             var block = this.classList.contains("TOCListElementDisable");
-            console.log("block = " + block);
+            //console.log("block = " + block);
             event.stopPropagation();
             if (!block) {
                 var i = parseInt(this.getAttribute("goto"), 10);
@@ -571,14 +620,16 @@ function addTOCelement(name, id, isModule) {
     __tocList.appendChild(entry);
 }
 function showTOC(event) {
-    event.stopPropagation();
-    if (__toogleTOC) {
-        __toc.style.display = "none";
+    if (!__isGuide) {
+        event.stopPropagation();
+        if (__toogleTOC) {
+            __toc.style.display = "none";
+        }
+        else {
+            __toc.style.display = "block";
+        }
+        __toogleTOC = !__toogleTOC;
     }
-    else {
-        __toc.style.display = "block";
-    }
-    __toogleTOC = !__toogleTOC;
 }
 function hideTOC() {
     __toogleTOC = false;
@@ -619,31 +670,45 @@ function tooglePlayPause() {
 }
 function play_pause(isPaused) {
     __isPaused = isPaused;
-    var audios = document.getElementsByTagName("audio");
+    console.log("play_pause " + __isPaused);
     var videos = document.getElementsByTagName("video");
-    console.log(audios.length + "|" + videos.length);
-    if (audios.length > 0) {
-        console.log("playing audios ");
-        for (var i = 0; i < audios.length; i++) {
-            console.log("pausing " + i);
-            if (__isPaused) {
-                audios[i].pause();
+    if (__isPaused) {
+        __mainAudio.pause();
+        __fxAudio.pause();
+    }
+    else {
+        console.log("__mainAudio src = " + __mainAudio.src);
+        if (__mainAudio.src != "") {
+            console.log("playing ...");
+            var playAudioPromise = __mainAudio.play();
+            if (playAudioPromise !== undefined) {
+                playAudioPromise.then(function () {
+                }).catch(function (error) {
+                    console.log("error: " + error);
+                });
             }
-            else {
-                audios[0].play();
+        }
+        if ((__fxAudio.currentTime != 0) && (!__fxAudio.ended)) {
+            var playAudioFXPromise = __fxAudio.play();
+            ;
+            if (playAudioFXPromise !== undefined) {
+                playAudioFXPromise.then(function () {
+                }).catch(function (error) {
+                    console.log("error: " + error);
+                });
             }
         }
     }
     if (videos.length > 0) {
-        console.log("playing audios ");
-        for (i = 0; i < videos.length; i++) {
-            console.log("pausing " + i);
-            if (__isPaused) {
+        //console.log("playing videos ");
+        if (__isPaused) {
+            for (var i = 0; i < videos.length; i++) {
+                //console.log("pausing " + i);
                 videos[i].pause();
             }
-            else {
-                videos[0].play();
-            }
+        }
+        else {
+            videos[0].play();
         }
     }
     if (__isPaused) {
@@ -663,11 +728,11 @@ function play() {
 }
 var map = { 17: false, 39: false, 40: false };
 document.addEventListener('keydown', function (event) {
-    console.log(event.code);
-    console.log(event.keyCode);
+    //console.log(event.code);
+    //console.log(event.keyCode);
     if (event.code == "ArrowRight") {
         if (__isPlayEnable) {
-            console.log("ArrowRight");
+            //console.log("ArrowRight");
             nextPage();
         }
     }
@@ -675,18 +740,29 @@ document.addEventListener('keydown', function (event) {
         prevPage();
     }
     if (event.code == "Space") {
-        tooglePlayPause();
+        //console.log("SPACE KEY");
+        if (!__spacePressed) {
+            __spacePressed = true;
+            tooglePlayPause();
+            setTimeout(function () { __spacePressed = false; }, 750);
+        }
+    }
+    if (event.code == "Escape") {
+        closeAbout();
     }
     if (event.keyCode in map) {
         map[event.keyCode] = true;
-        console.log(map[17] + " - " + map[39]);
+        //console.log(map[17] + " - " + map[39]);
         if (map[17] && map[39]) {
             //console.log("hack nextPage"); nextPage();
         }
         if (map[17] && map[40]) {
-            for (var i = 0; i < __totalPages; i++) {
+            /*
+              for(var i:number = 0; i < __totalPages; i++){
                 unlockTOC(i);
-            }
+              }
+              */
+            hackMode();
         }
     }
 });
@@ -716,7 +792,7 @@ function goToAndStop(goFrame) {
     __blockEvent = true;
     clearInterval(__frameInterval);
     var totalEvents = __events.length;
-    console.log("---------------------goToAndStop = " + __frame + " | __blockEvent = " + __blockEvent);
+    //console.log("---------------------goToAndStop = " + __frame + " | __blockEvent = " + __blockEvent);
     for (var i = 0; i < totalEvents; i++) {
         var sTime = Number(__events[i].getAttribute("time"));
         var timing = sTime * 1000;
@@ -727,7 +803,7 @@ function goToAndStop(goFrame) {
     }
 }
 function goToAndPlay(goFrame) {
-    console.log("goToAndPlay()");
+    //console.log("goToAndPlay()");
     clearInterval(__frameInterval);
     __blockEvent = false;
     __frame = (goFrame * 10);
@@ -743,20 +819,20 @@ function setReviewItem(nItem) {
     __reviewPool[nItem - 1] = true;
 }
 function checkReviewItems(frameToGo) {
-    console.log("checkReviewItems");
+    //console.log("checkReviewItems");
     for (var i = 0; i < __reviewPool.length; i++) {
         if (__reviewPool[i] == false) {
-            console.log("return.......");
+            //console.log("return.......");
             return;
         }
     }
-    console.log("action..................................... frame = " + frameToGo);
+    //console.log("action..................................... frame = " + frameToGo);
     goToAndPlay(frameToGo);
 }
 function stop() {
     clearInterval(__frameInterval);
     __blockEvent = true;
-    console.log("---stop()---");
+    //console.log("---stop()---");
 }
 function reload() {
     setCourseContent(__pageCounter);
@@ -768,7 +844,7 @@ function movefordwardbyaudio() {
 function checkAudioEnd() {
     if (__mainAudio.ended) {
         clearInterval(__audioInterval);
-        console.log("audio ends----");
+        //console.log("audio ends----");
         nextPage();
     }
 }
@@ -778,16 +854,16 @@ function setVolume() {
     var audios = document.getElementsByTagName("audio");
     var videos = document.getElementsByTagName("video");
     if (audios.length > 0) {
-        console.log("there is some audios to play");
+        //console.log("there is some audios to play");
         for (var i = 0; i < audios.length; i++) {
-            console.log("set volume for audio " + i + " audio value " + __volumeControl.value);
+            //console.log("set volume for audio " + i + " audio value " + __volumeControl.value);
             audios[i].volume = __volumeControl.value / 100;
         }
     }
     if (videos.length > 0) {
-        console.log("there is some videos to play");
+        //console.log("there is some videos to play");
         for (var j = 0; j < videos.length; j++) {
-            console.log("set volume for video " + j + " video value " + __volumeControl.value);
+            //console.log("set volume for video " + j + " video value " + __volumeControl.value);
             videos[j].volume = __volumeControl.value / 100;
         }
     }
@@ -835,8 +911,8 @@ function checkLMS() {
     var s = doLMSInitialize();
     __LMSInitialized = (s == "true");
     if (__LMSInitialized)
-        console.log("LMS connection available <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-    getSuspendData();
+        //console.log("LMS connection available <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        getSuspendData();
 }
 function saveSuspendData() {
     if (__LMSInitialized) {
@@ -847,17 +923,22 @@ function saveSuspendData() {
                 data += ",";
             }
         }
-        data += "|";
-        for (var j = 0; j < __attemps.length; j++) {
-            data += __attemps[j];
-            if (j < (__attemps.length - 1)) {
-                data += ",";
+        var isNumber = isNaN(parseInt(__attemps[__attemps.length - 1]));
+        if (!isNumber) {
+            data += "|";
+            for (var j = 0; j < __attemps.length; j++) {
+                //console.log("__attemps " + __attemps[j]);
+                data += __attemps[j];
+                if (j < (__attemps.length - 1)) {
+                    data += ",";
+                }
             }
         }
         doLMSSetValue("cmi.suspend_data", data);
         doLMSCommit();
     }
 }
+//TODO review
 function getSuspendData() {
     if (__LMSInitialized) {
         __suspendData = doLMSGetValue("cmi.suspend_data");
@@ -868,20 +949,22 @@ function getSuspendData() {
                 var id = parseInt(v);
                 __visited.push(id);
             });
-            __suspendDataAttemps = parseCategory[1].split(",");
+            __suspendDataAttemps = parseCategory[1].split(","); //TODO review this
             __suspendDataAttemps.forEach(function (v) {
                 var score = parseInt(v);
-                __attemps.push(score);
+                if (!isNaN(score)) {
+                    __attemps.push(score);
+                }
             });
         }
     }
 }
 function unlockTOC(id) {
-    console.log("unlockTOC " + id);
+    //console.log("unlockTOC " + id);
     document.getElementById("L" + id).classList.remove("TOCListElementDisable");
 }
 function setWelcomeInfo() {
-    console.log("setWelcomeInfo");
+    //console.log("setWelcomeInfo");
     var studentName = "";
     var percentage = Math.floor((__visited.length * 100) / __totalPages);
     var d = new Date();
@@ -920,7 +1003,7 @@ function setWelcomeInfo() {
     document.getElementById("ButtonContinue").addEventListener("click", function(){});
   */
     if (percentage == 0) {
-        console.log("here to set welcome ui");
+        //console.log("here to set welcome ui");
         //document.getElementById("location").style.display = "none";
         document.getElementById("ButtonStart").classList.add("buttonWelcomeCentred");
         document.getElementById("ButtonContinue").style.display = "none";
@@ -936,7 +1019,7 @@ function setWelcomeInfo() {
     }
 }
 function getLessonId() {
-    console.log("---getLessonId | __LMSInitialized = " + __LMSInitialized);
+    //console.log("---getLessonId | __LMSInitialized = " + __LMSInitialized);
     var lessonLocation = "";
     var LessonTarget = 1;
     var LessonID = 0;
@@ -945,13 +1028,13 @@ function getLessonId() {
     var moduleList = __course.getElementsByTagName("course")[0].getElementsByTagName("module");
     if (__LMSInitialized) {
         lessonLocation = doLMSGetValue("cmi.core.lesson_location");
-        console.log("lessonLocation:" + lessonLocation);
+        //console.log("lessonLocation:" + lessonLocation);
         if (lessonLocation != "") {
             LessonTarget = parseInt(lessonLocation);
         }
-        console.log("lessonLocation " + lessonLocation);
+        //console.log("lessonLocation " + lessonLocation);
         for (var i = 0; i < moduleList.length; i++) {
-            console.log("Module " + i);
+            //console.log("Module " + i);
             //ModuleName = moduleList[i].getAttribute("name");
             var lessonList = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("lesson");
             var quiz = __course.getElementsByTagName("course")[0].getElementsByTagName("module")[i].getElementsByTagName("quiz");
@@ -962,10 +1045,10 @@ function getLessonId() {
                     return output;
                 }
                 LessonID++;
-                console.log("Lesson " + LessonID);
+                //console.log("Lesson " + LessonID );
             }
             for (var k = 0; k < quiz.length; k++) {
-                console.log("Quiz ---" + k);
+                //console.log("Quiz ---" + k);
                 //var quizName:string = quiz[k].getAttribute("name");
                 if (LessonID + 1 == LessonTarget) {
                     output = ModuleID + "|" + LessonID;
@@ -994,44 +1077,43 @@ function edgeversion() {
     return isEdge;
 }
 function startCourse(start) {
-    console.log("startCourse " + start + " | __lessonsContinue:" + __pageCounter);
+    //console.log("startCourse " + start + " | __lessonsContinue:"+__pageCounter + "| __isGuide = " + __isGuide);
+    setCourseStatus();
     windowedCourse();
     document.getElementById("Welcome_UI").style.display = "none";
     if (start) {
         __pageCounter = 0;
     }
-    setCourseContent(__pageCounter);
-}
-/*
-function playAudio(id:string){
-  var promise = document.querySelector(id).play();
-
-  if (promise !== undefined) {
-      promise.catch(error => {
-          // Auto-play was prevented
-          // Show a UI element to let the user manually start playback
-          alert("que la chin");
-      }).then(() => {
-          // Auto-play started
-          alert("okas");
-      });
-}
-*/
-function playAudio(src) {
-    __mainAudio.pause();
-    __mainAudio.setAttribute("src", src);
-    if (src == "") {
-        return;
+    if (__isGuide && (__pageCounter == 0)) {
+        showGuide();
     }
-    __mainAudio.play();
+    else {
+        __isGuide = false;
+        __toogleUI = false;
+        showUI();
+        setCourseContent(__pageCounter);
+    }
+}
+function playAudio(src) {
+    //__mainAudio.pause();
+    __mainAudio.src = src;
+    //__mainAudio.setAttribute("src", src);
+    if (src != "") {
+        //__mainAudio.play();
+        play_pause(true);
+        __mainAudio.addEventListener("canplay", playWithBuffer);
+    }
 }
 function pauseAudio() {
     __mainAudio.pause();
 }
 function playFxAudio(src) {
-    __fxAudio.pause();
-    __fxAudio.setAttribute("src", src);
-    __fxAudio.play();
+    //__fxAudio.pause();
+    __fxAudio.src = src;
+    //__fxAudio.setAttribute("src", src);
+    if (src != "") {
+        __fxAudio.addEventListener("canplay", playFxWithBuffer);
+    }
 }
 function isIpad() {
     var ua = window.navigator.userAgent;
@@ -1051,20 +1133,20 @@ var __TimingDelay = 1.0;
 var __wordsPerMinute = 120;
 var __characteresPerMinute = 14.3;
 function getTiming() {
-    console.log("__characteresPerMinute=" + __characteresPerMinute);
+    //console.log("__characteresPerMinute="+__characteresPerMinute);
     var ps = __courseContainer.querySelectorAll("p");
     var globalTiming = __TimingDelay;
-    var globalCharacters = 0;
+    //var globalCharacters:number = 0;
     for (var i = 0; i < ps.length; i++) {
-        console.log(ps[i].getAttribute("id") + ":" + globalTiming);
+        //console.log(ps[i].getAttribute("id") + ":" + globalTiming);
         var wordCounter = ps[i].innerText.trim().length;
-        console.log(wordCounter);
-        globalCharacters += wordCounter;
+        //console.log(wordCounter);
+        //globalCharacters += wordCounter;
         var localTiming = (Math.round((wordCounter / __characteresPerMinute) * 10) / 10);
         ps[i].setAttribute("timing", globalTiming);
         globalTiming += localTiming;
     }
-    console.log("total timing: " + globalTiming + " - total characers: " + globalCharacters);
+    //console.log("total timing: " + globalTiming + " - total characers: " + globalCharacters);
 }
 function hideUI(hide) {
     if (hide) {
@@ -1077,4 +1159,309 @@ function hideUI(hide) {
         __ui.style.display = "block";
         showUI();
     }
+}
+function hackMode() {
+    var div;
+    div = document.getElementById("hack");
+    if (div != null) {
+        return;
+    }
+    div = document.createElement("div");
+    div.setAttribute("id", "hack");
+    var btnClose = document.createElement("div");
+    var iconPassword = document.createElement("img");
+    var img = document.createElement("img");
+    var welcome = document.createElement("label");
+    var input = document.createElement("input");
+    var bntSend = document.createElement("div");
+    var iconSend = document.createElement("img");
+    var btnUnlockTOC = document.createElement("div");
+    var pb1 = document.createElement("p");
+    var btnNextPage = document.createElement("div");
+    var pb2 = document.createElement("p");
+    var btnUnlockNext = document.createElement("div");
+    var pb3 = document.createElement("p");
+    var btnShowScorm = document.createElement("div");
+    var pb4 = document.createElement("p");
+    var btnScreenshot = document.createElement("div");
+    var pb5 = document.createElement("p");
+    var btnFastMode = document.createElement("div");
+    var pb6 = document.createElement("p");
+    var iconBtn1 = document.createElement("img");
+    iconBtn1.setAttribute("src", "bin/images/unlock.png");
+    var iconBtn2 = document.createElement("img");
+    iconBtn2.setAttribute("src", "bin/images/next.png");
+    var iconBtn3 = document.createElement("img");
+    iconBtn3.setAttribute("src", "bin/images/enable.png");
+    var iconBtn4 = document.createElement("img");
+    iconBtn4.setAttribute("src", "bin/images/scorm.png");
+    var iconBtn5 = document.createElement("img");
+    iconBtn5.setAttribute("src", "bin/images/screenshot.png");
+    var iconBtn6 = document.createElement("img");
+    iconBtn6.setAttribute("src", "bin/images/fast.png");
+    btnClose.setAttribute("id", "btnClose");
+    iconPassword.setAttribute("src", "bin/images/password.png");
+    img.setAttribute("src", "bin/images/close_a.png");
+    welcome.setAttribute("for", "saymyname");
+    welcome.innerText = "PASSWORD:";
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "saymyname");
+    input.setAttribute("name", "saymyname");
+    iconSend.setAttribute("src", "bin/images/go_a.png");
+    iconBtn1.classList.add("middleY");
+    btnUnlockTOC.appendChild(iconBtn1);
+    iconBtn2.classList.add("middleY");
+    btnNextPage.appendChild(iconBtn2);
+    iconBtn3.classList.add("middleY");
+    btnUnlockNext.appendChild(iconBtn3);
+    iconBtn4.classList.add("middleY");
+    btnShowScorm.appendChild(iconBtn4);
+    iconBtn5.classList.add("middleY");
+    btnScreenshot.appendChild(iconBtn5);
+    iconBtn6.classList.add("middleY");
+    btnFastMode.appendChild(iconBtn6);
+    btnUnlockTOC.classList.add("btnHack");
+    btnNextPage.classList.add("btnHack");
+    btnUnlockNext.classList.add("btnHack");
+    btnShowScorm.classList.add("btnHack");
+    btnScreenshot.classList.add("btnHack");
+    btnFastMode.classList.add("btnHack");
+    pb1.innerText = "UNLOCK TOC";
+    pb2.innerText = "NEXT PAGE";
+    pb3.innerText = "ENABLE NEXT";
+    pb4.innerText = "SHOW SCORM";
+    pb5.innerText = "SCREENSHOT";
+    pb6.innerText = "FAST MODE";
+    bntSend.addEventListener("click", function () {
+        if (!__isHackeable && (input.value == "davinci")) {
+            __isHackeable = true;
+            welcome.innerText = "COMMAND";
+            input.value = "";
+            //div.style.backgroundColor = "rgba(135, 206, 235, 0.75)";
+            iconPassword.setAttribute("src", "bin/images/command.png");
+            div.appendChild(btnUnlockTOC);
+            div.appendChild(btnNextPage);
+            div.appendChild(btnUnlockNext);
+            div.appendChild(btnShowScorm);
+            div.appendChild(btnScreenshot);
+            div.appendChild(btnFastMode);
+            div.insertBefore(btnUnlockTOC, btnClose);
+            div.insertBefore(btnNextPage, btnClose);
+            div.insertBefore(btnUnlockNext, btnClose);
+            div.insertBefore(btnShowScorm, btnClose);
+            div.insertBefore(btnScreenshot, btnClose);
+            div.insertBefore(btnFastMode, btnClose);
+        }
+        else if (__isHackeable) {
+            eval(input.value);
+        }
+        else {
+            alert("Wrong password.");
+        }
+    });
+    bntSend.addEventListener("mouseover", function () { iconSend.setAttribute("src", "bin/images/go_b.png"); });
+    bntSend.addEventListener("mouseout", function () { iconSend.setAttribute("src", "bin/images/go_a.png"); });
+    btnClose.addEventListener("click", function () { div.remove(); __isHackeable = false; });
+    btnClose.addEventListener("mouseover", function () { img.setAttribute("src", "bin/images/close_b.png"); });
+    btnClose.addEventListener("mouseout", function () { img.setAttribute("src", "bin/images/close_a.png"); });
+    btnUnlockTOC.addEventListener("click", function () {
+        for (var i = 0; i < __totalPages; i++) {
+            unlockTOC(i);
+        }
+    });
+    btnNextPage.addEventListener("click", function () { nextPage(); });
+    btnUnlockNext.addEventListener("click", function () { enableNext(); });
+    btnShowScorm.addEventListener("click", function () {
+        var cmi = "";
+        cmi += ("student_id: " + doLMSGetValue("cmi.core.student_id") + "\n");
+        cmi += ("student_name: " + doLMSGetValue("cmi.core.student_name") + "\n");
+        cmi += ("lesson_location: " + doLMSGetValue("cmi.core.lesson_location") + "\n");
+        cmi += ("lesson_status: " + doLMSGetValue("cmi.core.lesson_status") + "\n");
+        cmi += ("score: " + doLMSGetValue("cmi.core.score.raw") + "\n");
+        cmi += ("suspend_data: " + doLMSGetValue("cmi.suspend_data") + "\n");
+        if (__LMSInitialized) {
+            alert(cmi);
+        }
+        else {
+            alert("The course has to be connected to an LMS platform.");
+        }
+    });
+    btnScreenshot.addEventListener("click", function () {
+        var _str = __lessons[__pageCounter].getAttribute("name");
+        var leftNumber = "";
+        if (__pageCounter < 9) {
+            leftNumber = "0";
+        }
+        _str = _str.replace(" ", "_");
+        var fileName = leftNumber + (__pageCounter + 1) + "_" + _str;
+        __displayWindow.classList.add("screenshot");
+        domtoimage.toBlob(__displayWindow)
+            .then(function (blob) {
+            saveAs(blob, fileName);
+        });
+        setTimeout(function () { __displayWindow.classList.remove("screenshot"); }, 1000);
+    });
+    btnFastMode.addEventListener("click", fastMode);
+    div.appendChild(iconPassword);
+    div.appendChild(welcome);
+    div.appendChild(input);
+    div.appendChild(bntSend);
+    bntSend.appendChild(iconSend);
+    btnClose.appendChild(img);
+    div.appendChild(btnClose);
+    btnUnlockTOC.appendChild(pb1);
+    btnNextPage.appendChild(pb2);
+    btnUnlockNext.appendChild(pb3);
+    btnShowScorm.appendChild(pb4);
+    btnScreenshot.appendChild(pb5);
+    btnFastMode.appendChild(pb6);
+    div.classList.add("hack");
+    document.getElementById("Course").appendChild(div);
+    input.select();
+}
+function sessionTime() {
+    var hour = __sessionStatTime.getHours();
+    var min = __sessionStatTime.getMinutes();
+    var currentTime = new Date();
+    var currHour = currentTime.getHours() - hour;
+    var currMin = currentTime.getMinutes() - min;
+    var currSec = currentTime.getSeconds();
+    var sHour;
+    var sMin;
+    var sSec;
+    if (currHour < 10) {
+        sHour = "0" + currHour;
+    }
+    else {
+        sHour = currHour.toString();
+    }
+    if (currMin < 10) {
+        sMin = "0" + currMin;
+    }
+    else {
+        sMin = currMin.toString();
+    }
+    if (currSec < 10) {
+        sSec = "0" + currSec;
+    }
+    else {
+        sSec = currSec.toString();
+    }
+    var sTime = sHour + ":" + sMin + ":" + sSec;
+    doLMSSetValue("cmi.core.session_time", sTime);
+}
+function showGuide() {
+    //show if is on xml
+    var guide = __addons.getElementsByTagName("guide")[0].getElementsByTagName("content")[0].textContent;
+    __guide.innerHTML = guide;
+    __guide.style.display = "block";
+    __isGuide = true;
+    var gifs = __guide.getElementsByClassName("reload_gif");
+    for (var i = 0; i < gifs.length; i++) {
+        var src = gifs[i].getAttribute("src");
+        gifs[i].setAttribute("src", src + "?" + Math.random());
+    }
+    var script = __addons.getElementsByTagName("guide")[0].getElementsByTagName("script")[0];
+    if (script != undefined) {
+        eval(script.textContent);
+    }
+    __toogleUI = false;
+    showUI();
+}
+function closeGuide() {
+    __guide.style.display = "none";
+    clearInterval(__guideInterval);
+    __guide.innerHTML = "";
+    __isGuide = false;
+    __uiButton.classList.remove("higlightButton");
+    __volumeButton.classList.remove("higlightButton");
+    __prevButton.classList.remove("higlightButton");
+    __prevButton.classList.remove("show");
+    __playButton.classList.remove("higlightButton");
+    __nextButton.classList.remove("higlightButton");
+    __reloadButton.classList.remove("higlightButton");
+    __tocButton.classList.remove("higlightButton");
+    setCourseContent(__pageCounter);
+}
+function loadAddons(src) {
+    //console.log("loadAddons---");
+    var requestCourse;
+    if (window.XMLHttpRequest) {
+        requestCourse = new XMLHttpRequest();
+    }
+    else { // IE 5/6
+        requestCourse = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    requestCourse.overrideMimeType('text/xml');
+    requestCourse.open('GET', src);
+    requestCourse.onload = function () {
+        //console.log("on load addons start ------------------------");
+        __addons = requestCourse.responseXML;
+    };
+    requestCourse.setRequestHeader("Content-Type", "text/xml");
+    requestCourse.send();
+}
+function about() {
+    var about = __addons.getElementsByTagName("about")[0].getElementsByTagName("content")[0].textContent;
+    var d = new Date();
+    var year = d.getFullYear();
+    about = about.replace("#version", __version.toString());
+    about = about.replace("#year", year.toString());
+    __about.innerHTML = about;
+    __about.style.display = "block";
+    pauseCourse();
+}
+function closeAbout() {
+    __about.innerHTML = "";
+    __about.style.display = "none";
+}
+function fastMode() {
+    __fastMode = true;
+    __frameRate = 10;
+    reload();
+    mute();
+}
+function saveText() {
+    var content = "";
+    var title = document.getElementById("title").textContent;
+    var subtitle = document.getElementById("subtitle").textContent;
+    var _s = document.getElementsByClassName("s");
+    content += (title + " ");
+    content += (subtitle + "\n");
+    for (var i = 0; i < _s.length; i++) {
+        content += (_s[i].textContent + "\n");
+    }
+    var _sTitle = __lessons[__pageCounter].getAttribute("name");
+    var leftNumber = "";
+    if (__pageCounter < 9) {
+        leftNumber = "0";
+    }
+    _sTitle = _sTitle.replace(" ", "_");
+    var fileName = leftNumber + (__pageCounter + 1) + "_" + _sTitle;
+    var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, fileName + ".txt");
+}
+function setCourseStatus() {
+    if (__LMSInitialized) {
+        var lessonStatus = doLMSGetValue("cmi.core.lesson_status");
+        var doIt = "";
+        console.log("lessonStatus before = " + lessonStatus);
+        if ((lessonStatus != "completed") && (lessonStatus != "passed") && (lessonStatus != "failed") && (lessonStatus != "incomplete") && (lessonStatus != "browsed")) {
+            doLMSSetValue("cmi.core.lesson_status", "incomplete");
+            doIt = doLMSCommit();
+        }
+        else {
+            doLMSSetValue("cmi.core.lesson_status", lessonStatus);
+        }
+        console.log("lessonStatus after = " + lessonStatus + "- saved = " + doIt);
+    }
+}
+function playWithBuffer() {
+    play_pause(false);
+}
+function videoWithBuffer() {
+    play_pause(false);
+}
+function playFxWithBuffer() {
+    __fxAudio.play();
 }

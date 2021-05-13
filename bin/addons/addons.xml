@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<course name="Fundamentos del teletrabajo para supervisores" windowed="true" width="1280" height="720" guide="true">
+  <guide>
+    <content><![CDATA[
+    <div class="guide_background guide guideTitles">
+      <button id="Button_closeGuide" class="closeGuide ButtonUI" onclick="closeGuide()">OMITIR INTRO</button>
+      <div style="position: absolute; width: inherit; height: auto; top: 140px;">
+        <p class="MoveParagraph" tyle="opacity:0; font-weight: bold; font-size:22px; margin-top:45px;">Instrucciones</p>
+        <p class="MoveParagraph" style="opacity:0; animation-delay: 1s; font-size:18px; margin-top:45px; margin-bottom:15px;">Menú de navegación</p>
+        <p class="MoveParagraph" style="opacity:0; animation-delay: 2s; margin-top:45px; font-size:12px; color:white;">Para mostrar el Menú de navegación haga clic en el icono de ajustes <img src="bin/images/gear.gif" class="reload_gif" style="margin: 0px 0 -8px 10px;"></p>
+      </div>
+      <img src="bin/images/flecha-1.gif" class="showGuideTooltip reload_gif" style="animation-delay: 3s; position: absolute; top: 585px; left: 0px;">
+      <p class="showGuideTooltip" style="animation-delay: 3s; color: white; position: absolute; top: 554px; left: 80px;">Click para esconder el Menú de navegación.</p>
+
+      <img src="bin/images/flecha-2.gif" class="showGuideTooltip reload_gif" style="animation-delay: 7s; position: absolute; top: 600px; left: 220px;">
+      <p class="showGuideTooltip" style="animation-delay: 7s; color: white; position: absolute; top: 554px; left: 115px;">Desplace la barra para ajustar el volumen <br>o haga clic en el ícono para silenciar por completo.</p>
+
+      <img src="bin/images/flecha-2.gif" class="showGuideTooltip reload_gif" style="animation-delay: 11s; position: absolute; top: 600px; left: 515px;">
+      <p class="showGuideTooltip" style="animation-delay: 11s; color: white; position: absolute; top: 554px; left: 405px;">Atrás - regresa a la página anterior.</p>
+
+      <img src="bin/images/flecha-2.gif" class="showGuideTooltip reload_gif" style="animation-delay: 15s; position: absolute; top: 600px; left: 615px;">
+      <p class="showGuideTooltip" style="animation-delay: 15s; color: white; position: absolute; top: 554px; left: 420px;">Reproducir / Pausa - Reproduce o pausa los audios y videos.</p>
+
+      <img src="bin/images/flecha-3.gif" class="showGuideTooltip reload_gif" style="animation-delay: 19s; position: absolute; top: 600px; left: 685px;">
+      <p class="showGuideTooltip" style="animation-delay: 19s; color: white; position: absolute; top: 554px; left: 520px;">Adelante - Avanza a la siguiente página.</p>
+
+      <img src="bin/images/flecha-3.gif" class="showGuideTooltip reload_gif" style="animation-delay: 23s; position: absolute; top: 600px; left: 1065px;">
+      <p class="showGuideTooltip" style="animation-delay: 23s; color: white; position: absolute; top: 554px; left: 860px;">Recargar - Repite la página desde el inicio.</p>
+
+      <img src="bin/images/flecha-3.gif" class="showGuideTooltip reload_gif" style="animation-delay: 27s; position: absolute; top: 600px; left: 1130px;">
+      <p class="showGuideTooltip" style="animation-delay: 27s; color: white; position: absolute; top: 554px; left: 860px;">Tabla de contenido - Revisa el temario del curso.</p>
+
+      <img src="bin/images/flecha-3.gif" class="showGuideTooltip reload_gif" style="animation-delay: 31s; position: absolute; top: 600px; left: 1180px;">
+      <p class="showGuideTooltip" style="animation-delay: 31s; color: white; position: absolute; top: 554px; left: 1135px;">Página actual.</p>
+
+    </div>
+    ]]></content>
+    <script><![CDATA[
+      __guideInterval = setTimeout(closeGuide, 34000);
+      __uiButton.style.animationDelay = "2s";
+      __uiButton.classList.add("higlightButton");
+
+      __volumeButton.style.animationDelay = "7s";
+      __volumeButton.classList.add("higlightButton");
+
+      __prevButton.style.animationDelay = "11s";
+      __prevButton.classList.add("higlightButton");
+      __prevButton.classList.add("show");
+
+      __playButton.style.animationDelay = "15s";
+      __playButton.classList.add("higlightButton");
+
+      __nextButton.style.animationDelay = "19s";
+      __nextButton.classList.add("higlightButton");
+
+      __reloadButton.style.animationDelay = "23s";
+      __reloadButton.classList.add("higlightButton");
+
+      __tocButton.style.animationDelay = "27s";
+      __tocButton.classList.add("higlightButton");
+    ]]></script>
+  </guide>
+
+  <about>
+    <content><![CDATA[
+      <div class="guide_background guide guideTitles">
+        <div style="position: absolute; width: inherit; height: auto; top: 140px;">
+          <img src="bin/images/davinci.png">
+          <p class="MoveParagraph" style="opacity:0;">versión: #version<p>
+          <p class="MoveParagraph" style="opacity:0; animation-delay: 0.5s; -webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; -o-animation-delay: 0.5s;">Copyright 2019-#year MexicoDC.</p>
+          <p class="MoveParagraph" style="opacity:0; animation-delay: 1.0s; -webkit-animation-delay: 1.0s; -moz-animation-delay: 1.0s; -o-animation-delay: 1.0s;">Todos los derechos reservados.</p>
+          <p class="MoveParagraph" style="opacity:0; animation-delay: 1.5s; -webkit-animation-delay: 1.5s; -moz-animation-delay: 1.5s; -o-animation-delay: 1.5s;">
+            Diseño Instruccional: Ana Méndez, Isis Rodriguez, José Luis Gallegos.
+            <br>Conceptualización Gráfica: Roberto Ávila.
+            <br>Producción Audiovisual: Miguel Campos.
+            <br>Ingeniería en Programación: David Barreto.
+            <br>Desarrolladores: Blanca Cabrera, Raúl Durán, Alex Mayor, Ángel Velázquez, Giovanna Amaya, Cristhian Ríos.
+            <br>Control de Calidad (QA): Nathalie Cruz, Claudia Lezama.
+            <br>Líderes de Equipos de Producción: Memo Mandujano (Custom), Ana Guzmán
+            <br>(Traducciones), Jade Mons (Control de Calidad), Gerardo Alcántara (Desarrollo).
+            <br>Representante de Ventas: Adrián de la Barrera.</p>
+            <img src="bin/images/logoelearning.png" class="MoveParagraph" style="width: 180px; height: auto; padding: 20px; opacity:0; animation-delay: 2.0s; -webkit-animation-delay: 2.0s; -moz-animation-delay: 2.0s; -o-animation-delay: 2.0s;">
+        </div>
+        <p style="width: -moz-available; width: -webkit-fill-available; position:absolute; bottom:50px;">Para cerrar da click en cualquier punto de la pantalla</p>
+      </div>
+    ]]></content>
+    <script><![CDATA[
+
+    ]]></script>
+  </about>
+</course>

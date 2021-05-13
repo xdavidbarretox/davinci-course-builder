@@ -597,6 +597,10 @@ button{
   transition: opacity 0.3s;
   transition-delay: 2s;
 }
+.ButtonUI--controles p {
+  left: 85%;
+
+}
 
 .left p{
   left: 0% !important;
@@ -733,4 +737,195 @@ td{
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
+}
+
+.hack{
+  height: 50px;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  z-index: 100;
+  border-radius: 8px;
+  padding: 5px 10px 5px 10px;
+  transform: translateX(-50%);
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.hack #btnClose{
+  /*height: auto;
+  width: auto;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  position: relative;*/
+  display: flex;
+  float:right;
+}
+
+.hack label{
+  color: white;
+  margin-left: 5px;
+  top: 2px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+.hack button{
+  font-size: 12px;
+  font-weight: bold;
+  height: 20px;
+  width: 20px;
+}
+
+.hack input{
+  margin-left: 10px;
+}
+
+.hack div img{
+  height: 18px;
+  width: auto;
+}
+
+.hack img{
+  margin: 0 5px 0 10px;
+}
+
+.btnHack{
+  height: 34px;
+  width: 130px;
+  background-color: rgba(134, 75, 255, 0.3);
+  border-radius: 8px;
+  display: flex;
+  margin-left: 10px;
+  align-self:auto;
+  /*top: 50%;
+  transform: translateY(-50%);*/
+}
+
+.btnHack:hover{
+  background-color: rgba(134, 75, 255, 0.9);
+}
+
+.btnHack p{
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  margin: 0;
+  /*font-weight: bold;*/
+  color: white;
+  text-align: center;
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  height: auto;
+  top: 50%;
+  position: relative;
+  transform: translateY(-15%);
+}
+
+.guide_background{
+  background-color: rgba(0,0,0,1);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+}
+
+.closeGuide{
+  position: absolute;
+  width: auto;
+  height: 45px;
+  left: 50%;
+  top: 50%;
+  background-color: black;
+  border: 2px solid white;
+  color: white;
+  padding: 0 15px 0 15px;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+}
+
+.guide p{
+  color: white;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.guideTitles{
+  text-align: center;
+}
+
+.showGuideTooltip{
+  visibility: hidden;
+  opacity:0;
+  animation-name: showGuideTooltip;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showGuideTooltip {
+0%   {opacity: 0.0; visibility: visible;}
+5%  {opacity: 1.0;}
+95%  {opacity: 1.0;}
+100% {opacity: 0.0;}
+}
+
+.higlightButton{
+animation-name: higlightButton;
+animation-duration: 4s;
+animation-fill-mode: forwards;
+}
+
+@keyframes higlightButton {
+0%   {opacity: 0.5;}
+5%  {opacity: 1.0;}
+95%  {opacity: 1.0;}
+100% {opacity: 0.5;}
+}
+
+.show{
+display: block !important;
+}
+
+#Button_Info{
+  right: 15%;
+  background-image: url(../images/info_a.png);
+}
+
+#About{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 110;
+  display: none;
+}
+
+.middleY{
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+}
+
+input[type="text"], textarea {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.screenshot{
+  top: 0px !important;
+  left: 0px !important;
+}
+
+.screenshot .hack{
+  display: none;
 }
